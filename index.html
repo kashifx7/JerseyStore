@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VORTEX KITS | Authentic Football Jerseys, Custom Kit Studio & Live Match Center</title>
+  <!-- Modern Google Fonts for Athletic & Luxury Sportswear -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top Announcement Ticker -->
+  <aside class="announcement-bar" aria-label="Store Announcements">
+    <div class="announcement-content">
+      <span>🔥 <strong>2024/25 OFFICIAL FOOTBALL KITS DROPPED:</strong> Real Madrid, Arsenal, Barcelona 125th Anniv, Liverpool, Bayern & Argentina 3-Star!</span>
+      <span class="bullet">•</span>
+      <span>⚡ Use Code <span class="badge-code">KICKOFF15</span> for 15% OFF your first football kit</span>
+      <span class="bullet">•</span>
+      <span>📦 Free Global Priority Tracked Shipping on orders over $85</span>
+      <span class="bullet">•</span>
+      <span>⚽ Live Match Scores & Fixtures below • Shop your team's match kit live!</span>
+    </div>
+  </aside>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <!-- Mobile Menu Toggle -->
+      <button class="icon-btn mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" aria-label="Vortex Kits Home">
+        <div class="logo-mark">
+          <svg viewBox="0 0 36 36" width="34" height="34" fill="none">
+            <polygon points="18,2 34,10 34,26 18,34 2,26 2,10" stroke="url(#logoGrad)" stroke-width="3" fill="rgba(0, 245, 160, 0.08)"/>
+            <path d="M12,18 L18,10 L24,18 L18,26 Z" fill="url(#logoGrad)"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00F5A0"/>
+                <stop offset="100%" stop-color="#00D9F5"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">VORTEX<span class="brand-accent">KITS</span></span>
+          <span class="brand-tagline">100% PURE FOOTBALL KITS</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="main-nav" id="mainNav" aria-label="Primary Navigation">
+        <button class="nav-link active" data-category="all">All Football Kits</button>
+        <button class="nav-link" data-league="Premier League">Premier League</button>
+        <button class="nav-link" data-league="La Liga">La Liga</button>
+        <button class="nav-link" data-league="Serie A">Serie A</button>
+        <button class="nav-link" data-league="International">National Teams</button>
+        <button class="nav-link" data-league="Retro">Retro Legends</button>
+        <a href="#customizerSection" class="nav-link highlight-link">
+          <span class="pulse-dot"></span> Custom Kit Studio
+        </a>
+        <a href="#matchCenterSection" class="nav-link match-center-link">
+          <span class="live-blink-dot"></span> Match Scores
+        </a>
+      </nav>
+
+      <!-- Header Actions (Favorite Club, Search, Currency, Wishlist, Cart) -->
+      <div class="header-actions">
+        <!-- Customer Favorite Option Trigger -->
+        <button class="fav-team-btn" id="openFavOptionsBtn" title="Set Your Favorite Club & Kit Options">
+          <span class="fav-icon">⭐</span>
+          <span class="fav-btn-text" id="headerFavClubLabel">My Favorite Club</span>
+        </button>
+
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="headerSearchInput" class="search-input" placeholder="Search club, player, country..." aria-label="Search football jerseys">
+          <button id="clearSearchBtn" class="clear-search-btn" aria-label="Clear search" hidden>&times;</button>
+        </div>
+
+        <!-- Currency Selector -->
+        <div class="currency-selector">
+          <select id="currencySelect" aria-label="Select currency">
+            <option value="USD" selected>USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+          </select>
+        </div>
+
+        <!-- Wishlist Button -->
+        <button class="icon-btn" id="wishlistOpenBtn" aria-label="View Saved Kits">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge" id="wishlistBadge">0</span>
+        </button>
+
+        <!-- Cart Trigger Button -->
+        <button class="cart-trigger-btn" id="cartOpenBtn" aria-label="Open Shopping Cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="cart-btn-label">Kit Bag</span>
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Showcase Section -->
+  <section class="hero-section">
+    <div class="hero-backdrop"></div>
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="tag-badge">100% AUTHENTIC FOOTBALL</span>
+        <span>2024 / 2025 OFFICIAL MATCH KITS</span>
+      </div>
+      <h1 class="hero-title">WEAR THE BADGE.<br><span class="gradient-text">OWN THE PITCH.</span></h1>
+      <p class="hero-subtitle">
+        Exclusive football kits from the world's greatest clubs and national teams. Engineered with match-grade breathable jacquard mesh, official league fonts, and genuine tournament badges.
+      </p>
+      <div class="hero-buttons">
+        <a href="#productGridSection" class="btn btn-primary">
+          <span>Explore Football Kits</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="#customizerSection" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          <span>Personalize Your Kit</span>
+        </a>
+        <a href="#matchCenterSection" class="btn btn-dark match-btn-hero">
+          <span class="live-dot-small"></span>
+          <span>Live Match Center</span>
+        </a>
+      </div>
+      <div class="hero-perks">
+        <div class="perk-item">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#00F5A0" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <span>100% Official Club Licensing</span>
+        </div>
+        <div class="perk-item">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#00D9F5" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Official League & UCL Typography</span>
+        </div>
+        <div class="perk-item">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#FFB800" stroke-width="2" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <span>Over 25,000 Verified Football Fans</span>
+        </div>
+      </div>
+    </div>
+    <!-- Hero Visual Jersey Banner -->
+    <div class="hero-visual">
+      <div class="hero-jersey-showcase" id="heroShowcase">
+        <div class="jersey-card-glow"></div>
+        <div class="floating-jersey-display" id="heroJerseySvgContainer">
+          <!-- Rendered dynamically via JS -->
+        </div>
+        <div class="hero-jersey-info">
+          <span class="hero-jersey-badge">SPOTLIGHT MATCH KIT</span>
+          <h3 id="heroJerseyTitle">Real Madrid 24/25 Home Kit</h3>
+          <p id="heroJerseySubtitle">Player Issue • Bellingham #5 • Official UCL Starball</p>
+          <button class="btn btn-sm btn-accent" id="heroQuickBuyBtn">Customize This Kit</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Custom Football Kit Studio -->
+  <section class="customizer-section" id="customizerSection">
+    <div class="section-container">
+      <div class="section-header center">
+        <span class="section-pill">LIVE 360° PREVIEW</span>
+        <h2 class="section-title">THE CUSTOM <span class="gradient-text">FOOTBALL STUDIO</span></h2>
+        <p class="section-subtitle">
+          Personalize any football kit with your own name, squad number, or iconic club legends. Add official domestic league and UEFA Champions League patches in real-time.
+        </p>
+      </div>
+
+      <div class="customizer-grid">
+        <!-- Interactive Jersey Canvas / SVG Preview -->
+        <div class="customizer-preview-container">
+          <div class="preview-controls">
+            <button class="angle-btn active" id="viewFrontBtn">Front View</button>
+            <button class="angle-btn" id="viewBackBtn">Back View (Name & Number)</button>
+            <button class="zoom-btn" id="resetZoomBtn" title="Reset View">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+              Reset
+            </button>
+          </div>
+
+          <div class="interactive-jersey-stage" id="customizerStage">
+            <!-- Dynamic SVG Jersey Canvas rendered by JavaScript -->
+            <div id="liveJerseySvgHolder" class="svg-stage-inner"></div>
+            <!-- Sleeve Badges Overlay -->
+            <div class="sleeve-badge-indicator" id="sleeveBadgeIndicator">
+              <span id="badgeIndicatorText">League Patch Attached</span>
+            </div>
+          </div>
+
+          <div class="preview-tips">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span>Switch to <strong>Back View</strong> to see your custom name and squad number with official club typeface.</span>
+          </div>
+        </div>
+
+        <!-- Customizer Configuration Panel -->
+        <div class="customizer-panel">
+          <!-- Step 1: Select Football Club Base -->
+          <div class="config-group">
+            <div class="config-label-row">
+              <label class="config-label">1. Choose Football Club or Nation</label>
+              <button type="button" class="quick-legend-btn" id="applyFavoriteToCustomizerBtn">⚡ Load My Favorite Team</button>
+            </div>
+            <div class="kit-selector-row" id="customizerKitSelector">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Step 2: Edition / Version -->
+          <div class="config-group">
+            <label class="config-label">2. Select Football Edition</label>
+            <div class="edition-toggle">
+              <label class="edition-option active">
+                <input type="radio" name="editionRadio" value="fan" checked>
+                <div class="edition-card">
+                  <div class="edition-title">Stadium Fan Edition</div>
+                  <div class="edition-desc">Standard relaxed fit, woven club badge, durable breathable fabric.</div>
+                  <div class="edition-price-diff">Base Price</div>
+                </div>
+              </label>
+              <label class="edition-option">
+                <input type="radio" name="editionRadio" value="player">
+                <div class="edition-card">
+                  <div class="edition-title">Match Player Issue (+ $35)</div>
+                  <div class="edition-desc">Aerodynamic slim athletic fit, heat-pressed silicone crest, laser ventilation.</div>
+                  <div class="edition-price-diff">+$35.00</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 3: Sleeve Length -->
+          <div class="config-group">
+            <label class="config-label">3. Sleeve Length</label>
+            <div class="sleeve-toggle-row">
+              <label class="sleeve-choice active">
+                <input type="radio" name="sleeveRadio" value="short" checked>
+                <span>Short Sleeve (Standard Matchday)</span>
+              </label>
+              <label class="sleeve-choice">
+                <input type="radio" name="sleeveRadio" value="long">
+                <span>Long Sleeve Classic (+ $10.00)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 4: Name & Number Customization -->
+          <div class="config-group">
+            <div class="config-label-row">
+              <label class="config-label">4. Official Name & Number Printing (+ $15)</label>
+              <button type="button" class="quick-legend-btn" id="quickLegendBtn">Choose Legend Preset</button>
+            </div>
+
+            <!-- Preset legends drop menu -->
+            <div class="legend-preset-tray" id="legendPresetsTray" hidden>
+              <button type="button" class="preset-pill" data-name="BELLINGHAM" data-num="5">Bellingham #5</button>
+              <button type="button" class="preset-pill" data-name="VINICIUS JR" data-num="7">Vinicius Jr #7</button>
+              <button type="button" class="preset-pill" data-name="MESSI" data-num="10">Messi #10</button>
+              <button type="button" class="preset-pill" data-name="SAKA" data-num="7">Saka #7</button>
+              <button type="button" class="preset-pill" data-name="SALAH" data-num="11">Salah #11</button>
+              <button type="button" class="preset-pill" data-name="PALMER" data-num="20">Palmer #20</button>
+              <button type="button" class="preset-pill" data-name="YAMAL" data-num="19">Lamine Yamal #19</button>
+              <button type="button" class="preset-pill" data-name="RONALDO" data-num="7">Ronaldo #7</button>
+              <button type="button" class="preset-pill" data-name="ZIDANE" data-num="10">Zidane #10</button>
+            </div>
+
+            <div class="custom-name-number-inputs">
+              <div class="input-field-col name-col">
+                <span class="input-sub">NAME ON JERSEY</span>
+                <input type="text" id="customNameInput" maxlength="14" placeholder="e.g. YOUR SURNAME" value="BELLINGHAM">
+              </div>
+              <div class="input-field-col num-col">
+                <span class="input-sub">NUMBER (1-99)</span>
+                <input type="number" id="customNumberInput" min="1" max="99" placeholder="5" value="5">
+              </div>
+            </div>
+            <div class="input-hint">Official club vinyl thermal lettering. Guaranteed to withstand 100+ machine washes.</div>
+          </div>
+
+          <!-- Step 5: Badges & Sleeve Patches -->
+          <div class="config-group">
+            <label class="config-label">5. Official Competition Patches</label>
+            <div class="patches-selector">
+              <label class="patch-checkbox">
+                <input type="checkbox" id="patchLeagueCheckbox" checked>
+                <span class="checkmark"></span>
+                <div class="patch-info">
+                  <span class="patch-name">Domestic League Champion Patch</span>
+                  <span class="patch-price">+$8.00</span>
+                </div>
+              </label>
+              <label class="patch-checkbox">
+                <input type="checkbox" id="patchStarballCheckbox">
+                <span class="checkmark"></span>
+                <div class="patch-info">
+                  <span class="patch-name">UEFA Champions League Starball + Foundation Badge</span>
+                  <span class="patch-price">+$10.00</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 6: Size Selection -->
+          <div class="config-group">
+            <div class="config-label-row">
+              <label class="config-label">6. Select Size</label>
+              <button type="button" class="size-guide-btn" id="openSizeGuideBtn">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21.3 8.7 8.7 21.3c-.4.4-1 .4-1.4 0l-4.6-4.6c-.4-.4-.4-1 0-1.4L15.3 2.7c.4-.4 1-.4 1.4 0l4.6 4.6c.4.4.4 1 0 1.4z"></path><path d="m10 8 2 2"></path><path d="m13 11 2 2"></path><path d="m16 14 2 2"></path></svg>
+                Size Guide & Fit Advisor
+              </button>
+            </div>
+            <div class="size-pills-row" id="customizerSizePills">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill active" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+              <button type="button" class="size-pill" data-size="2XL">2XL</button>
+            </div>
+          </div>
+
+          <!-- Live Price Summary & Add to Cart -->
+          <div class="customizer-checkout-card">
+            <div class="customizer-pricing-breakdown">
+              <div class="price-line">
+                <span>Base Football Kit:</span>
+                <span id="custBasePrice">$89.99</span>
+              </div>
+              <div class="price-line" id="custEditionRow">
+                <span>Edition:</span>
+                <span id="custEditionPrice">Fan Issue ($0.00)</span>
+              </div>
+              <div class="price-line" id="custSleeveRow">
+                <span>Sleeve:</span>
+                <span id="custSleevePrice">Short Sleeve ($0.00)</span>
+              </div>
+              <div class="price-line" id="custPrintingRow">
+                <span>Name & Number Print:</span>
+                <span id="custPrintingPrice">+$15.00</span>
+              </div>
+              <div class="price-line" id="custBadgesRow">
+                <span>Sleeve Badges:</span>
+                <span id="custBadgesPrice">+$8.00</span>
+              </div>
+              <div class="price-divider"></div>
+              <div class="price-line total-line">
+                <span>Total Custom Kit:</span>
+                <span class="custom-total" id="custTotalPrice">$112.99</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block btn-lg" id="addCustomKitToCartBtn">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              <span>Add Custom Football Kit to Bag</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMER FAVORITE TEAM HUB BANNER -->
+  <section class="favorite-team-hub" id="favoriteTeamHub">
+    <div class="section-container">
+      <div class="fav-hub-card">
+        <div class="fav-hub-left">
+          <div class="fav-star-icon">⭐</div>
+          <div>
+            <span class="fav-hub-tag">CUSTOMER PREFERENCES</span>
+            <h3 class="fav-hub-heading" id="favClubGreeting">Select Your Favorite Football Club</h3>
+            <p class="fav-hub-desc" id="favClubDescription">
+              Choose your favorite team to personalize your store experience, highlight matchday kits, and auto-apply your favorite player preferences.
+            </p>
+          </div>
+        </div>
+
+        <div class="fav-hub-right">
+          <div class="fav-select-wrap">
+            <select id="favClubSelect" class="fav-club-dropdown" aria-label="Select favorite team">
+              <option value="">-- Choose Your Favorite Team --</option>
+              <option value="Real Madrid">🇪🇸 Real Madrid</option>
+              <option value="FC Barcelona">🇪🇸 FC Barcelona</option>
+              <option value="Arsenal FC">🇬🇧 Arsenal</option>
+              <option value="Manchester City">🇬🇧 Manchester City</option>
+              <option value="Liverpool FC">🇬🇧 Liverpool</option>
+              <option value="Chelsea FC">🇬🇧 Chelsea</option>
+              <option value="Inter Milan">🇮🇹 Inter Milan</option>
+              <option value="AC Milan">🇮🇹 AC Milan</option>
+              <option value="Bayern Munich">🇩🇪 Bayern Munich</option>
+              <option value="Borussia Dortmund">🇩🇪 Borussia Dortmund</option>
+              <option value="Paris Saint-Germain">🇫🇷 Paris Saint-Germain</option>
+              <option value="Argentina">🌍 Argentina</option>
+              <option value="Brazil">🌍 Brazil</option>
+              <option value="Spain">🌍 Spain</option>
+              <option value="Portugal">🌍 Portugal</option>
+              <option value="Japan">🌍 Japan</option>
+              <option value="France">🌍 France</option>
+            </select>
+            <button class="btn btn-primary btn-sm" id="saveFavClubBtn">Set as Favorite</button>
+          </div>
+          <button class="link-btn customize-options-link" id="hubOpenOptionsBtn">⚙️ Customize All Favorite Kit Options</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Football Products Catalog & Filters Section -->
+  <section class="catalog-section" id="productGridSection">
+    <div class="section-container">
+      <div class="catalog-header-wrap">
+        <div>
+          <span class="section-pill">OFFICIAL FOOTBALL CATALOG</span>
+          <h2 class="section-title">THE 2024/25 <span class="gradient-text">FOOTBALL KITS</span></h2>
+          <p class="section-subtitle">Authentic European club, national team, and retro legends collection.</p>
+        </div>
+        <!-- Active Filter Counter -->
+        <div class="catalog-meta">
+          <span id="productCounterText">Showing all football kits</span>
+        </div>
+      </div>
+
+      <!-- Quick League Filter Pills -->
+      <div class="filter-pills-scroll" id="leagueFilterPills">
+        <button class="pill-btn active" data-league="all">All Football Kits</button>
+        <button class="pill-btn fav-pill-btn" id="filterByFavClubPill" hidden>⭐ My Favorite Team</button>
+        <button class="pill-btn" data-league="Premier League">🇬🇧 Premier League</button>
+        <button class="pill-btn" data-league="La Liga">🇪🇸 La Liga</button>
+        <button class="pill-btn" data-league="Serie A">🇮🇹 Serie A</button>
+        <button class="pill-btn" data-league="Bundesliga">🇩🇪 Bundesliga</button>
+        <button class="pill-btn" data-league="Ligue 1">🇫🇷 Ligue 1</button>
+        <button class="pill-btn" data-league="International">🌍 National Teams</button>
+        <button class="pill-btn" data-league="Retro">⏳ Retro & Legends</button>
+      </div>
+
+      <!-- Filter Controls Toolbar -->
+      <div class="filter-toolbar">
+        <div class="toolbar-left">
+          <!-- Edition Filter -->
+          <div class="dropdown-filter">
+            <label for="editionFilterSelect">Edition:</label>
+            <select id="editionFilterSelect">
+              <option value="all">All Editions</option>
+              <option value="Player Issue">Match Player Issue</option>
+              <option value="Stadium Fan">Stadium Fan</option>
+              <option value="Retro">Retro Classic</option>
+            </select>
+          </div>
+
+          <!-- Type Filter (Home, Away, Third) -->
+          <div class="dropdown-filter">
+            <label for="typeFilterSelect">Kit Type:</label>
+            <select id="typeFilterSelect">
+              <option value="all">Home, Away & Special</option>
+              <option value="Home">Home Kit</option>
+              <option value="Away">Away Kit</option>
+              <option value="Special">Special Edition</option>
+            </select>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="dropdown-filter">
+            <label for="priceSortSelect">Sort By:</label>
+            <select id="priceSortSelect">
+              <option value="featured">Featured / Trending</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+              <option value="newest">Newest Drops</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toolbar-right">
+          <!-- Reset button -->
+          <button class="reset-filter-btn" id="resetFiltersBtn" title="Reset all filters">
+            <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            Reset Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="product-grid" id="productGrid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Empty state when no match -->
+      <div class="empty-state" id="emptySearchState" hidden>
+        <div class="empty-icon">⚽</div>
+        <h3>No Football Kits Found Matching Your Filters</h3>
+        <p>Try adjusting your search keywords, league filters, or clear all filters to explore the full football collection.</p>
+        <button class="btn btn-secondary" id="clearAllFiltersBtn">Clear All Filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MATCHDAY LIVE CENTER (LIVE & UPCOMING MATCHES TAB) ==================== -->
+  <section class="match-center-section" id="matchCenterSection">
+    <div class="section-container">
+      <div class="match-center-header">
+        <div>
+          <div class="match-live-pulse-badge">
+            <span class="live-dot-pulse"></span>
+            <span id="liveMatchesCountText">3 MATCHES IN PLAY RIGHT NOW</span>
+          </div>
+          <h2 class="section-title">FOOTBALL <span class="gradient-text">MATCHDAY CENTER</span></h2>
+          <p class="section-subtitle">Follow real-time scores for live matches and upcoming fixtures. Shop each playing team's official match kit instantly.</p>
+        </div>
+
+        <div class="match-center-controls">
+          <button class="btn btn-sm btn-dark" id="refreshScoresBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>Refresh Scores</span>
+          </button>
+          <label class="live-ticker-toggle">
+            <input type="checkbox" id="liveTickerToggle" checked>
+            <span class="toggle-switch"></span>
+            <span class="toggle-text">Auto-Update Scores</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Match Center Tabs (Live Now, Upcoming Fixtures, Recent Results) -->
+      <div class="match-tabs-bar" role="tablist" aria-label="Football Match Categories">
+        <button class="match-tab active" role="tab" aria-selected="true" id="tabLiveBtn" data-tab="live">
+          <span class="tab-live-dot"></span>
+          <span>Live Now (<span id="tabLiveCount">3</span>)</span>
+        </button>
+        <button class="match-tab" role="tab" aria-selected="false" id="tabUpcomingBtn" data-tab="upcoming">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Upcoming Fixtures (<span id="tabUpcomingCount">6</span>)</span>
+        </button>
+        <button class="match-tab" role="tab" aria-selected="false" id="tabResultsBtn" data-tab="results">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          <span>Recent Results</span>
+        </button>
+      </div>
+
+      <!-- Match Cards Container -->
+      <div class="match-cards-grid" id="matchCardsContainer" role="tabpanel">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Authenticity & Quality Assurance Banner -->
+  <section class="trust-banner">
+    <div class="section-container">
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon-box">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#00F5A0" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+          </div>
+          <h4>100% Authentic Football Grade</h4>
+          <p>Direct from official licensed manufacturers. Original crest embroidery, genuine thermal tags, and serialized club security labels.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon-box">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#00D9F5" stroke-width="2" fill="none"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          </div>
+          <h4>Matchday Express Dispatch</h4>
+          <p>Custom name printing completed within 24 hours. Tracked priority air shipping with DHL & FedEx. Free global delivery over $85.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon-box">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#FFB800" stroke-width="2" fill="none"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          </div>
+          <h4>30-Day Easy Returns</h4>
+          <p>Not 100% thrilled with your size or fit? Return or exchange any non-customized football kit hassle-free within 30 days.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon-box">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#FF5E62" stroke-width="2" fill="none"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h4>Certified Thermal Pressing</h4>
+          <p>We use official polyurethane vinyl certified by UEFA, Premier League, and La Liga. Names and numbers will never peel or crack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter & Discount Banner -->
+  <section class="newsletter-section">
+    <div class="section-container">
+      <div class="newsletter-card">
+        <div class="newsletter-content">
+          <span class="section-pill">JOIN THE FOOTBALL ULTRA CLUB</span>
+          <h2>UNLOCK 15% OFF YOUR FIRST KIT</h2>
+          <p>Receive early VIP access to limited retro football drops, kit restocks, and exclusive club customization discounts.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" id="newsletterEmail" placeholder="Enter your email address..." required aria-label="Email address for discount">
+            <button type="submit" class="btn btn-primary">Claim 15% Off</button>
+          </form>
+          <p class="newsletter-disclaimer">Instant code sent. No spam ever. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="section-container">
+      <div class="footer-grid">
+        <div class="footer-col brand-col">
+          <div class="logo-mark">
+            <span class="brand-name">VORTEX<span class="brand-accent">KITS</span></span>
+          </div>
+          <p class="footer-desc">
+            The world's leading destination for authentic football club, national team, and classic retro kits. Crafted for the fans, engineered for the pitch.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="#" aria-label="Twitter / X">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Top Football Competitions</h4>
+          <ul class="footer-links">
+            <li><a href="#productGridSection" data-league="Premier League">Premier League Kits</a></li>
+            <li><a href="#productGridSection" data-league="La Liga">La Liga Kits</a></li>
+            <li><a href="#productGridSection" data-league="Serie A">Serie A TIM Kits</a></li>
+            <li><a href="#productGridSection" data-league="Bundesliga">Bundesliga Kits</a></li>
+            <li><a href="#productGridSection" data-league="International">FIFA World Cup & Euro Kits</a></li>
+            <li><a href="#matchCenterSection">Live Match Fixtures</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="#" id="footerSizeGuideLink">Size & Fit Guide</a></li>
+            <li><a href="#" id="footerTrackOrderLink">Track Your Kit</a></li>
+            <li><a href="#" id="footerReturnsLink">Returns & Exchanges</a></li>
+            <li><a href="#" id="footerCustomInfoLink">Custom Name Printing FAQ</a></li>
+            <li><a href="#" id="footerAuthLink">Authenticity Certificate</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Official Badges</h4>
+          <p class="footer-subtext">We are an authorized distributor of certified heat-applied football club badges, sleeve patches, and league numbers.</p>
+          <div class="payment-badges-row">
+            <span class="pay-badge">VISA</span>
+            <span class="pay-badge">Mastercard</span>
+            <span class="pay-badge">Apple Pay</span>
+            <span class="pay-badge">Google Pay</span>
+            <span class="pay-badge">PayPal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 VORTEX KITS Inc. All rights reserved. 100% Dedicated Football Apparel.</p>
+        <div class="bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Shipping Policy</a>
+          <a href="#">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS & DRAWERS (Modern <dialog> with closedby="any") ==================== -->
+
+  <!-- 1. CUSTOMER FAVORITE OPTIONS MODAL (NEW) -->
+  <dialog id="favoriteOptionsDialog" closedby="any" aria-labelledby="favOptionsTitle" class="store-dialog modal-md">
+    <div class="dialog-card">
+      <div class="dialog-header-row">
+        <div>
+          <span class="section-pill">CUSTOMER PREFERENCES</span>
+          <h2 id="favOptionsTitle" class="dialog-heading">Select Your Favorite Options</h2>
+          <p class="dialog-sub">Tailor the store, recommendations, and customizer to your personal football preferences.</p>
+        </div>
+        <button class="dialog-close-btn" id="closeFavOptionsBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="favOptionsForm" class="fav-options-form">
+        <!-- Option 1: Favorite Football Team -->
+        <div class="form-group">
+          <label for="modalFavTeamSelect">1. Your Favorite Football Club / Nation *</label>
+          <select id="modalFavTeamSelect" class="form-select-lg" required>
+            <option value="">-- Choose Your Favorite Team --</option>
+            <option value="Real Madrid">🇪🇸 Real Madrid</option>
+            <option value="FC Barcelona">🇪🇸 FC Barcelona</option>
+            <option value="Arsenal FC">🇬🇧 Arsenal FC</option>
+            <option value="Manchester City">🇬🇧 Manchester City</option>
+            <option value="Liverpool FC">🇬🇧 Liverpool FC</option>
+            <option value="Chelsea FC">🇬🇧 Chelsea FC</option>
+            <option value="Inter Milan">🇮🇹 Inter Milan</option>
+            <option value="AC Milan">🇮🇹 AC Milan</option>
+            <option value="Bayern Munich">🇩🇪 Bayern Munich</option>
+            <option value="Borussia Dortmund">🇩🇪 Borussia Dortmund</option>
+            <option value="Paris Saint-Germain">🇫🇷 Paris Saint-Germain</option>
+            <option value="Argentina">🌍 Argentina (3-Star Champions)</option>
+            <option value="Brazil">🌍 Brazil (5-Star)</option>
+            <option value="Spain">🌍 Spain (Euro 2024 Champions)</option>
+            <option value="Portugal">🌍 Portugal</option>
+            <option value="Japan">🌍 Japan (Samurai Blue)</option>
+            <option value="France">🌍 France</option>
+          </select>
+        </div>
+
+        <!-- Option 2: Favorite Edition Preference -->
+        <div class="form-group">
+          <label>2. Preferred Kit Edition</label>
+          <div class="pref-radio-group">
+            <label class="pref-choice">
+              <input type="radio" name="prefEdition" value="fan" checked>
+              <span>Stadium Fan Edition (Comfortable everyday regular fit)</span>
+            </label>
+            <label class="pref-choice">
+              <input type="radio" name="prefEdition" value="player">
+              <span>Match Player Issue (Athletic slim fit with laser ventilation)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Option 3: Favorite Sleeve Length -->
+        <div class="form-group">
+          <label>3. Preferred Sleeve Length</label>
+          <div class="pref-radio-group">
+            <label class="pref-choice">
+              <input type="radio" name="prefSleeve" value="short" checked>
+              <span>Short Sleeve (Standard Matchday)</span>
+            </label>
+            <label class="pref-choice">
+              <input type="radio" name="prefSleeve" value="long">
+              <span>Long Sleeve Classic (+ $10.00)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Option 4: Favorite Custom Print Name & Squad Number -->
+        <div class="form-group">
+          <label>4. Default Custom Name & Squad Number</label>
+          <div class="form-row two-col">
+            <input type="text" id="prefCustomName" maxlength="14" placeholder="e.g. YOUR NAME">
+            <input type="number" id="prefCustomNum" min="1" max="99" placeholder="e.g. 7">
+          </div>
+          <span class="input-hint">Will automatically pre-fill when opening the Custom Kit Studio.</span>
+        </div>
+
+        <div class="fav-options-actions">
+          <button type="submit" class="btn btn-primary btn-block btn-lg">Save & Apply My Favorite Options</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- 2. PRODUCT QUICK VIEW & DETAILS MODAL -->
+  <dialog id="quickViewDialog" closedby="any" aria-labelledby="quickViewTitle" class="store-dialog modal-lg">
+    <div class="dialog-card">
+      <button class="dialog-close-btn" id="closeQuickViewBtn" aria-label="Close dialog">&times;</button>
+      <div class="quickview-grid">
+        <!-- Jersey View Stage -->
+        <div class="qv-visual-column">
+          <div class="qv-svg-wrapper" id="qvSvgHolder">
+            <!-- Dynamic SVG injected -->
+          </div>
+          <div class="qv-view-toggles">
+            <button class="qv-toggle-btn active" id="qvFrontBtn">Front View</button>
+            <button class="qv-toggle-btn" id="qvBackBtn">Back View</button>
+          </div>
+          <div class="qv-fabric-badges">
+            <span class="fabric-badge">✓ DRI-FIT ADV Jacquard Mesh</span>
+            <span class="fabric-badge">✓ Heat-applied Crest & Official Badges</span>
+          </div>
+        </div>
+
+        <!-- Details & Options -->
+        <div class="qv-info-column">
+          <div class="qv-header">
+            <span class="qv-league-badge" id="qvLeague">La Liga</span>
+            <h2 id="quickViewTitle" class="qv-title">Real Madrid 24/25 Home Kit</h2>
+            <div class="qv-rating-row">
+              <div class="star-rating">★★★★★</div>
+              <span class="rating-num">(4.9 • 248 verified reviews)</span>
+            </div>
+            <div class="qv-price-row">
+              <span class="qv-price" id="qvPrice">$89.99</span>
+              <span class="qv-tag-edition" id="qvEditionTag">Stadium Fan Edition</span>
+            </div>
+          </div>
+
+          <p class="qv-desc" id="qvDescription">
+            Featuring the iconic crisp white body with an embossed houndstooth pattern and golden trim accents. Breathable moisture-wicking technology designed for matchday performance.
+          </p>
+
+          <!-- Size selector -->
+          <div class="qv-section">
+            <div class="qv-label-row">
+              <label>Select Size:</label>
+              <button type="button" class="link-btn" id="qvSizeGuideLink">Size Advisor</button>
+            </div>
+            <div class="size-pills-row" id="qvSizeRow">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill active" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+              <button type="button" class="size-pill" data-size="2XL">2XL</button>
+            </div>
+          </div>
+
+          <!-- Add-on Customization Toggle inside QuickView -->
+          <div class="qv-section">
+            <div class="qv-custom-accordion">
+              <label class="checkbox-toggle">
+                <input type="checkbox" id="qvCustomToggle">
+                <span class="switch-slider"></span>
+                <span class="toggle-text">Add Player Name & Number (+ $15.00)</span>
+              </label>
+
+              <div class="qv-custom-inputs" id="qvCustomInputs" hidden>
+                <div class="qv-inputs-row">
+                  <input type="text" id="qvCustomName" maxlength="14" placeholder="NAME (e.g. BELLINGHAM)">
+                  <input type="number" id="qvCustomNum" min="1" max="99" placeholder="5">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- QuickView CTA actions -->
+          <div class="qv-actions">
+            <button class="btn btn-primary btn-block btn-lg" id="qvAddToCartBtn">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              <span>Add to Bag • <span id="qvFinalPrice">$89.99</span></span>
+            </button>
+            <button class="btn btn-secondary" id="qvOpenInStudioBtn" title="Customize in 360 Studio">
+              Open in Studio
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 3. SHOPPING CART DRAWER MODAL -->
+  <dialog id="cartDrawerDialog" closedby="any" aria-labelledby="cartDrawerTitle" class="store-dialog cart-drawer">
+    <div class="cart-drawer-container">
+      <!-- Drawer Header -->
+      <div class="cart-header">
+        <div class="cart-header-title">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <h2 id="cartDrawerTitle">Your Kit Bag (<span id="cartCountHeader">0</span>)</h2>
+        </div>
+        <button class="dialog-close-btn" id="closeCartBtn" aria-label="Close cart">&times;</button>
+      </div>
+
+      <!-- Free Shipping Goal Progress Bar -->
+      <div class="free-shipping-tracker">
+        <div class="shipping-info-row">
+          <span id="shippingGoalText">Add $85.00 more for Free Worldwide Shipping</span>
+          <span class="shipping-icon">🚚</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="shippingProgressBar" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Cart Item List -->
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Cart Empty View -->
+      <div class="cart-empty-state" id="cartEmptyState" hidden>
+        <div class="empty-ball-icon">⚽</div>
+        <h3>Your Kit Bag is Empty</h3>
+        <p>No football jerseys added yet. Discover our 2024/25 match collection or create your personalized kit.</p>
+        <button class="btn btn-primary" id="exploreKitsBtn">Explore Football Kits</button>
+      </div>
+
+      <!-- Drawer Footer with Promo & Checkout -->
+      <div class="cart-footer" id="cartFooter">
+        <!-- Promo Coupon Form -->
+        <div class="coupon-box">
+          <div class="coupon-input-group">
+            <input type="text" id="couponInput" placeholder="Promo code (try 'KICKOFF15')">
+            <button type="button" id="applyCouponBtn" class="btn btn-sm btn-dark">Apply</button>
+          </div>
+          <div class="coupon-status" id="couponStatus"></div>
+        </div>
+
+        <!-- Breakdown -->
+        <div class="cart-totals">
+          <div class="total-row">
+            <span>Subtotal:</span>
+            <span id="cartSubtotal">$0.00</span>
+          </div>
+          <div class="total-row discount-row" id="cartDiscountRow" hidden>
+            <span>Discount (KICKOFF15):</span>
+            <span id="cartDiscountAmount">-$0.00</span>
+          </div>
+          <div class="total-row">
+            <span>Estimated Shipping:</span>
+            <span id="cartShippingFee">$9.99</span>
+          </div>
+          <div class="total-divider"></div>
+          <div class="total-row grand-total">
+            <span>Estimated Total:</span>
+            <span id="cartGrandTotal" class="total-number">$0.00</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-lg" id="proceedToCheckoutBtn">
+          <span>Checkout Securely</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+        <p class="cart-guarantee-note">🔒 Encrypted 256-bit SSL Checkout • 30-Day Money Back Guarantee</p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 4. WISHLIST MODAL -->
+  <dialog id="wishlistDialog" closedby="any" aria-labelledby="wishlistTitle" class="store-dialog modal-md">
+    <div class="dialog-card">
+      <div class="dialog-header-row">
+        <h2 id="wishlistTitle" class="dialog-heading">Saved Kits (<span id="wishlistCountHeader">0</span>)</h2>
+        <button class="dialog-close-btn" id="closeWishlistBtn" aria-label="Close wishlist">&times;</button>
+      </div>
+
+      <div class="wishlist-list" id="wishlistItemsList">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="wishlist-empty-state" id="wishlistEmptyState" hidden>
+        <p>No kits saved yet. Click the heart icon on any jersey card to save it for later.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 5. SIZE GUIDE & FIT ADVISOR MODAL -->
+  <dialog id="sizeGuideDialog" closedby="any" aria-labelledby="sizeGuideTitle" class="store-dialog modal-md">
+    <div class="dialog-card">
+      <div class="dialog-header-row">
+        <div>
+          <h2 id="sizeGuideTitle" class="dialog-heading">Official Football Jersey Size & Fit Guide</h2>
+          <p class="dialog-sub">Find your exact match-day athletic or relaxed fit.</p>
+        </div>
+        <button class="dialog-close-btn" id="closeSizeGuideBtn" aria-label="Close size guide">&times;</button>
+      </div>
+
+      <!-- Fit Tip Comparison -->
+      <div class="fit-comparison-cards">
+        <div class="fit-card">
+          <div class="fit-badge">STADIUM FAN FIT</div>
+          <p>Standard comfortable fit designed for everyday streetwear and match cheering. Order your true regular T-shirt size.</p>
+        </div>
+        <div class="fit-card highlight">
+          <div class="fit-badge player-badge">PLAYER ISSUE FIT</div>
+          <p>Tapered aerodynamic athletic cut worn by professionals. Snug on shoulders and chest. <strong>We recommend sizing UP 1 size</strong> if you prefer casual fit.</p>
+        </div>
+      </div>
+
+      <!-- Size Calculator -->
+      <div class="size-calculator-box">
+        <h4>⚡ Quick Fit Recommendation Calculator</h4>
+        <div class="calculator-inputs">
+          <div class="calc-field">
+            <label for="userHeight">Your Height (cm):</label>
+            <input type="number" id="userHeight" min="140" max="220" value="178" placeholder="178">
+          </div>
+          <div class="calc-field">
+            <label for="userWeight">Your Weight (kg):</label>
+            <input type="number" id="userWeight" min="40" max="150" value="75" placeholder="75">
+          </div>
+          <div class="calc-field">
+            <label for="preferredFit">Preferred Fit:</label>
+            <select id="preferredFit">
+              <option value="regular">Regular Casual</option>
+              <option value="slim">Athletic Snug</option>
+              <option value="loose">Oversized / Baggy</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-result" id="calcResult">
+          Recommended Size: <strong id="recommendedSizeOutput">Size M (REGULAR FIT)</strong>
+        </div>
+      </div>
+
+      <!-- Measurement Table -->
+      <div class="size-table-wrapper">
+        <table class="size-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Chest (Inches)</th>
+              <th>Chest (cm)</th>
+              <th>Length (cm)</th>
+              <th>Typical Height</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>S</strong></td>
+              <td>35 - 37.5"</td>
+              <td>88 - 96 cm</td>
+              <td>71 cm</td>
+              <td>165 - 173 cm</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>M</strong></td>
+              <td>37.5 - 41"</td>
+              <td>96 - 104 cm</td>
+              <td>73 cm</td>
+              <td>173 - 180 cm</td>
+            </tr>
+            <tr>
+              <td><strong>L</strong></td>
+              <td>41 - 44"</td>
+              <td>104 - 112 cm</td>
+              <td>76 cm</td>
+              <td>180 - 188 cm</td>
+            </tr>
+            <tr>
+              <td><strong>XL</strong></td>
+              <td>44 - 48.5"</td>
+              <td>112 - 124 cm</td>
+              <td>79 cm</td>
+              <td>185 - 195 cm</td>
+            </tr>
+            <tr>
+              <td><strong>2XL</strong></td>
+              <td>48.5 - 53.5"</td>
+              <td>124 - 136 cm</td>
+              <td>82 cm</td>
+              <td>190+ cm</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 6. CHECKOUT MODAL -->
+  <dialog id="checkoutDialog" closedby="any" aria-labelledby="checkoutTitle" class="store-dialog modal-lg">
+    <div class="dialog-card">
+      <div class="dialog-header-row">
+        <div>
+          <h2 id="checkoutTitle" class="dialog-heading">Secure Express Checkout</h2>
+          <p class="dialog-sub">Enter shipping information to complete your football kit order.</p>
+        </div>
+        <button class="dialog-close-btn" id="closeCheckoutBtn" aria-label="Close checkout">&times;</button>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="checkout-grid">
+          <!-- Shipping Fields -->
+          <div class="checkout-left">
+            <h4 class="form-section-title">1. Contact & Delivery Address</h4>
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="shipFirstName">First Name *</label>
+                <input type="text" id="shipFirstName" required placeholder="Alex">
+              </div>
+              <div class="form-group">
+                <label for="shipLastName">Last Name *</label>
+                <input type="text" id="shipLastName" required placeholder="Sterling">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="shipEmail">Email Address (for tracking updates) *</label>
+              <input type="email" id="shipEmail" required placeholder="alex.sterling@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="shipAddress">Street Address *</label>
+              <input type="text" id="shipAddress" required placeholder="742 Evergreen Terrace, Apt 4B">
+            </div>
+
+            <div class="form-row three-col">
+              <div class="form-group">
+                <label for="shipCity">City *</label>
+                <input type="text" id="shipCity" required placeholder="Manchester">
+              </div>
+              <div class="form-group">
+                <label for="shipCountry">Country *</label>
+                <select id="shipCountry" required>
+                  <option value="GB">United Kingdom</option>
+                  <option value="US">United States</option>
+                  <option value="ES">Spain</option>
+                  <option value="DE">Germany</option>
+                  <option value="IT">Italy</option>
+                  <option value="FR">France</option>
+                  <option value="CA">Canada</option>
+                  <option value="AU">Australia</option>
+                  <option value="JP">Japan</option>
+                  <option value="BR">Brazil</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="shipZip">Postal / ZIP Code *</label>
+                <input type="text" id="shipZip" required placeholder="M1 1AG">
+              </div>
+            </div>
+
+            <h4 class="form-section-title">2. Select Payment Method</h4>
+            <div class="payment-method-selector">
+              <label class="pay-method active">
+                <input type="radio" name="payMethod" value="card" checked>
+                <span class="pay-label">💳 Credit / Debit Card</span>
+              </label>
+              <label class="pay-method">
+                <input type="radio" name="payMethod" value="applepay">
+                <span class="pay-label"> Apple Pay / Google Pay</span>
+              </label>
+              <label class="pay-method">
+                <input type="radio" name="payMethod" value="paypal">
+                <span class="pay-label">🅿 PayPal Express</span>
+              </label>
+            </div>
+
+            <div id="cardFieldsContainer" class="card-inputs-box">
+              <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="•••• •••• •••• 4242" maxlength="19" value="4532 8901 2345 8892">
+              </div>
+              <div class="form-row two-col">
+                <div class="form-group">
+                  <label for="cardExp">Expiry (MM/YY)</label>
+                  <input type="text" id="cardExp" placeholder="12/28" maxlength="5" value="08/28">
+                </div>
+                <div class="form-group">
+                  <label for="cardCvc">CVC Code</label>
+                  <input type="text" id="cardCvc" placeholder="982" maxlength="4" value="982">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Summary in Checkout -->
+          <div class="checkout-right">
+            <div class="checkout-summary-card">
+              <h4>Order Summary</h4>
+              <div class="checkout-items-summary" id="checkoutItemsSummary">
+                <!-- Injected via JS -->
+              </div>
+              <div class="summary-divider"></div>
+              <div class="checkout-totals-box">
+                <div class="co-row">
+                  <span>Subtotal:</span>
+                  <span id="coSubtotal">$0.00</span>
+                </div>
+                <div class="co-row" id="coDiscountRow" hidden>
+                  <span>Discount Applied:</span>
+                  <span id="coDiscountAmount">-$0.00</span>
+                </div>
+                <div class="co-row">
+                  <span>Shipping:</span>
+                  <span id="coShipping">$0.00</span>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="co-row grand">
+                  <span>Total Due:</span>
+                  <span id="coGrandTotal">$0.00</span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitOrderBtn">
+                <span>Complete Purchase</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
+              <div class="ssl-guarantee">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="#00F5A0" stroke-width="2" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>Guaranteed 256-Bit Bank Level Encryption</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- 7. ORDER SUCCESS CONFIRMATION MODAL -->
+  <dialog id="orderSuccessDialog" closedby="any" aria-labelledby="orderSuccessTitle" class="store-dialog modal-md">
+    <div class="dialog-card success-card">
+      <div class="success-icon-wrap">
+        <svg viewBox="0 0 24 24" width="48" height="48" stroke="#00F5A0" stroke-width="3" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      </div>
+      <span class="order-badge">FOOTBALL KIT ORDER CONFIRMED</span>
+      <h2 id="orderSuccessTitle" class="success-heading">You're Matchday Ready!</h2>
+      <p class="success-desc">
+        Thank you for ordering with VORTEX KITS. Your official football kit is being printed and heat-pressed in our authentic workshop.
+      </p>
+
+      <div class="order-receipt-box">
+        <div class="receipt-row">
+          <span>Order Number:</span>
+          <strong id="receiptOrderNum">#VK-948217</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Confirmation Sent To:</span>
+          <strong id="receiptEmail">supporter@example.com</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Estimated Delivery:</span>
+          <strong>3-5 Business Days (Tracked Air)</strong>
+        </div>
+      </div>
+
+      <div class="success-actions">
+        <button class="btn btn-primary" id="continueShoppingBtn">Continue Exploring Kits</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
