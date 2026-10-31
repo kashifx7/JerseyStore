@@ -703,21 +703,29 @@ const CURRENCIES = {
   INR: { symbol: "₹", rate: 83.5 }
 };
 
-let currentCurrency = "USD";
+let currentCurrency = "INR";
 
 function formatPrice(amount, explicitCurrency = null) {
   const num = typeof amount === "number" ? amount : parseFloat(amount || 0);
-  const targetCurrency = explicitCurrency || currentCurrency;
+  const targetCurrency = explicitCurrency || currentCurrency || "INR";
 
   if (targetCurrency === "INR") {
-    return `₹${num.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    return `₹${Math.round(num).toLocaleString("en-IN")}`;
+  }
+  if (targetCurrency === "USD") {
+    return `$${num.toFixed(2)}`;
+  }
+  if (targetCurrency === "EUR") {
+    return `€${num.toFixed(2)}`;
+  }
+  if (targetCurrency === "GBP") {
+    return `£${num.toFixed(2)}`;
   }
 
-  const curr = CURRENCIES[targetCurrency] || CURRENCIES.USD;
-  // If explicitly given a currency matching the target, display directly
+  const curr = CURRENCIES[targetCurrency] || CURRENCIES.INR;
   const converted = (explicitCurrency && explicitCurrency === targetCurrency)
-    ? num.toFixed(2)
-    : (num * (targetCurrency === currentCurrency ? 1 : curr.rate)).toFixed(2);
+    ? Math.round(num)
+    : Math.round(num * (targetCurrency === currentCurrency ? 1 : curr.rate));
 
   return `${curr.symbol}${converted}`;
 }
@@ -1172,26 +1180,25 @@ function initHeroShowcase() {
   if (!container) return;
 
   if (shopifyProducts.length > 0) {
-    const featured = shopifyProducts[0];
-    container.innerHTML = `<img src="${featured.featuredImage}" alt="${featured.title}" class="hero-featured-img">`;
+    const featured = shopifyProducts.find(p => p.availableForSale) || shopifyProducts[0];
+    if (featured.featuredImage) {
+      container.innerHTML = `<img src="${featured.featuredImage}" alt="${featured.title}" class="hero-featured-img">`;
+    }
     if (titleEl) titleEl.textContent = featured.title;
     if (subEl) subEl.textContent = `Official Match Edition • ${formatPrice(featured.price, featured.currencyCode)} • ${featured.availableForSale ? 'In Stock' : 'Sold Out'}`;
     if (quickBuyBtn) {
-      quickBuyBtn.textContent = `Quick View • ${formatPrice(featured.price, featured.currencyCode)}`;
+      quickBuyBtn.textContent = `⚡ Quick View • ${formatPrice(featured.price, featured.currencyCode)}`;
       quickBuyBtn.onclick = () => openQuickView(featured.id);
     }
     return;
   }
 
-  const featuredKit = JERSEYS_DATA[0]; // Fallback if no Shopify products loaded yet
-  container.innerHTML = generateJerseySVG(featuredKit, { isBack: false });
-
+  // Initial placeholder while loading
   if (quickBuyBtn) {
-    quickBuyBtn.addEventListener("click", () => {
-      selectCustomizerKit(featuredKit.id);
-      const section = document.getElementById("customizerSection");
+    quickBuyBtn.onclick = () => {
+      const section = document.getElementById("productGridSection");
       if (section) section.scrollIntoView({ behavior: "smooth" });
-    });
+    };
   }
 }
 
@@ -1211,6 +1218,8 @@ let customizerState = {
 };
 
 function initCustomizerStudio() {
+  const stage = document.getElementById("customizerStage");
+  if (!stage) return;
   renderCustomizerKitList();
   bindCustomizerEvents();
   updateCustomizerView();
@@ -1547,6 +1556,8 @@ async function addCustomKitToCart() {
 // 11. CUSTOMER FAVORITE HUB & OPTIONS MODAL
 // ==========================================
 function initFavoriteOptions() {
+  const dialog = document.getElementById("favoriteOptionsDialog");
+  if (!dialog) return;
   setupDialog("favoriteOptionsDialog", "closeFavOptionsBtn");
 
   const openHeaderBtn = document.getElementById("openFavOptionsBtn");
@@ -1626,29 +1637,13 @@ function initFavoriteOptions() {
 // ==========================================
 let filterState = {
   searchQuery: "",
-  league: "all",
-  category: "all",
-  edition: "all",
-  type: "all",
-  sortBy: "featured",
-  onlyFavorites: false
+  status: "all", // "all", "in-stock", "sold-out"
+  sortBy: "featured"
 };
 
 function initProductGrid() {
   bindCatalogControls();
-  if (window.SHOPIFY_CONFIG && window.SHOPIFY_CONFIG.isConfigured) {
-    const grid = document.getElementById("productGrid");
-    if (grid) {
-      grid.innerHTML = `
-        <div class="catalog-loading" style="grid-column: 1 / -1; padding: 60px 20px;">
-          <div class="loading-spinner"></div>
-          <span style="font-size: 1.05rem; font-weight: 500;">Loading official jerseys from Second Half Store...</span>
-        </div>
-      `;
-    }
-  } else {
-    renderProducts();
-  }
+  renderProducts();
 }
 
 function bindCatalogControls() {
@@ -1672,58 +1667,18 @@ function bindCatalogControls() {
     });
   }
 
-  // Header navigation league filters
-  document.querySelectorAll(".main-nav .nav-link[data-league]").forEach(link => {
-    link.addEventListener("click", () => {
-      document.querySelectorAll(".main-nav .nav-link").forEach(l => l.classList.remove("active"));
-      link.classList.add("active");
-      filterState.league = link.dataset.league;
-      filterState.onlyFavorites = false;
-      updateLeaguePillsActiveState();
-      renderProducts();
-      document.getElementById("productGridSection")?.scrollIntoView({ behavior: "smooth" });
-    });
-  });
-
-  // League Pills
-  document.querySelectorAll("#leagueFilterPills .pill-btn[data-league]").forEach(pill => {
+  // Status Filter Pills (All, In Stock, Sold Out)
+  const statusPills = document.querySelectorAll("#statusFilterPills .pill-btn");
+  statusPills.forEach(pill => {
     pill.addEventListener("click", () => {
-      document.querySelectorAll("#leagueFilterPills .pill-btn").forEach(p => p.classList.remove("active"));
+      statusPills.forEach(p => p.classList.remove("active"));
       pill.classList.add("active");
-      filterState.league = pill.dataset.league;
-      filterState.onlyFavorites = false;
+      filterState.status = pill.dataset.filter || "all";
       renderProducts();
     });
   });
 
-  // Favorite pill button
-  const favPill = document.getElementById("filterByFavClubPill");
-  if (favPill) {
-    favPill.addEventListener("click", () => {
-      document.querySelectorAll("#leagueFilterPills .pill-btn").forEach(p => p.classList.remove("active"));
-      favPill.classList.add("active");
-      filterState.onlyFavorites = true;
-      renderProducts();
-    });
-  }
-
-  // Dropdown selectors
-  const editionSelect = document.getElementById("editionFilterSelect");
-  if (editionSelect) {
-    editionSelect.addEventListener("change", (e) => {
-      filterState.edition = e.target.value;
-      renderProducts();
-    });
-  }
-
-  const typeSelect = document.getElementById("typeFilterSelect");
-  if (typeSelect) {
-    typeSelect.addEventListener("change", (e) => {
-      filterState.type = e.target.value;
-      renderProducts();
-    });
-  }
-
+  // Sort dropdown
   const sortSelect = document.getElementById("priceSortSelect");
   if (sortSelect) {
     sortSelect.addEventListener("change", (e) => {
@@ -1732,30 +1687,56 @@ function bindCatalogControls() {
     });
   }
 
+  // Reset filters
   const resetBtn = document.getElementById("resetFiltersBtn");
   const clearAllBtn = document.getElementById("clearAllFiltersBtn");
   const resetAction = () => {
     filterState = {
       searchQuery: "",
-      league: "all",
-      category: "all",
-      edition: "all",
-      type: "all",
-      sortBy: "featured",
-      onlyFavorites: false
+      status: "all",
+      sortBy: "featured"
     };
     if (searchInput) searchInput.value = "";
     if (clearSearchBtn) clearSearchBtn.hidden = true;
-    if (editionSelect) editionSelect.value = "all";
-    if (typeSelect) typeSelect.value = "all";
     if (sortSelect) sortSelect.value = "featured";
-    updateLeaguePillsActiveState();
+    const allPill = document.querySelector('#statusFilterPills [data-filter="all"]');
+    if (allPill) {
+      statusPills.forEach(p => p.classList.remove("active"));
+      allPill.classList.add("active");
+    }
     renderProducts();
   };
 
   if (resetBtn) resetBtn.addEventListener("click", resetAction);
   if (clearAllBtn) clearAllBtn.addEventListener("click", resetAction);
 
+  // In Stock shortcut buttons
+  const heroInStockBtn = document.getElementById("heroInStockCtaBtn");
+  const navInStockBtn = document.getElementById("navInStockBtn");
+  const footerInStockLink = document.getElementById("footerInStockLink");
+  const switchToInStock = (e) => {
+    if (e) e.preventDefault();
+    const inStockPill = document.querySelector('#statusFilterPills [data-filter="in-stock"]');
+    if (inStockPill) inStockPill.click();
+    const section = document.getElementById("productGridSection");
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+  };
+  if (heroInStockBtn) heroInStockBtn.addEventListener("click", switchToInStock);
+  if (navInStockBtn) navInStockBtn.addEventListener("click", switchToInStock);
+  if (footerInStockLink) footerInStockLink.addEventListener("click", switchToInStock);
+
+  // Size Advisor shortcuts
+  const navSizeBtn = document.getElementById("navSizeAdvisorBtn");
+  const footerSizeGuideLink = document.getElementById("footerSizeGuideLink");
+  const openSizeAdvisor = (e) => {
+    if (e) e.preventDefault();
+    const guide = document.getElementById("sizeGuideDialog");
+    if (guide) guide.showModal();
+  };
+  if (navSizeBtn) navSizeBtn.addEventListener("click", openSizeAdvisor);
+  if (footerSizeGuideLink) footerSizeGuideLink.addEventListener("click", openSizeAdvisor);
+
+  // Sync from Shopify button
   const refreshShopifyBtn = document.getElementById("refreshShopifyBtn");
   if (refreshShopifyBtn) {
     refreshShopifyBtn.addEventListener("click", async () => {
@@ -1767,10 +1748,18 @@ function bindCatalogControls() {
   }
 }
 
-function updateLeaguePillsActiveState() {
-  document.querySelectorAll("#leagueFilterPills .pill-btn").forEach(p => {
-    p.classList.toggle("active", p.dataset.league === filterState.league);
-  });
+function updateFilterCounts() {
+  const allBtn = document.querySelector('#statusFilterPills [data-filter="all"]');
+  const inStockBtn = document.querySelector('#statusFilterPills [data-filter="in-stock"]');
+  const soldOutBtn = document.querySelector('#statusFilterPills [data-filter="sold-out"]');
+
+  const total = shopifyProducts.length;
+  const inStock = shopifyProducts.filter(p => p.availableForSale).length;
+  const soldOut = total - inStock;
+
+  if (allBtn) allBtn.textContent = `All Products (${total})`;
+  if (inStockBtn) inStockBtn.textContent = `In Stock (${inStock})`;
+  if (soldOutBtn) soldOutBtn.textContent = `Sold Out (${soldOut})`;
 }
 
 function renderProducts() {
@@ -1779,11 +1768,7 @@ function renderProducts() {
   const counterText = document.getElementById("productCounterText");
   if (!grid) return;
 
-  const isConfigured = window.SHOPIFY_CONFIG && window.SHOPIFY_CONFIG.isConfigured;
-
-  // Prioritize live Shopify products. NEVER show dummy data when Shopify is configured.
-  const activeProductList = shopifyProducts.length > 0 ? shopifyProducts : (isConfigured ? [] : JERSEYS_DATA);
-  const favTeam = customerPreferences.favoriteTeam;
+  const activeProductList = shopifyProducts;
 
   if (isShopifyLoading && activeProductList.length === 0) {
     grid.innerHTML = `
@@ -1797,53 +1782,43 @@ function renderProducts() {
     return;
   }
 
+  if (shopifyLoadError && activeProductList.length === 0) {
+    grid.innerHTML = `
+      <div class="shopify-config-banner" style="grid-column: 1 / -1; text-align: center; padding: 40px 20px;">
+        <span class="banner-icon" style="font-size: 2rem; display: block; margin-bottom: 12px;">⚠️</span>
+        <div>
+          <strong style="font-size: 1.1rem; color: #fff;">Unable to load Shopify Storefront products:</strong><br>
+          <span style="color: #ef4444; font-size: 0.95rem; display: block; margin-top: 8px;">${shopifyLoadError}</span>
+          <p style="margin-top: 12px; font-size: 0.88rem; color: var(--text-muted); max-width: 500px; margin-left: auto; margin-right: auto;">
+            Note: Browsers block cross-origin API calls on <code>file:///</code> URLs. Run via a local web server (e.g. <code>python -m http.server 3000</code>) or on GitHub Pages to connect.
+          </p>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="loadShopifyData()" style="margin-top: 16px;">
+            🔄 Retry Shopify Sync
+          </button>
+        </div>
+      </div>
+    `;
+    if (counterText) counterText.textContent = "Shopify connection error";
+    if (emptyState) emptyState.hidden = true;
+    return;
+  }
+
   let filtered = activeProductList.filter(kit => {
-    // Only favorite filter
-    if (filterState.onlyFavorites) {
-      if (!favTeam || !(kit.team || "").toLowerCase().includes(favTeam.toLowerCase())) {
-        return false;
-      }
+    // Status filter (in-stock vs sold-out)
+    if (filterState.status === "in-stock" && !kit.availableForSale) {
+      return false;
+    }
+    if (filterState.status === "sold-out" && kit.availableForSale) {
+      return false;
     }
 
     if (filterState.searchQuery) {
-      const q = filterState.searchQuery;
+      const q = filterState.searchQuery.toLowerCase();
       const matchTitle = (kit.title || "").toLowerCase().includes(q);
       const matchTeam = (kit.team || "").toLowerCase().includes(q);
-      const matchPlayer = (kit.defaultName || "").toLowerCase().includes(q);
-      const matchLeague = (kit.league || "").toLowerCase().includes(q);
       const matchDesc = (kit.description || "").toLowerCase().includes(q);
-      if (!matchTitle && !matchTeam && !matchPlayer && !matchLeague && !matchDesc) return false;
-    }
-
-    if (filterState.league !== "all") {
-      const kitLeague = (kit.league || "").toLowerCase();
-      const targetLeague = filterState.league.toLowerCase();
-      const title = (kit.title || "").toLowerCase();
-      const isLeagueMatch = kitLeague.includes(targetLeague) || targetLeague.includes(kitLeague);
-      const isTeamMatch = (targetLeague.includes("serie a") && title.includes("milan")) ||
-                          (targetLeague.includes("la liga") && title.includes("barc")) ||
-                          (targetLeague.includes("premier") && (title.includes("arsenal") || title.includes("chelsea") || title.includes("liverpool") || title.includes("city")));
-      if (!isLeagueMatch && !isTeamMatch) {
-        return false;
-      }
-    }
-
-    if (filterState.edition !== "all") {
-      const ed = (kit.edition || "").toLowerCase();
-      const title = (kit.title || "").toLowerCase();
-      const targetEd = filterState.edition.toLowerCase();
-      if (!ed.includes(targetEd) && !title.includes(targetEd)) {
-        return false;
-      }
-    }
-
-    if (filterState.type !== "all") {
-      const type = (kit.type || "").toLowerCase();
-      const title = (kit.title || "").toLowerCase();
-      const targetType = filterState.type.toLowerCase();
-      if (!type.includes(targetType) && !title.includes(targetType)) {
-        return false;
-      }
+      const matchTags = (kit.tags || []).some(t => t.toLowerCase().includes(q));
+      if (!matchTitle && !matchTeam && !matchDesc && !matchTags) return false;
     }
 
     return true;
@@ -1851,44 +1826,19 @@ function renderProducts() {
 
   // Sorting
   if (filterState.sortBy === "price-asc") {
-    filtered.sort((a, b) => (a.price !== undefined ? a.price : a.priceUSD) - (b.price !== undefined ? b.price : b.priceUSD));
+    filtered.sort((a, b) => a.price - b.price);
   } else if (filterState.sortBy === "price-desc") {
-    filtered.sort((a, b) => (b.price !== undefined ? b.price : b.priceUSD) - (a.price !== undefined ? a.price : a.priceUSD));
-  } else if (filterState.sortBy === "rating") {
-    filtered.sort((a, b) => (b.rating || 5) - (a.rating || 5));
-  } else if (filterState.sortBy === "featured") {
-    if (favTeam) {
-      filtered.sort((a, b) => {
-        const aFav = (a.team || "").toLowerCase().includes(favTeam.toLowerCase());
-        const bFav = (b.team || "").toLowerCase().includes(favTeam.toLowerCase());
-        if (aFav && !bFav) return -1;
-        if (!aFav && bFav) return 1;
-        return 0;
-      });
-    }
+    filtered.sort((a, b) => b.price - a.price);
   }
 
   if (counterText) {
-    const sourceLabel = shopifyProducts.length > 0 ? "Shopify live products" : "football kits";
-    counterText.textContent = `Showing ${filtered.length} of ${activeProductList.length} ${sourceLabel}`;
+    counterText.textContent = `Showing ${filtered.length} of ${activeProductList.length} products from Second Half Store`;
   }
 
-  // Setup notice banner if token is missing
-  let configBannerHtml = "";
-  if (!isConfigured) {
-    configBannerHtml = `
-      <div class="shopify-config-banner" style="grid-column: 1 / -1;">
-        <span class="banner-icon">⚡</span>
-        <div>
-          <strong>Shopify Headless Storefront Connected:</strong>
-          Please configure your Public Storefront API token in <code>shopify-config.js</code> to display your live Shopify products.
-        </div>
-      </div>
-    `;
-  }
+  updateFilterCounts();
 
   if (filtered.length === 0) {
-    grid.innerHTML = configBannerHtml;
+    grid.innerHTML = "";
     if (emptyState) emptyState.hidden = false;
     return;
   }
@@ -1897,21 +1847,21 @@ function renderProducts() {
 
   const cardsHtml = filtered.map(kit => {
     const isWished = wishlist.includes(kit.id);
-    const isFavTeam = favTeam && (kit.team || "").toLowerCase().includes(favTeam.toLowerCase());
-    const isSoldOut = kit.isShopifyProduct ? !kit.availableForSale : false;
-    const priceDisplay = formatPrice(kit.price !== undefined ? kit.price : kit.priceUSD, kit.currencyCode);
+    const isSoldOut = !kit.availableForSale;
+    const priceDisplay = formatPrice(kit.price, kit.currencyCode);
 
-    // Image rendering: Real image if available, else SVG generator fallback
     const imageHtml = kit.featuredImage
       ? `<img src="${kit.featuredImage}" alt="${kit.title}" class="product-card-img" loading="lazy">`
-      : generateJerseySVG(kit, { isBack: false });
+      : `<div class="product-card-placeholder"><svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path></svg><span>Official Kit</span></div>`;
+
+    const variantLabel = kit.variants && kit.variants.length > 1
+      ? `${kit.variants.length} Sizes Available (${kit.variants.map(v => v.title).join(", ")})`
+      : (kit.variants && kit.variants.length === 1 ? `Size: ${kit.variants[0].title}` : 'Official Match Edition');
 
     return `
-      <div class="product-card ${isFavTeam ? 'is-fav-team' : ''} ${isSoldOut ? 'is-sold-out' : ''}" data-id="${kit.id}">
-        ${isFavTeam ? `<span class="card-fav-badge">⭐ YOUR FAVORITE TEAM</span>` : ''}
-
+      <div class="product-card ${isSoldOut ? 'is-sold-out' : ''}" data-id="${kit.id}">
         <div class="card-top-badges">
-          <span class="card-edition-pill" style="${isSoldOut ? 'background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); font-weight: 700;' : 'background: rgba(0, 245, 160, 0.15); color: #00F5A0; border: 1px solid rgba(0, 245, 160, 0.3); font-weight: 700;'}">
+          <span class="card-edition-pill ${isSoldOut ? 'pill-sold-out' : 'pill-in-stock'}">
             ${isSoldOut ? 'Sold Out' : 'In Stock'}
           </span>
           <button class="wishlist-heart-btn ${isWished ? 'active' : ''}" data-id="${kit.id}" title="${isWished ? 'Remove from Saved' : 'Save Kit'}" aria-label="Toggle Saved Kit">
@@ -1929,11 +1879,11 @@ function renderProducts() {
         <div class="card-body">
           <div class="card-league-row">
             <span class="card-league">${kit.league || kit.productType || 'Official Kit'}</span>
-            <span class="card-rating">★ ${kit.rating || '4.9'}</span>
+            <span class="card-rating">★ 4.9</span>
           </div>
 
           <h3 class="card-title">${kit.title}</h3>
-          <p class="card-season-type">${kit.variants && kit.variants.length > 0 ? `${kit.variants.length} Size Variant${kit.variants.length > 1 ? 's' : ''}` : 'Official Kit'}</p>
+          <p class="card-season-type">${variantLabel}</p>
 
           <div class="card-footer">
             <div class="card-price-box">
@@ -1943,7 +1893,7 @@ function renderProducts() {
             <div class="card-actions">
               <button class="card-quick-add" data-id="${kit.id}" ${isSoldOut ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
                 <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line></svg>
-                <span>${isSoldOut ? 'Sold Out' : 'Add to Bag'}</span>
+                <span>${isSoldOut ? 'Sold Out' : (kit.variants && kit.variants.length > 1 ? 'Select Size' : 'Add to Bag')}</span>
               </button>
             </div>
           </div>
@@ -1952,7 +1902,7 @@ function renderProducts() {
     `;
   }).join("");
 
-  grid.innerHTML = configBannerHtml + cardsHtml;
+  grid.innerHTML = cardsHtml;
   bindProductCardEvents();
 }
 
@@ -1974,45 +1924,39 @@ function bindProductCardEvents() {
   document.querySelectorAll(".card-quick-add").forEach(btn => {
     btn.addEventListener("click", async (e) => {
       e.stopPropagation();
-      const allKits = shopifyProducts.length > 0 ? shopifyProducts : JERSEYS_DATA;
-      const kit = allKits.find(k => k.id === btn.dataset.id);
+      const kit = shopifyProducts.find(k => k.id === btn.dataset.id);
       if (!kit) return;
 
-      if (kit.isShopifyProduct) {
-        const availableVariant = kit.variants.find(v => v.availableForSale) || kit.variants[0];
-        if (!availableVariant || !availableVariant.availableForSale) {
-          showToast(`Sorry, ${kit.title} is sold out!`, true);
-          return;
-        }
+      if (!kit.availableForSale) {
+        showToast(`Sorry, ${kit.title} is sold out!`, true);
+        return;
+      }
 
-        const originalHtml = btn.innerHTML;
-        btn.disabled = true;
-        btn.innerHTML = `<span>Adding...</span>`;
+      // If multiple size variants exist, open Quick View so customer can pick size
+      if (kit.variants && kit.variants.length > 1) {
+        openQuickView(kit.id);
+        return;
+      }
 
-        try {
-          await handleAddToCart(availableVariant.id, 1, []);
-          showToast(`Added ${kit.title} (${availableVariant.title}) to your bag!`);
-          openCartDrawer();
-        } catch (err) {
-          showToast("Shopify: " + err.message, true);
-        } finally {
-          btn.disabled = false;
-          btn.innerHTML = originalHtml;
-        }
-      } else {
-        // Fallback demo cart
-        cart.push({
-          cartId: "std-" + Date.now() + Math.random().toString(36).substr(2, 4),
-          kitId: kit.id,
-          title: kit.title,
-          team: kit.team,
-          edition: kit.edition,
-          size: "M",
-          priceUSD: kit.priceUSD,
-          quantity: 1
-        });
-        saveCart();
-        showToast(`Added ${kit.title} to bag!`);
+      const availableVariant = kit.variants[0];
+      if (!availableVariant || !availableVariant.availableForSale) {
+        showToast(`Sorry, ${kit.title} is sold out!`, true);
+        return;
+      }
+
+      const originalHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span>Adding...</span>`;
+
+      try {
+        await handleAddToCart(availableVariant.id, 1, []);
+        showToast(`Added ${kit.title} to your bag!`);
+        openCartDrawer();
+      } catch (err) {
+        showToast("Shopify: " + err.message, true);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
       }
     });
   });
@@ -2025,6 +1969,8 @@ let currentMatchTab = "live";
 let liveSimulationTimer = null;
 
 function initMatchCenter() {
+  const container = document.getElementById("matchCardsContainer");
+  if (!container) return;
   bindMatchCenterTabs();
   renderMatchCards();
   initMatchSimulator();
@@ -2410,26 +2356,24 @@ function initQuickViewDialog() {
 }
 
 function openQuickView(kitId) {
-  const allKits = shopifyProducts.length > 0 ? shopifyProducts : JERSEYS_DATA;
-  const kit = allKits.find(k => k.id === kitId) || allKits[0];
+  const kit = shopifyProducts.find(k => k.id === kitId) || shopifyProducts[0];
   if (!kit) return;
   currentQvKit = kit;
   qvIsBack = false;
 
-  document.getElementById("qvLeague").textContent = kit.league || kit.productType || "Official Kit";
-  document.getElementById("quickViewTitle").textContent = kit.title;
-  document.getElementById("qvEditionTag").textContent = kit.edition || "Official Edition";
-  document.getElementById("qvDescription").textContent = kit.description || "";
+  const leagueEl = document.getElementById("qvLeague");
+  if (leagueEl) leagueEl.textContent = kit.league || kit.productType || "Official Kit";
+  const titleEl = document.getElementById("quickViewTitle");
+  if (titleEl) titleEl.textContent = kit.title;
+  const editionEl = document.getElementById("qvEditionTag");
+  if (editionEl) editionEl.textContent = kit.availableForSale ? "In Stock" : "Sold Out";
+  const descEl = document.getElementById("qvDescription");
+  if (descEl) descEl.textContent = kit.description || "Authentic official football jersey from Second Half Store.";
 
   const customToggle = document.getElementById("qvCustomToggle");
   const customInputs = document.getElementById("qvCustomInputs");
   if (customToggle) customToggle.checked = false;
   if (customInputs) customInputs.hidden = true;
-
-  const qvName = document.getElementById("qvCustomName");
-  const qvNum = document.getElementById("qvCustomNum");
-  if (qvName) qvName.value = kit.defaultName || "";
-  if (qvNum) qvNum.value = kit.defaultNum || 10;
 
   // Render variant pills (sizes)
   renderQvVariants();
@@ -3177,6 +3121,10 @@ async function loadShopifyData() {
       shopifyProducts = products;
       console.log(`✓ Successfully retrieved ${products.length} live products from Shopify!`);
       showToast(`✓ Retrieved ${products.length} live products from Second Half Store!`);
+      const statusBadge = document.getElementById("headerShopifyBadge");
+      if (statusBadge) {
+        statusBadge.innerHTML = `<span class="status-indicator"></span><span class="status-label">Shopify Live (${products.length})</span>`;
+      }
     } else {
       console.warn("Shopify returned 0 products. Ensure products are active and published to Headless channel.");
       showToast("Shopify connected, but 0 products found. Ensure products are published to Headless sales channel.", true);
@@ -3189,6 +3137,7 @@ async function loadShopifyData() {
     isShopifyLoading = false;
     renderProducts();
     initHeroShowcase();
+    updateFilterCounts();
   }
 
   // Restore cart if stored

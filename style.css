@@ -3626,3 +3626,63 @@ dialog.cart-drawer {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
+
+
+/* ==========================================
+   SHOPIFY HEADLESS LIVE BADGE & CARD ADDITIONS
+   ========================================== */
+
+.shopify-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  background: rgba(0, 245, 160, 0.08);
+  border: 1px solid rgba(0, 245, 160, 0.25);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.status-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00F5A0;
+  box-shadow: 0 0 8px #00F5A0;
+  animation: liveDotPulse 2s infinite ease-in-out;
+}
+
+@keyframes liveDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.pill-in-stock {
+  background: rgba(0, 245, 160, 0.15) !important;
+  color: #00F5A0 !important;
+  border: 1px solid rgba(0, 245, 160, 0.3) !important;
+  font-weight: 700;
+}
+
+.pill-sold-out {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  font-weight: 700;
+}
+
+.product-card-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  height: 100%;
+}
