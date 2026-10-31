@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.example
+shopify-config.local.js
 
 # Editor and operating-system files
 .vscode/

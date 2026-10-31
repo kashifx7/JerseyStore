@@ -1,98 +1,99 @@
-# VORTEX KITS - 100% Pure Football Jersey Storefront & Matchday Live Center
+# Second Half Store — Shopify Headless Storefront
 
-An ultra-modern, high-performance e-commerce frontend dedicated **exclusively to football (soccer) jerseys**, featuring a **Customer Favorite Options Engine**, an interactive **360° Custom Football Kit Studio**, and a real-time **Matchday Live Center** with live scores, upcoming fixtures, and direct match-to-kit shopping integration.
+An ultra-modern, high-performance e-commerce frontend dedicated exclusively to football jerseys, featuring real-time **Shopify Storefront GraphQL API integration**, an interactive **360° Custom Football Kit Studio**, a **Customer Favorite Options Engine**, and a real-time **Matchday Live Center**.
 
----
-
-## 🚀 Key Features
-
-### 1. ⚽ 100% Pure Football Focus
-- Exclusively dedicated to the world's most prestigious football competitions:
-  - 🇪🇸 **La Liga**: Real Madrid 24/25 Home, FC Barcelona 125th Anniversary Home
-  - 🇬🇧 **Premier League**: Arsenal 24/25 Away, Liverpool FC 24/25 Home, Manchester City 24/25 Home, Chelsea FC 24/25 Home
-  - 🇮🇹 **Serie A**: Inter Milan Two-Star Home, AC Milan 24/25 Home
-  - 🇩🇪 **Bundesliga**: Bayern Munich Triple Red, Borussia Dortmund 24/25 Home
-  - 🇫🇷 **Ligue 1**: Paris Saint-Germain 24/25 Home
-  - 🌍 **National Teams**: Argentina 3-Star Champions, Brazil 2024 Home, Spain Euro 2024 Champions, Portugal Euro 2024 Home, Japan Y-3 Special Edition
-  - ⏳ **Retro Football Legends**: France 1998 World Cup Final Retro (#10 Zidane), Brazil 1970 World Cup Final Retro (#10 Pelé)
+- **Website Domain:** [secondhalfstore.in](https://secondhalfstore.in)
+- **Shopify Store Domain:** `q4z4z7-ns.myshopify.com`
+- **Frontend Stack:** HTML5, CSS3, Vanilla JavaScript (ES6+), Shopify Storefront GraphQL API
+- **Deployment:** GitHub Pages (Static hosting)
+- **Git Branch:** `shopify-integration`
 
 ---
 
-### 2. ⭐ Customer Favorite Options Engine
-- **Favorite Club Selector**:
-  - Customers can choose their favorite football team (*Real Madrid, Barcelona, Arsenal, Liverpool, Manchester City, Bayern, Argentina, Brazil, etc.*) via the header button or the **Favorite Team Hub**.
-  - Persisted in `localStorage` across visits.
-  - Personalized greeting and automatic filtering via the **"⭐ My Favorite Team"** filter pill.
-  - Highlighted with a special **"⭐ YOUR FAVORITE TEAM"** badge on matching jersey cards.
-- **Personalized Kit Preferences Modal**:
-  - Set default preferred edition: **Stadium Fan (Relaxed)** vs. **Match Player Issue (Slim Athletic)**.
-  - Set default sleeve length: **Short Sleeve** vs. **Long Sleeve**.
-  - Set default custom print: Preferred surname and squad number.
-  - 1-click **"⚡ Load My Favorite Team"** button inside the Custom Kit Studio automatically configures your favorite kit!
+## 🚀 Key Features & Shopify Architecture
 
----
+### 1. 🛍️ Real Shopify Storefront API Integration
+- **Source of Truth:** Shopify powers live products, pricing, inventory availability, images, variants, cart lines, and checkout.
+- **Dynamic Catalogue:** Automatically queries and normalizes live Shopify products, handles, descriptions, and media.
+- **Variant Engine:** Reads sizes and editions directly from Shopify variants. If an item or size is out of stock, it is automatically marked as sold-out and disabled from checkout.
+- **Safe Fallback:** If the public token is not yet configured, the application displays a friendly developer banner and keeps the UI fully functional with a preview collection.
 
-### 3. 🔴 Matchday Live Center (Live Scores & Upcoming Fixtures Tab)
-- Located prominently below the catalog and accessible directly via the top navigation bar.
-- **Three Match Categories**:
-  - **🔴 Live Now**: Real-time matches with in-play minute ticker (e.g., `LIVE 76'`), live scores, goal scorers, timeline commentary, and possession stats bars.
-  - **📅 Upcoming Fixtures**: Fixture cards featuring scheduled kickoff times, countdowns (e.g., `Starts in 2h 45m`), and venue details.
-  - **🏆 Recent Results**: Full-time scores with scorers recap.
-- **Direct Match-to-Kit E-Commerce Bridge**:
-  - Every team on each match card features a direct **"👕 Shop Kit"** button.
-  - Clicking automatically filters the store or opens that team's jersey directly in the 360° Customizer Studio!
-- **Interactive Match Simulator**:
-  - Toggle auto-updates or click **"Refresh Scores"** to simulate in-play match progression and goal alert toast notifications.
+### 2. 🛒 Official Shopify Cart API
+- Native Cart API (`cartCreate`, `cartLinesAdd`, `cartLinesUpdate`, `cartLinesRemove`).
+- Persists the active `cartId` in browser `localStorage` (`shopify_cart_id`), maintaining cart contents across page reloads.
+- Automatic recovery: If a stored cart expires on Shopify, the client gracefully cleans up and provisions a fresh cart.
 
----
+### 3. 💳 Genuine Shopify Checkout Flow
+- When clicking **"Checkout Securely"**, the customer is redirected directly to Shopify's secure, encrypted checkout URL (`cart.checkoutUrl`).
+- Shopify handles customer shipping addresses, payment gateways (Cards, UPI, Apple Pay, PayPal), discount codes, order confirmation emails, and inventory fulfillment.
 
 ### 4. 🎽 360° Custom Football Kit Studio
-- **Dynamic Vector SVG Renderer**: Live 2D graphic rendering of both Front and Back jersey angles in real-time as you type your name and number.
-- **Sleeve Options**: Toggle between **Short Sleeve** and **Long Sleeve Classic** (+ $10.00).
-- **Legend Presets**: Fast pre-fills for *Bellingham #5, Messi #10, Vinicius Jr #7, Saka #7, Salah #11, Palmer #20, Yamal #19, Ronaldo #7, Zidane #10*.
-- **Official Tournament Badges**: Domestic League Champion or UEFA Champions League Starball + Foundation patch.
+- Dynamic vector SVG rendering of front and back jersey angles.
+- Customizations (Player Surname, Squad Number, Match Edition, Sleeve Type, Tournament Patches) are attached directly to the Shopify Cart line item as **Line Item Attributes** and sent to Shopify Checkout!
 
----
-
-### 5. 🛍️ Bag & Secure Checkout Flow
-- **Slide-Over Drawer**: Native `<dialog>` modal with backdrop blur and light-dismiss boundary fallback.
-- **Line-item Breakdown**: Custom name, squad number, edition, sleeve length, and attached patches.
-- **Free Shipping Progress Tracker**: Live progress toward the $85 threshold.
-- **Coupon Code Engine**: Try `KICKOFF15` for 15% discount.
-- **Mock Checkout**: Form validation, payment selector (Card, Apple Pay, PayPal), and celebratory order confirmation modal with order number.
-
----
-
-### 6. 🌐 Modern Web Guidance Compliant
-- Semantic HTML5 dialogs with declarative `closedby="any"` and light dismiss click boundary fallback.
-- CSS scroll containment (`overscroll-behavior: contain`) on `dialog:modal` and `dialog::backdrop` with `overflow: hidden` to eliminate page scroll chaining.
+### 5. 🔴 Matchday Live Center & Customer Favorite Hub
+- Real-time football match score tracker, upcoming fixtures, and recent results with a simulated ticking score engine.
+- Direct **"👕 Shop Kit"** button on match cards to quickly find and customize the corresponding team's jersey.
+- Club preference selector persisted across visits.
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 jersey-store/
-├── index.html        # Pure football storefront layout, Favorite Team Hub & Matchday Live Center
-├── style.css         # Modern athletic styling, scoreboard cards, dialogs & responsive CSS
-├── app.js            # Football catalog, favorite options store, live match engine, SVG generator & cart
-└── README.md         # Documentation & setup guide
+├── index.html                 # Semantic HTML5 layout, modals (<dialog>), and store branding
+├── style.css                  # Modern athletic dark theme, gallery, drawer & responsive CSS
+├── shopify-config.js          # Shopify Storefront domain, API version, and public token config
+├── shopify-config.local.js    # (Optional, git-ignored) Local configuration override
+├── shopify-api.js             # Standalone vanilla JS GraphQL Storefront API client
+├── app.js                     # Storefront controller: catalog, cart drawer, customizer, matchday
+└── README.md                  # Documentation and setup guide
 ```
 
 ---
 
-## ⚡ How to Run
+## ⚡ How to Configure Shopify Credentials
 
-Open `index.html` directly in your browser:
+1. Open `shopify-config.js` in your editor.
+2. Enter your Public Storefront API token from your Shopify Admin:
+   * Go to **Shopify Admin** -> **Sales Channels** -> **Headless**.
+   * Under your storefront credentials, copy your **Storefront API public access token**.
+   * In `shopify-config.js`, update:
+     ```javascript
+     const SHOPIFY_CONFIG = {
+       storeDomain: "q4z4z7-ns.myshopify.com",
+       apiVersion: "2024-10", // Supported stable Storefront API version
+       storefrontAccessToken: "YOUR_PUBLIC_STOREFRONT_TOKEN_HERE",
+       // ...
+     };
+     ```
+3. **Optional Git-Ignored Config:**
+   If you prefer not to touch `shopify-config.js` or keep your local token uncommitted, create a file named `shopify-config.local.js` (which is already added to `.gitignore`) containing:
+   ```javascript
+   window.SHOPIFY_CONFIG_OVERRIDE = {
+     storefrontAccessToken: "YOUR_PUBLIC_STOREFRONT_TOKEN_HERE"
+   };
+   ```
+   Or set it in your browser console:
+   ```javascript
+   localStorage.setItem("shopify_token_override", "YOUR_PUBLIC_STOREFRONT_TOKEN_HERE");
+   ```
 
+> [!NOTE]
+> The Storefront API Access Token is an unprivileged, public token designed specifically for client-side browsers. Never expose private Admin API keys (`shpat_...`) in frontend code.
+
+---
+
+## 💻 How to Run Locally
+
+Launch directly in your web browser:
 ```powershell
-# Directly launch in your default browser:
-Start-Process "C:\Users\kashi\.gemini\antigravity\scratch\jersey-store\index.html"
+Start-Process "index.html"
 ```
 
-Or run a local server:
-
+Or run using a lightweight static HTTP server:
 ```powershell
-python -m http.server 3000 --directory "C:\Users\kashi\.gemini\antigravity\scratch\jersey-store"
+python -m http.server 3000
 ```
 Then visit `http://localhost:3000` in your web browser.
