@@ -1,36 +1,37 @@
 /* ===================================================================
-   HALF TIME STORE - MINIMALIST FOOTBALL APPAREL STOREFRONT
-   Clean, modern, high-contrast monochrome & neutral aesthetic
+   HALF TIME STORE - MINIMALIST DARK FOOTBALL APPAREL STOREFRONT
+   Clean, refined, high-contrast luxury dark aesthetic
    =================================================================== */
 
 :root {
-  /* Minimalist Color Palette */
-  --bg-page: #F8F9FA;
-  --bg-surface: #FFFFFF;
-  --bg-subtle: #F3F4F6;
-  --bg-card: #FFFFFF;
-  --bg-dark: #111111;
+  /* Minimalist Luxury Dark Palette */
+  --bg-page: #0C0E12;          /* Deep matte obsidian */
+  --bg-surface: #14161C;       /* Elevated dark slate surface */
+  --bg-subtle: #1A1D24;        /* Input & pedestal background */
+  --bg-card: #14161C;          /* Card surface */
+  --bg-dark: #000000;          /* Deepest contrast */
   
-  --text-main: #111827;
-  --text-secondary: #4B5563;
-  --text-muted: #6B7280;
-  --text-light: #9CA3AF;
-  --text-inverse: #FFFFFF;
+  --text-main: #FFFFFF;        /* Pure crisp white */
+  --text-secondary: #D1D5DB;   /* Soft light silver */
+  --text-muted: #9CA3AF;       /* Muted gray */
+  --text-light: #6B7280;       /* Subtle detail text */
+  --text-inverse: #0C0E12;     /* Inverted dark text */
   
-  --border-light: #E5E7EB;
-  --border-subtle: #F3F4F6;
-  --border-dark: #111111;
-  --border-focus: #111827;
+  --border-light: rgba(255, 255, 255, 0.08); /* Subtle crisp divider */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-dark: rgba(255, 255, 255, 0.16);
+  --border-focus: #FFFFFF;
 
-  --primary: #111111;
-  --primary-hover: #27272A;
+  --primary: #FFFFFF;          /* High-contrast crisp white button */
+  --primary-hover: #E5E7EB;
+  --primary-text: #0C0E12;
   
-  --accent-green: #059669;
-  --accent-green-bg: #ECFDF5;
-  --accent-green-border: #A7F3D0;
-  --accent-red: #DC2626;
-  --accent-red-bg: #FEF2F2;
-  --accent-red-border: #FECACA;
+  --accent-green: #10B981;     /* Emerald green */
+  --accent-green-bg: rgba(16, 185, 129, 0.12);
+  --accent-green-border: rgba(16, 185, 129, 0.25);
+  --accent-red: #EF4444;       /* Rose red */
+  --accent-red-bg: rgba(239, 68, 68, 0.12);
+  --accent-red-border: rgba(239, 68, 68, 0.25);
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -43,10 +44,10 @@
   --radius-pill: 9999px;
 
   /* Elevation */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.08);
-  --shadow-drawer: -6px 0 28px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 14px 36px rgba(0, 0, 0, 0.6);
+  --shadow-drawer: -8px 0 36px rgba(0, 0, 0, 0.7);
 
   --transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -94,13 +95,13 @@ button {
    ========================================== */
 .announcement-bar {
   background-color: var(--bg-dark);
-  color: #E5E7EB;
+  color: var(--text-secondary);
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   padding: 9px 16px;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .announcement-content {
@@ -112,11 +113,11 @@ button {
 }
 
 .announcement-content .bullet {
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
 .badge-code {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
   padding: 2px 7px;
   border-radius: 4px;
   font-weight: 700;
@@ -133,6 +134,7 @@ button {
   background-color: var(--bg-surface);
   border-bottom: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
 }
 
 .header-container {
@@ -154,8 +156,8 @@ button {
 .logo-badge {
   width: 34px;
   height: 34px;
-  background: var(--bg-dark);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  color: #0C0E12;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,6 +165,7 @@ button {
   font-family: var(--font-display);
   font-size: 1.15rem;
   letter-spacing: 0.05em;
+  font-weight: 700;
 }
 
 .brand-text-col {
@@ -204,13 +207,13 @@ button {
 }
 
 .nav-link:hover, .nav-link.active {
-  color: var(--primary);
+  color: var(--text-main);
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .shopify-status-badge {
@@ -233,6 +236,7 @@ button {
   height: 6px;
   border-radius: 50%;
   background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
 }
 
 .search-wrapper {
@@ -263,7 +267,6 @@ button {
   outline: none;
   width: 220px;
   border-color: var(--border-focus);
-  background: #FFFFFF;
 }
 
 .clear-search-btn {
@@ -303,15 +306,16 @@ button {
 }
 
 .customer-btn:hover, .icon-btn:hover {
-  background: #E5E7EB;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--border-dark);
 }
 
 .cart-trigger-btn {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg-dark);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  color: #0C0E12;
   border: none;
   padding: 7px 16px;
   border-radius: var(--radius-pill);
@@ -339,11 +343,11 @@ button {
 }
 
 /* ==========================================
-   3. HERO SECTION (MINIMALIST EDITORIAL)
+   3. HERO SECTION (MINIMALIST DARK)
    ========================================== */
 .hero-section {
   padding: 50px 0 60px;
-  background: #FFFFFF;
+  background: var(--bg-page);
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -367,11 +371,12 @@ button {
 }
 
 .tag-badge {
-  background: var(--bg-dark);
+  background: rgba(255, 255, 255, 0.12);
   color: #FFFFFF;
   padding: 3px 8px;
   border-radius: 4px;
   font-size: 0.68rem;
+  border: 1px solid var(--border-light);
 }
 
 .hero-title {
@@ -421,8 +426,8 @@ button {
 }
 
 .btn-primary {
-  background: var(--bg-dark);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  color: #0C0E12;
 }
 
 .btn-primary:hover {
@@ -431,14 +436,14 @@ button {
 }
 
 .btn-secondary {
-  background: #FFFFFF;
+  background: var(--bg-surface);
   color: var(--text-main);
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--border-dark);
 }
 
 .btn-secondary:hover {
   background: var(--bg-subtle);
-  border-color: var(--border-dark);
+  border-color: #FFFFFF;
 }
 
 .btn-sm {
@@ -473,20 +478,20 @@ button {
   color: var(--text-muted);
 }
 
-/* Hero Spotlight Card */
+/* Hero Spotlight Pedestal */
 .hero-visual {
   position: relative;
 }
 
 .hero-pedestal-card {
-  background: #F8F9FA;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
 }
 
 .hero-jersey-display {
@@ -502,7 +507,7 @@ button {
   max-width: 85%;
   max-height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.12));
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.45));
   transition: transform 0.3s ease;
 }
 
@@ -544,6 +549,7 @@ button {
    ========================================== */
 .catalog-section {
   padding: 60px 0 80px;
+  background: var(--bg-page);
 }
 
 .catalog-header-wrap {
@@ -594,7 +600,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #FFFFFF;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   color: var(--text-main);
   font-size: 0.82rem;
@@ -607,7 +613,7 @@ button {
 
 .sync-shopify-btn:hover {
   background: var(--bg-subtle);
-  border-color: var(--border-dark);
+  border-color: #FFFFFF;
 }
 
 .sync-shopify-btn.loading svg {
@@ -638,7 +644,7 @@ button {
 }
 
 .pill-btn {
-  background: #FFFFFF;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   color: var(--text-secondary);
   padding: 7px 16px;
@@ -655,9 +661,10 @@ button {
 }
 
 .pill-btn.active {
-  background: var(--bg-dark);
-  border-color: var(--bg-dark);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #0C0E12;
+  font-weight: 700;
 }
 
 .dropdown-filter {
@@ -670,7 +677,7 @@ button {
 }
 
 .dropdown-filter select {
-  background: #FFFFFF;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   padding: 6px 12px;
   border-radius: var(--radius-md);
@@ -688,18 +695,19 @@ button {
 }
 
 .product-card {
-  background: #FFFFFF;
+  background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   position: relative;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
+  border-color: var(--border-dark);
   box-shadow: var(--shadow-md);
 }
 
@@ -739,7 +747,7 @@ button {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(20, 22, 28, 0.85);
   border: 1px solid var(--border-light);
   display: flex;
   align-items: center;
@@ -751,12 +759,14 @@ button {
 
 .wishlist-heart-btn:hover, .wishlist-heart-btn.active {
   color: var(--accent-red);
+  border-color: var(--accent-red);
 }
 
 .card-image-wrap {
   position: relative;
   height: 270px;
-  background: #F8F9FA;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -768,7 +778,7 @@ button {
   max-width: 90%;
   max-height: 90%;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
   transition: transform 0.3s ease;
 }
 
@@ -781,8 +791,8 @@ button {
   bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(17, 24, 39, 0.9);
-  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.95);
+  color: #0C0E12;
   border: none;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
@@ -822,7 +832,7 @@ button {
 .card-rating {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #D97706;
+  color: #F59E0B;
 }
 
 .card-title {
@@ -870,8 +880,8 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-dark);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  color: #0C0E12;
   border: none;
   padding: 8px 14px;
   border-radius: var(--radius-md);
@@ -886,8 +896,9 @@ button {
 }
 
 .card-quick-add:disabled {
-  background: #E5E7EB;
+  background: var(--bg-subtle);
   color: var(--text-muted);
+  border: 1px solid var(--border-light);
   cursor: not-allowed;
 }
 
@@ -895,7 +906,7 @@ button {
    5. AUTHENTICITY TRUST BANNER
    ========================================== */
 .trust-banner {
-  background: #FFFFFF;
+  background: var(--bg-surface);
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
   padding: 60px 0;
@@ -918,7 +929,7 @@ button {
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: #FFFFFF;
+  background: var(--bg-subtle);
   border: 1px solid var(--border-light);
   display: flex;
   align-items: center;
@@ -949,8 +960,9 @@ button {
 }
 
 .newsletter-card {
-  background: var(--bg-dark);
+  background: var(--bg-surface);
   color: #FFFFFF;
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 48px;
   text-align: center;
@@ -966,7 +978,7 @@ button {
 
 .newsletter-card p {
   font-size: 0.95rem;
-  color: #9CA3AF;
+  color: var(--text-muted);
   max-width: 500px;
   margin: 0 auto 24px;
 }
@@ -982,8 +994,8 @@ button {
 
 .newsletter-form input {
   flex-grow: 1;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
   color: #FFFFFF;
   padding: 12px 16px;
   border-radius: var(--radius-md);
@@ -992,13 +1004,12 @@ button {
 
 .newsletter-form input:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.18);
   border-color: #FFFFFF;
 }
 
 .newsletter-form button {
   background: #FFFFFF;
-  color: #111111;
+  color: #0C0E12;
   font-weight: 700;
   padding: 12px 20px;
   border-radius: var(--radius-md);
@@ -1009,7 +1020,7 @@ button {
 
 .newsletter-disclaimer {
   font-size: 0.75rem !important;
-  color: #6B7280 !important;
+  color: var(--text-light) !important;
   margin-top: 12px !important;
 }
 
@@ -1017,7 +1028,7 @@ button {
    7. FOOTER
    ========================================== */
 .site-footer {
-  background: #FFFFFF;
+  background: var(--bg-dark);
   border-top: 1px solid var(--border-light);
   padding: 60px 0 30px;
 }
@@ -1055,12 +1066,12 @@ button {
 
 .footer-links a {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   transition: color var(--transition);
 }
 
 .footer-links a:hover {
-  color: var(--primary);
+  color: #FFFFFF;
 }
 
 .footer-subtext {
@@ -1105,7 +1116,7 @@ button {
 }
 
 /* ==========================================
-   8. SHOPPING CART DRAWER (WITH CUSTOMER DETAILS)
+   8. SHOPPING CART DRAWER
    ========================================== */
 .store-dialog {
   border: none;
@@ -1115,8 +1126,8 @@ button {
 }
 
 .store-dialog::backdrop {
-  background: rgba(17, 24, 39, 0.45);
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
 }
 
 .cart-drawer {
@@ -1129,7 +1140,8 @@ button {
   width: 440px;
   max-width: 100vw;
   height: 100vh;
-  background: #FFFFFF;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border-light);
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-drawer);
@@ -1154,7 +1166,7 @@ button {
 
 .dialog-close-btn {
   background: var(--bg-subtle);
-  border: none;
+  border: 1px solid var(--border-light);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -1162,20 +1174,20 @@ button {
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   cursor: pointer;
-  transition: background var(--transition);
+  transition: all var(--transition);
 }
 
 .dialog-close-btn:hover {
-  background: #E5E7EB;
-  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
 }
 
 /* Free Shipping Tracker */
 .free-shipping-tracker {
   padding: 12px 24px;
-  background: var(--bg-subtle);
+  background: var(--bg-page);
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -1191,7 +1203,7 @@ button {
 
 .progress-bar-bg {
   height: 5px;
-  background: #E5E7EB;
+  background: var(--bg-subtle);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -1224,6 +1236,7 @@ button {
   width: 64px;
   height: 64px;
   background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
   border-radius: 8px;
   overflow: hidden;
   display: flex;
@@ -1273,10 +1286,12 @@ button {
   border: 1px solid var(--border-light);
   border-radius: 6px;
   overflow: hidden;
+  background: var(--bg-subtle);
 }
 
 .qty-btn {
-  background: #FFFFFF;
+  background: transparent;
+  color: var(--text-main);
   border: none;
   width: 26px;
   height: 26px;
@@ -1284,10 +1299,15 @@ button {
   font-weight: 700;
 }
 
+.qty-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .qty-display {
   padding: 0 8px;
   font-size: 0.85rem;
   font-weight: 600;
+  color: var(--text-main);
 }
 
 .remove-item-btn {
@@ -1317,6 +1337,7 @@ button {
   font-size: 1.15rem;
   font-weight: 700;
   margin-bottom: 6px;
+  color: var(--text-main);
 }
 
 .cart-empty-state p {
@@ -1363,7 +1384,7 @@ button {
 
 .cart-customer-input {
   width: 100%;
-  background: #FFFFFF;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   color: var(--text-main);
   padding: 8px 12px;
@@ -1373,7 +1394,7 @@ button {
 
 .cart-customer-input:focus {
   outline: none;
-  border-color: var(--border-dark);
+  border-color: #FFFFFF;
 }
 
 .customer-help-note {
@@ -1386,7 +1407,7 @@ button {
 .cart-footer {
   padding: 20px 24px;
   border-top: 1px solid var(--border-light);
-  background: #FFFFFF;
+  background: var(--bg-surface);
 }
 
 .cart-totals {
@@ -1413,10 +1434,10 @@ button {
 }
 
 .checkout-btn {
-  background: var(--bg-dark);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  color: #0C0E12;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
   padding: 14px;
   border-radius: var(--radius-md);
   border: none;
@@ -1453,13 +1474,15 @@ button {
 }
 
 .dialog-card {
-  background: #FFFFFF;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 32px;
   position: relative;
   box-shadow: var(--shadow-lg);
   max-height: 90vh;
   overflow-y: auto;
+  color: var(--text-main);
 }
 
 .dialog-card .dialog-close-btn {
@@ -1476,6 +1499,7 @@ button {
 
 .qv-visual-column {
   background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 24px;
   display: flex;
@@ -1488,6 +1512,7 @@ button {
   max-width: 100%;
   max-height: 320px;
   object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45));
 }
 
 .qv-info-column {
@@ -1529,6 +1554,7 @@ button {
   padding: 3px 8px;
   background: var(--accent-green-bg);
   color: var(--accent-green);
+  border: 1px solid var(--accent-green-border);
   border-radius: 4px;
 }
 
@@ -1551,8 +1577,9 @@ button {
   min-width: 44px;
   height: 38px;
   padding: 0 12px;
-  background: #FFFFFF;
+  background: var(--bg-subtle);
   border: 1px solid var(--border-light);
+  color: var(--text-main);
   border-radius: 6px;
   font-size: 0.88rem;
   font-weight: 600;
@@ -1560,14 +1587,19 @@ button {
   transition: all var(--transition);
 }
 
+.size-pill:hover {
+  border-color: #FFFFFF;
+}
+
 .size-pill.active {
-  background: var(--bg-dark);
-  border-color: var(--bg-dark);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #0C0E12;
+  font-weight: 700;
 }
 
 .size-pill.sold-out {
-  opacity: 0.4;
+  opacity: 0.3;
   text-decoration: line-through;
   cursor: not-allowed;
 }
@@ -1588,15 +1620,16 @@ button {
 .customer-form-input {
   width: 100%;
   padding: 10px 14px;
-  background: #FFFFFF;
+  background: var(--bg-subtle);
   border: 1px solid var(--border-light);
+  color: var(--text-main);
   border-radius: var(--radius-md);
   font-size: 0.9rem;
 }
 
 .customer-form-input:focus {
   outline: none;
-  border-color: var(--border-dark);
+  border-color: #FFFFFF;
 }
 
 /* Toast */
@@ -1611,18 +1644,19 @@ button {
 }
 
 .toast {
-  background: var(--bg-dark);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  color: #0C0E12;
   padding: 12px 20px;
   border-radius: var(--radius-md);
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 700;
   box-shadow: var(--shadow-lg);
   animation: slideToast 0.3s ease;
 }
 
 .toast.toast-error {
   background: var(--accent-red);
+  color: #FFFFFF;
 }
 
 @keyframes slideToast {
