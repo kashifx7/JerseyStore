@@ -1729,6 +1729,16 @@ function bindCatalogControls() {
 
   if (resetBtn) resetBtn.addEventListener("click", resetAction);
   if (clearAllBtn) clearAllBtn.addEventListener("click", resetAction);
+
+  const refreshShopifyBtn = document.getElementById("refreshShopifyBtn");
+  if (refreshShopifyBtn) {
+    refreshShopifyBtn.addEventListener("click", async () => {
+      refreshShopifyBtn.classList.add("loading");
+      showToast("🔄 Syncing latest products from Shopify...");
+      await loadShopifyData();
+      refreshShopifyBtn.classList.remove("loading");
+    });
+  }
 }
 
 function updateLeaguePillsActiveState() {
@@ -3111,8 +3121,10 @@ async function loadShopifyData() {
     if (products && products.length > 0) {
       shopifyProducts = products;
       console.log(`✓ Successfully retrieved ${products.length} live products from Shopify!`);
+      showToast(`✓ Retrieved ${products.length} live products from Second Half Store!`);
     } else {
       console.warn("Shopify returned 0 products. Ensure products are active and published to Headless channel.");
+      showToast("Shopify connected, but 0 products found. Ensure products are published to Headless sales channel.", true);
     }
   } catch (err) {
     console.error("Shopify Products Error:", err);

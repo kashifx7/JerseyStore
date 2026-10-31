@@ -10,8 +10,50 @@
  */
 
 // ==========================================
-// 1. CORE GRAPHQL EXECUTION ENGINE
+// 1. CORE GRAPHQL EXECUTION ENGINE & CONNECTIVITY
 // ==========================================
+
+const SHOP_INFO_QUERY = `
+  query GetShopInfo {
+    shop {
+      name
+      primaryDomain {
+        url
+        host
+      }
+      paymentSettings {
+        currencyCode
+      }
+    }
+  }
+`;
+
+/**
+ * Checks connectivity to the Shopify Storefront API
+ * @returns {Promise<{ status: string, shopName?: string, currencyCode?: string, message?: string }>}
+ */
+async function shopifyCheckConnection() {
+  if (!window.SHOPIFY_CONFIG || !window.SHOPIFY_CONFIG.isConfigured) {
+    return {
+      status: "missing_config",
+      message: "Storefront access token is not yet configured in shopify-config.js"
+    };
+  }
+
+  try {
+    const data = await shopifyFetch(SHOP_INFO_QUERY);
+    return {
+      status: "connected",
+      shopName: data?.shop?.name || "Second Half Store",
+      currencyCode: data?.shop?.paymentSettings?.currencyCode || "USD"
+    };
+  } catch (err) {
+    return {
+      status: "error",
+      message: err.message
+    };
+  }
+}
 
 /**
  * Execute a GraphQL query or mutation against Shopify Storefront API
@@ -577,6 +619,7 @@ async function shopifyRemoveCartLine(cartId, lineId) {
 if (typeof window !== "undefined") {
   window.shopifyApi = {
     fetch: shopifyFetch,
+    checkConnection: shopifyCheckConnection,
     getProducts: shopifyGetProducts,
     getCart: shopifyGetCart,
     createCart: shopifyCreateCart,

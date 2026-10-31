@@ -3580,3 +3580,36 @@ dialog.cart-drawer {
   object-fit: cover;
   border-radius: 8px;
 }
+
+.catalog-status-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sync-shopify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #00F5A0;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sync-shopify-btn:hover {
+  background: rgba(0, 245, 160, 0.12);
+  border-color: #00F5A0;
+  transform: translateY(-1px);
+}
+
+.sync-shopify-btn.loading svg {
+  animation: shopifySpin 0.75s linear infinite;
+}
