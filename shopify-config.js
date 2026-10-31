@@ -1,7 +1,7 @@
 /**
- * Second Half Store - Shopify Headless Storefront Configuration
+ * Half Time Store - Shopify Headless Storefront Configuration
  *
- * Store: Second Half Store (secondhalfstore.in)
+ * Store: Half Time Store (secondhalfstore.in)
  * Shopify Domain: q4z4z7-ns.myshopify.com
  */
 

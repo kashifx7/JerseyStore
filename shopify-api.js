@@ -591,6 +591,21 @@ async function shopifyUpdateCartLine(cartId, lineId, quantity) {
   return normalizeShopifyCart(data?.cartLinesUpdate?.cart);
 }
 
+const CART_BUYER_IDENTITY_UPDATE_MUTATION = `
+  mutation CartBuyerIdentityUpdate($buyerIdentity: CartBuyerIdentityInput!, $cartId: ID!) {
+    cartBuyerIdentityUpdate(buyerIdentity: $buyerIdentity, cartId: $cartId) {
+      cart {
+        id
+        checkoutUrl
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;
+
 /**
  * Remove a line item from the cart
  * @param {string} cartId
@@ -615,6 +630,36 @@ async function shopifyRemoveCartLine(cartId, lineId) {
   return normalizeShopifyCart(data?.cartLinesRemove?.cart);
 }
 
+/**
+ * Update the buyer's contact info on the cart (email/phone)
+ * @param {string} cartId
+ * @param {{ email?: string, phone?: string }} buyerIdentity
+ * @returns {Promise<Object|null>} Updated cart or null
+ */
+async function shopifyUpdateCartBuyerIdentity(cartId, buyerIdentity = {}) {
+  if (!cartId) return null;
+  const input = {};
+  if (buyerIdentity.email && buyerIdentity.email.trim()) {
+    input.email = buyerIdentity.email.trim();
+  }
+  if (buyerIdentity.phone && buyerIdentity.phone.trim()) {
+    input.phone = buyerIdentity.phone.trim();
+  }
+
+  if (Object.keys(input).length === 0) return null;
+
+  try {
+    const data = await shopifyFetch(CART_BUYER_IDENTITY_UPDATE_MUTATION, {
+      cartId: cartId,
+      buyerIdentity: input
+    });
+    return data?.cartBuyerIdentityUpdate?.cart || null;
+  } catch (err) {
+    console.warn("Could not update buyer identity:", err.message);
+    return null;
+  }
+}
+
 // Attach to window object for global availability in vanilla JS
 if (typeof window !== "undefined") {
   window.shopifyApi = {
@@ -626,6 +671,7 @@ if (typeof window !== "undefined") {
     addToCart: shopifyAddToCart,
     updateCartLine: shopifyUpdateCartLine,
     removeCartLine: shopifyRemoveCartLine,
+    updateCartBuyerIdentity: shopifyUpdateCartBuyerIdentity,
     normalizeShopifyProduct: normalizeShopifyProduct,
     normalizeShopifyCart: normalizeShopifyCart
   };

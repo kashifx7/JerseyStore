@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Second Half Store | Authentic Football Kits & Match Jerseys</title>
-  <!-- Modern Google Fonts for Athletic & Luxury Sportswear -->
+  <title>Half Time Store | Authentic Football Apparel & Match Jerseys</title>
+  <!-- Modern Clean Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Top Announcement Ticker -->
   <aside class="announcement-bar" aria-label="Store Announcements">
     <div class="announcement-content">
-      <span>🔥 <strong>SECOND HALF STORE:</strong> 100% Authentic Football Kits & Player Editions</span>
+      <span>🔥 <strong>HALF TIME STORE:</strong> 100% Authentic Football Jerseys & Match Editions</span>
       <span class="bullet">•</span>
-      <span>⚡ Use Code <span class="badge-code">KICKOFF15</span> for 15% OFF your first order</span>
+      <span>⚡ Use Code <span class="badge-code">KICKOFF15</span> for 15% OFF your order</span>
       <span class="bullet">•</span>
       <span>📦 Free Tracked Shipping on orders over ₹1,999</span>
       <span class="bullet">•</span>
-      <span>⚽ Powered by Shopify Headless Storefront</span>
+      <span>⚽ Powered by Shopify Headless</span>
     </div>
   </aside>
 
@@ -33,45 +33,34 @@
       </button>
 
       <!-- Brand Logo -->
-      <a href="#" class="brand-logo" aria-label="Second Half Store Home">
-        <div class="logo-mark">
-          <svg viewBox="0 0 36 36" width="34" height="34" fill="none">
-            <polygon points="18,2 34,10 34,26 18,34 2,26 2,10" stroke="url(#logoGrad)" stroke-width="3" fill="rgba(0, 245, 160, 0.08)"/>
-            <path d="M12,18 L18,10 L24,18 L18,26 Z" fill="url(#logoGrad)"/>
-            <defs>
-              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#00F5A0"/>
-                <stop offset="100%" stop-color="#00D9F5"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div class="logo-text">
-          <span class="brand-name">SECOND HALF<span class="brand-accent">STORE</span></span>
-          <span class="brand-tagline">100% AUTHENTIC FOOTBALL KITS</span>
+      <a href="#" class="brand-logo" aria-label="Half Time Store Home">
+        <div class="logo-badge">HTS</div>
+        <div class="brand-text-col">
+          <span class="brand-title">HALF TIME STORE</span>
+          <span class="brand-subtitle">AUTHENTIC FOOTBALL APPAREL</span>
         </div>
       </a>
 
       <!-- Desktop Navigation Links -->
       <nav class="main-nav" id="mainNav" aria-label="Primary Navigation">
-        <a href="#productGridSection" class="nav-link active">All Match Kits</a>
+        <a href="#productGridSection" class="nav-link active">All Jerseys</a>
         <a href="#productGridSection" class="nav-link" id="navInStockBtn">In Stock Only</a>
         <a href="#trustSection" class="nav-link">Authenticity Guarantee</a>
-        <button type="button" class="nav-link" id="navSizeAdvisorBtn" style="background:none;border:none;cursor:pointer;font:inherit;">Size Advisor</button>
+        <button type="button" class="nav-link" id="navSizeAdvisorBtn">Size Advisor</button>
       </nav>
 
-      <!-- Header Actions (Live Status, Search, Currency, Wishlist, Cart) -->
+      <!-- Header Actions (Live Status, Search, Currency, Customer Account, Bag) -->
       <div class="header-actions">
         <!-- Live Shopify Status Pill -->
-        <div class="shopify-status-badge" id="headerShopifyBadge" title="Live Shopify Headless Connection">
+        <div class="shopify-status-badge" id="headerShopifyBadge" title="Live Shopify Storefront Connection">
           <span class="status-indicator"></span>
           <span class="status-label">Shopify Live</span>
         </div>
 
         <!-- Search Bar -->
         <div class="search-wrapper">
-          <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" id="headerSearchInput" class="search-input" placeholder="Search kits, clubs..." aria-label="Search football jerseys">
+          <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="headerSearchInput" class="search-input" placeholder="Search jerseys..." aria-label="Search football jerseys">
           <button id="clearSearchBtn" class="clear-search-btn" aria-label="Clear search" hidden>&times;</button>
         </div>
 
@@ -85,71 +74,77 @@
           </select>
         </div>
 
-        <!-- Wishlist Button -->
-        <button class="icon-btn" id="wishlistOpenBtn" aria-label="View Saved Kits">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-          <span class="badge" id="wishlistBadge">0</span>
+        <!-- Customer Account / Profile Button -->
+        <button class="customer-btn" id="openCustomerBtn" title="Customer Details">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span id="headerCustomerName">Account</span>
         </button>
 
         <!-- Cart Trigger Button -->
-        <button class="cart-trigger-btn" id="cartOpenBtn" aria-label="Open Shopping Cart">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-          <span class="cart-btn-label">Kit Bag</span>
+        <button class="cart-trigger-btn" id="cartOpenBtn" aria-label="Open Shopping Bag">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="cart-btn-label">Bag</span>
           <span class="badge" id="cartBadge">0</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Showcase Section -->
+  <!-- Hero Showcase Section (Minimalist Editorial) -->
   <section class="hero-section">
-    <div class="hero-backdrop"></div>
-    <div class="hero-content">
-      <div class="hero-tag">
-        <span class="tag-badge">100% AUTHENTIC FOOTBALL</span>
-        <span>OFFICIAL MATCH KITS</span>
-      </div>
-      <h1 class="hero-title">WEAR THE PASSION.<br><span class="gradient-text">OWN THE PITCH.</span></h1>
-      <p class="hero-subtitle">
-        Exclusive football jerseys directly from Second Half Store. Engineered with match-grade breathable jacquard mesh, official typography, and genuine tournament badges.
-      </p>
-      <div class="hero-buttons">
-        <a href="#productGridSection" class="btn btn-primary">
-          <span>Explore Football Kits</span>
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
-        <button type="button" class="btn btn-secondary" id="heroInStockCtaBtn">
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#00F5A0" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>View In Stock</span>
-        </button>
-      </div>
-      <div class="hero-perks">
-        <div class="perk-item">
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#00F5A0" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <span>100% Authentic Quality</span>
+    <div class="section-container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="tag-badge">NEW DROP</span>
+            <span>2025/2026 OFFICIAL KITS</span>
+          </div>
+          <h1 class="hero-title">
+            HALF TIME STORE
+            <span class="brand-accent">THE MATCHDAY ARCHIVE</span>
+          </h1>
+          <p class="hero-subtitle">
+            Curated authentic football jerseys from the world's greatest clubs and national teams. Engineered with match-grade breathable fabrics, authentic detailing, and genuine club crests.
+          </p>
+          <div class="hero-buttons">
+            <a href="#productGridSection" class="btn btn-primary">
+              <span>Shop All Jerseys</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <button type="button" class="btn btn-secondary" id="heroInStockCtaBtn">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#059669" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>View In Stock</span>
+            </button>
+          </div>
+          <div class="hero-perks">
+            <div class="perk-item">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#059669" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>100% Authentic Quality</span>
+            </div>
+            <div class="perk-item">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#111827" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>Fast Tracked Dispatch</span>
+            </div>
+            <div class="perk-item">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#111827" stroke-width="2" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>Shopify Checkout</span>
+            </div>
+          </div>
         </div>
-        <div class="perk-item">
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#00D9F5" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          <span>Fast Tracked Dispatch</span>
-        </div>
-        <div class="perk-item">
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#FFB800" stroke-width="2" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-          <span>Secure Shopify Payments</span>
-        </div>
-      </div>
-    </div>
-    <!-- Hero Visual Jersey Banner -->
-    <div class="hero-visual">
-      <div class="hero-jersey-showcase" id="heroShowcase">
-        <div class="jersey-card-glow"></div>
-        <div class="floating-jersey-display" id="heroJerseySvgContainer">
-          <img src="https://cdn.shopify.com/s/files/1/0667/6450/5173/files/6ceeb5df.jpg?v=1792591979" alt="Barcelona Third player 2025-26" class="hero-featured-img">
-        </div>
-        <div class="hero-jersey-info">
-          <span class="hero-jersey-badge">FEATURED MATCH KIT</span>
-          <h3 id="heroJerseyTitle">Barcelona Third player 2025-26</h3>
-          <p id="heroJerseySubtitle">Official Match Edition • ₹699 • In Stock</p>
-          <button class="btn btn-sm btn-accent" id="heroQuickBuyBtn">⚡ Quick View</button>
+
+        <!-- Hero Visual Jersey Banner -->
+        <div class="hero-visual">
+          <div class="hero-pedestal-card" id="heroShowcase">
+            <div class="hero-jersey-display" id="heroJerseySvgContainer">
+              <img src="https://cdn.shopify.com/s/files/1/0667/6450/5173/files/6ceeb5df.jpg?v=1792591979" alt="Barcelona Third player 2025-26" class="hero-featured-img">
+            </div>
+            <div class="hero-jersey-info">
+              <span class="hero-jersey-badge">SPOTLIGHT MATCH KIT</span>
+              <h3 class="hero-jersey-title" id="heroJerseyTitle">Barcelona Third player 2025-26</h3>
+              <p class="hero-jersey-subtitle" id="heroJerseySubtitle">Official Match Edition • ₹699 • In Stock</p>
+              <button class="btn btn-secondary btn-sm" id="heroQuickBuyBtn">⚡ Quick View</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -160,9 +155,9 @@
     <div class="section-container">
       <div class="catalog-header-wrap">
         <div>
-          <span class="section-pill">LIVE SHOPIFY STOREFRONT</span>
-          <h2 class="section-title">AUTHENTIC <span class="gradient-text">FOOTBALL KITS</span></h2>
-          <p class="section-subtitle">Real official club editions from Second Half Store, powered by Shopify Headless.</p>
+          <span class="section-pill">LIVE SHOPIFY CATALOGUE</span>
+          <h2 class="section-title">OFFICIAL JERSEYS</h2>
+          <p class="section-subtitle">Directly synced with Half Time Store on Shopify.</p>
         </div>
         <!-- Active Filter Counter & Shopify Live Sync -->
         <div class="catalog-meta">
@@ -176,49 +171,37 @@
         </div>
       </div>
 
-      <!-- Quick Filter Pills -->
-      <div class="filter-pills-scroll" id="statusFilterPills">
-        <button class="pill-btn active" data-filter="all">All Products (3)</button>
-        <button class="pill-btn" data-filter="in-stock">In Stock (2)</button>
-        <button class="pill-btn" data-filter="sold-out">Sold Out (1)</button>
-      </div>
-
-      <!-- Filter Controls Toolbar -->
-      <div class="filter-toolbar">
-        <div class="toolbar-left">
-          <!-- Price Range Filter -->
-          <div class="dropdown-filter">
-            <label for="priceSortSelect">Sort By:</label>
-            <select id="priceSortSelect">
-              <option value="featured">Featured / Trending</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-          </div>
+      <!-- Controls: Filter Pills & Sort Select -->
+      <div class="catalog-controls">
+        <div class="filter-pills-scroll" id="statusFilterPills">
+          <button class="pill-btn active" data-filter="all">All Products (3)</button>
+          <button class="pill-btn" data-filter="in-stock">In Stock (2)</button>
+          <button class="pill-btn" data-filter="sold-out">Sold Out (1)</button>
         </div>
 
-        <div class="toolbar-right">
-          <button class="reset-filter-btn" id="resetFiltersBtn" title="Reset all filters">
-            <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
-            Reset Filters
-          </button>
+        <div class="dropdown-filter">
+          <label for="priceSortSelect">Sort:</label>
+          <select id="priceSortSelect">
+            <option value="featured">Featured / Trending</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
         </div>
       </div>
 
       <!-- Product Cards Grid -->
       <div class="product-grid" id="productGrid">
-        <div class="catalog-loading">
-          <div class="loading-spinner"></div>
-          <span>Loading official jerseys from Second Half Store...</span>
+        <div class="catalog-loading" style="grid-column: 1 / -1; padding: 60px 20px; text-align: center;">
+          <span>Loading official jerseys from Half Time Store...</span>
         </div>
       </div>
 
       <!-- Empty state when no match -->
-      <div class="empty-state" id="emptySearchState" hidden>
-        <div class="empty-icon">⚽</div>
-        <h3>No Football Kits Found Matching Your Filters</h3>
-        <p>Try adjusting your search keywords or clear all filters to explore the full collection.</p>
-        <button class="btn btn-secondary" id="clearAllFiltersBtn">Clear All Filters</button>
+      <div class="empty-state" id="emptySearchState" hidden style="text-align:center; padding: 60px 20px;">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">⚽</div>
+        <h3>No Football Jerseys Found Matching Your Filter</h3>
+        <p style="color: var(--text-muted); margin: 8px 0 16px;">Try adjusting your search keywords or clear filters to view the full collection.</p>
+        <button class="btn btn-secondary btn-sm" id="clearAllFiltersBtn">Clear All Filters</button>
       </div>
     </div>
   </section>
@@ -229,31 +212,31 @@
       <div class="trust-grid">
         <div class="trust-card">
           <div class="trust-icon-box">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#00F5A0" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
           </div>
-          <h4>100% Authentic Football Grade</h4>
+          <h4>100% Authentic Grade</h4>
           <p>Official matchday and player editions. Original crest embroidery, genuine thermal tags, and serialized club security labels.</p>
         </div>
 
         <div class="trust-card">
           <div class="trust-icon-box">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#00D9F5" stroke-width="2" fill="none"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
           </div>
           <h4>Matchday Express Dispatch</h4>
-          <p>Carefully inspected and packed for dispatch. Fast tracked delivery across India and worldwide with real-time tracking.</p>
+          <p>Carefully inspected and packed for dispatch. Fast tracked delivery across India and worldwide with real-time updates.</p>
         </div>
 
         <div class="trust-card">
           <div class="trust-icon-box">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#FFB800" stroke-width="2" fill="none"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
           </div>
           <h4>Easy Size Exchanges</h4>
-          <p>Want a different fit? Return or exchange any standard football kit hassle-free. View our Size Advisor for accurate fit details.</p>
+          <p>Need a different fit? Return or exchange any standard football kit hassle-free. View our Size Advisor for accurate fit details.</p>
         </div>
 
         <div class="trust-card">
           <div class="trust-icon-box">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#FF5E62" stroke-width="2" fill="none"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
           </div>
           <h4>Secure Shopify Payments</h4>
           <p>Industry-standard 256-bit encryption powered by Shopify checkout. Pay with UPI, Credit/Debit Cards, Net Banking, and Wallets.</p>
@@ -262,20 +245,18 @@
     </div>
   </section>
 
-  <!-- Newsletter & Discount Banner -->
+  <!-- Newsletter & Member Club -->
   <section class="newsletter-section">
     <div class="section-container">
       <div class="newsletter-card">
-        <div class="newsletter-content">
-          <span class="section-pill">JOIN SECOND HALF FOOTBALL CLUB</span>
-          <h2>GET 15% OFF YOUR FIRST ORDER</h2>
-          <p>Receive early VIP access to limited retro drops, kit restocks, and exclusive club discounts.</p>
-          <form class="newsletter-form" id="newsletterForm">
-            <input type="email" id="newsletterEmail" placeholder="Enter your email address..." required aria-label="Email address for discount">
-            <button type="submit" class="btn btn-primary">Claim 15% Off</button>
-          </form>
-          <p class="newsletter-disclaimer">Instant code sent. No spam ever. Unsubscribe anytime.</p>
-        </div>
+        <span class="section-pill" style="color: #9CA3AF;">HALF TIME CLUB</span>
+        <h2>JOIN THE ARCHIVE</h2>
+        <p>Subscribe for early access to limited retro drops, kit restocks, and exclusive community discounts.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" id="newsletterEmail" placeholder="Enter your email address..." required aria-label="Email address for discount">
+          <button type="submit">Claim 15% Off</button>
+        </form>
+        <p class="newsletter-disclaimer">Instant code sent. No spam ever. Unsubscribe anytime.</p>
       </div>
     </div>
   </section>
@@ -285,27 +266,20 @@
     <div class="section-container">
       <div class="footer-grid">
         <div class="footer-col brand-col">
-          <div class="logo-mark">
-            <span class="brand-name">SECOND HALF<span class="brand-accent">STORE</span></span>
+          <div class="brand-logo" style="margin-bottom: 12px;">
+            <div class="logo-badge">HTS</div>
+            <span class="brand-title">HALF TIME STORE</span>
           </div>
           <p class="footer-desc">
             Your premier destination for authentic football club, national team, and player edition kits. Powered by Shopify Headless.
           </p>
-          <div class="social-links">
-            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter / X">
-              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-            </a>
-          </div>
         </div>
 
         <div class="footer-col">
           <h4 class="footer-heading">Collections</h4>
           <ul class="footer-links">
-            <li><a href="#productGridSection">All Football Kits</a></li>
-            <li><a href="#productGridSection" id="footerInStockLink">In Stock Jerseys</a></li>
+            <li><a href="#productGridSection">All Football Jerseys</a></li>
+            <li><a href="#productGridSection" id="footerInStockLink">In Stock Only</a></li>
             <li><a href="#trustSection">Authenticity Guarantee</a></li>
           </ul>
         </div>
@@ -313,14 +287,14 @@
         <div class="footer-col">
           <h4 class="footer-heading">Customer Care</h4>
           <ul class="footer-links">
+            <li><a href="#" id="footerCustomerLink">Customer Details</a></li>
             <li><a href="#" id="footerSizeGuideLink">Size & Fit Guide</a></li>
             <li><a href="#" id="footerReturnsLink">Returns & Exchanges</a></li>
-            <li><a href="#" id="footerAuthLink">Authenticity Certificate</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-heading">Shopify Headless Store</h4>
+          <h4 class="footer-heading">Shopify Checkout</h4>
           <p class="footer-subtext">Official storefront for secondhalfstore.in powered by Shopify Storefront API.</p>
           <div class="payment-badges-row">
             <span class="pay-badge">UPI</span>
@@ -332,7 +306,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 Second Half Store (<a href="https://secondhalfstore.in" target="_blank" rel="noopener" style="color:var(--primary);">secondhalfstore.in</a>). All rights reserved.</p>
+        <p>&copy; 2026 Half Time Store (<a href="https://secondhalfstore.in" target="_blank" rel="noopener" style="font-weight:600;">secondhalfstore.in</a>). All rights reserved.</p>
         <div class="bottom-links">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
@@ -354,21 +328,13 @@
           <div class="qv-svg-wrapper" id="qvSvgHolder">
             <!-- Dynamic Gallery or Image injected -->
           </div>
-          <div class="qv-fabric-badges">
-            <span class="fabric-badge">✓ DRI-FIT ADV Jacquard Mesh</span>
-            <span class="fabric-badge">✓ Heat-applied Crest & Official Badges</span>
-          </div>
         </div>
 
         <!-- Details & Options -->
         <div class="qv-info-column">
           <div class="qv-header">
-            <span class="qv-league-badge" id="qvLeague">Official Kit</span>
+            <span class="qv-league-badge" id="qvLeague">Official Match Kit</span>
             <h2 id="quickViewTitle" class="qv-title">Barcelona Third player 2025-26</h2>
-            <div class="qv-rating-row">
-              <div class="star-rating">★★★★★</div>
-              <span class="rating-num">(4.9 • Verified Official Kit)</span>
-            </div>
             <div class="qv-price-row">
               <span class="qv-price" id="qvPrice">₹699</span>
               <span class="qv-tag-edition" id="qvEditionTag">In Stock</span>
@@ -376,14 +342,14 @@
           </div>
 
           <p class="qv-desc" id="qvDescription">
-            Authentic official football jersey from Second Half Store. Engineered for performance and luxury everyday wear.
+            Authentic official football jersey from Half Time Store. Engineered for performance and luxury everyday wear.
           </p>
 
           <!-- Size selector -->
           <div class="qv-section">
-            <div class="qv-label-row">
-              <label>Select Size / Variant:</label>
-              <button type="button" class="link-btn" id="qvSizeGuideLink">Size Advisor</button>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <label style="font-size:0.85rem; font-weight:700;">Select Size / Variant:</label>
+              <button type="button" class="nav-link" id="qvSizeGuideLink" style="font-size:0.8rem; text-decoration:underline;">Size Advisor</button>
             </div>
             <div class="size-pills-row" id="qvSizeRow">
               <!-- Rendered via JS -->
@@ -391,9 +357,9 @@
           </div>
 
           <!-- QuickView CTA actions -->
-          <div class="qv-actions">
+          <div class="qv-actions" style="margin-top:auto;">
             <button class="btn btn-primary btn-block btn-lg" id="qvAddToCartBtn">
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
               <span>Add to Bag • <span id="qvFinalPrice">₹699</span></span>
             </button>
           </div>
@@ -402,14 +368,14 @@
     </div>
   </dialog>
 
-  <!-- 2. SHOPPING CART DRAWER MODAL -->
+  <!-- 2. SHOPPING CART DRAWER (WITH CUSTOMER INFORMATION & CHECKOUT) -->
   <dialog id="cartDrawerDialog" closedby="any" aria-labelledby="cartDrawerTitle" class="store-dialog cart-drawer">
     <div class="cart-drawer-container">
       <!-- Drawer Header -->
       <div class="cart-header">
         <div class="cart-header-title">
-          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-          <h2 id="cartDrawerTitle">Your Kit Bag (<span id="cartCountHeader">0</span>)</h2>
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <h2 id="cartDrawerTitle" style="font-size:1.1rem; font-weight:800;">Your Bag (<span id="cartCountHeader">0</span>)</h2>
         </div>
         <button class="dialog-close-btn" id="closeCartBtn" aria-label="Close cart">&times;</button>
       </div>
@@ -418,7 +384,7 @@
       <div class="free-shipping-tracker">
         <div class="shipping-info-row">
           <span id="shippingGoalText">Add ₹1,999 for Free Express Shipping</span>
-          <span class="shipping-icon">🚚</span>
+          <span>🚚</span>
         </div>
         <div class="progress-bar-bg">
           <div class="progress-bar-fill" id="shippingProgressBar" style="width: 0%;"></div>
@@ -433,46 +399,50 @@
       <!-- Cart Empty View -->
       <div class="cart-empty-state" id="cartEmptyState" hidden>
         <div class="empty-ball-icon">⚽</div>
-        <h3>Your Kit Bag is Empty</h3>
-        <p>No football jerseys added yet. Discover our official collection.</p>
-        <button class="btn btn-primary" id="exploreKitsBtn">Explore Football Kits</button>
+        <h3>Your Shopping Bag is Empty</h3>
+        <p>No football jerseys added yet. Discover our collection.</p>
+        <button class="btn btn-primary btn-sm" id="exploreKitsBtn">Explore Football Jerseys</button>
       </div>
 
-      <!-- Drawer Footer with Promo & Checkout -->
-      <div class="cart-footer" id="cartFooter">
-        <!-- Promo Coupon Form -->
-        <div class="coupon-box">
-          <div class="coupon-input-group">
-            <input type="text" id="couponInput" placeholder="Promo code (try 'KICKOFF15')">
-            <button type="button" id="applyCouponBtn" class="btn btn-sm btn-dark">Apply</button>
-          </div>
-          <div class="coupon-status" id="couponStatus"></div>
+      <!-- Customer Information Card (Pre-Checkout) -->
+      <div class="cart-customer-card" id="cartCustomerCard">
+        <div class="cart-customer-header">
+          <span class="cart-customer-title">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Customer Details
+          </span>
+          <span style="font-size:0.72rem; color:var(--text-muted);">Step 1 of 2</span>
         </div>
+        <div class="cart-customer-inputs">
+          <input type="text" id="cartCustomerName" class="cart-customer-input" placeholder="Full Name (e.g. Rahul Sharma)">
+          <div class="cart-input-row">
+            <input type="email" id="cartCustomerEmail" class="cart-customer-input" placeholder="Email Address (required for tracking)">
+            <input type="tel" id="cartCustomerPhone" class="cart-customer-input" placeholder="Mobile Number">
+          </div>
+        </div>
+        <p class="customer-help-note">✓ Your contact info pre-fills on Shopify checkout for faster placement.</p>
+      </div>
 
-        <!-- Breakdown -->
+      <!-- Drawer Footer with Totals & Checkout Button -->
+      <div class="cart-footer" id="cartFooter">
         <div class="cart-totals">
           <div class="total-row">
             <span>Subtotal:</span>
             <span id="cartSubtotal">₹0</span>
           </div>
-          <div class="total-row discount-row" id="cartDiscountRow" hidden>
-            <span>Discount (KICKOFF15):</span>
-            <span id="cartDiscountAmount">-₹0</span>
-          </div>
           <div class="total-row">
-            <span>Estimated Shipping:</span>
-            <span id="cartShippingText" class="text-accent">FREE</span>
+            <span>Shipping:</span>
+            <span style="color:var(--accent-green); font-weight:700;">FREE</span>
           </div>
           <div class="total-row final-total-row">
-            <span>Estimated Total:</span>
-            <span class="final-price-value" id="cartFinalTotal">₹0</span>
+            <span>Total:</span>
+            <span id="cartFinalTotal">₹0</span>
           </div>
         </div>
 
-        <!-- Checkout Button -->
-        <button class="btn btn-primary btn-block btn-lg checkout-btn" id="proceedCheckoutBtn">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span id="checkoutBtnLabel">Proceed to Secure Checkout</span>
+        <!-- Proceed to Checkout Button -->
+        <button class="checkout-btn btn-block" id="proceedCheckoutBtn">
+          Proceed to Secure Checkout →
         </button>
 
         <div class="checkout-guarantees">
@@ -483,128 +453,96 @@
     </div>
   </dialog>
 
-  <!-- 3. WISHLIST / SAVED KITS DIALOG -->
-  <dialog id="wishlistDialog" closedby="any" aria-labelledby="wishlistTitle" class="store-dialog modal-md">
+  <!-- 3. CUSTOMER PROFILE / DETAILS MODAL -->
+  <dialog id="customerProfileDialog" closedby="any" aria-labelledby="customerModalTitle" class="store-dialog modal-md">
     <div class="dialog-card">
-      <div class="dialog-header-row">
-        <div>
-          <span class="section-pill">SAVED ITEMS</span>
-          <h2 id="wishlistTitle" class="dialog-heading">Your Saved Kits (<span id="wishlistCountHeader">0</span>)</h2>
+      <button class="dialog-close-btn" id="closeCustomerModalBtn" aria-label="Close dialog">&times;</button>
+      <div style="margin-bottom: 20px;">
+        <span class="section-pill">CUSTOMER INFORMATION</span>
+        <h2 id="customerModalTitle" style="font-size:1.4rem; font-weight:800; margin-top:4px;">Customer Account</h2>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-top:4px;">Save your contact details for faster checkout and order tracking.</p>
+      </div>
+
+      <form id="customerProfileForm">
+        <div class="customer-form-group">
+          <label for="modalCustomerName">Full Name</label>
+          <input type="text" id="modalCustomerName" class="customer-form-input" placeholder="e.g. Rahul Sharma" required>
         </div>
-        <button class="dialog-close-btn" id="closeWishlistBtn" aria-label="Close saved kits">&times;</button>
-      </div>
 
-      <div class="wishlist-grid" id="wishlistGrid">
-        <!-- Rendered via JS -->
-      </div>
+        <div class="customer-form-group">
+          <label for="modalCustomerEmail">Email Address</label>
+          <input type="email" id="modalCustomerEmail" class="customer-form-input" placeholder="e.g. rahul@example.com" required>
+        </div>
 
-      <div class="wishlist-empty-state" id="wishlistEmptyState" hidden>
-        <div class="empty-star-icon">⭐</div>
-        <h3>No Saved Football Kits Yet</h3>
-        <p>Click the heart icon on any jersey card to save it to your personal shortlist.</p>
-      </div>
+        <div class="customer-form-group">
+          <label for="modalCustomerPhone">Phone / WhatsApp</label>
+          <input type="tel" id="modalCustomerPhone" class="customer-form-input" placeholder="e.g. +91 98765 43210">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top:20px;">
+          Save Customer Details
+        </button>
+      </form>
     </div>
   </dialog>
 
   <!-- 4. SIZE GUIDE & FIT ADVISOR DIALOG -->
   <dialog id="sizeGuideDialog" closedby="any" aria-labelledby="sizeGuideTitle" class="store-dialog modal-md">
     <div class="dialog-card">
-      <div class="dialog-header-row">
-        <div>
-          <span class="section-pill">ATHLETIC FIT GUIDE</span>
-          <h2 id="sizeGuideTitle" class="dialog-heading">Football Jersey Size Advisor</h2>
-        </div>
-        <button class="dialog-close-btn" id="closeSizeGuideBtn" aria-label="Close size guide">&times;</button>
+      <button class="dialog-close-btn" id="closeSizeGuideBtn" aria-label="Close size guide">&times;</button>
+      <div style="margin-bottom: 20px;">
+        <span class="section-pill">ATHLETIC FIT GUIDE</span>
+        <h2 id="sizeGuideTitle" style="font-size:1.3rem; font-weight:800; margin-top:4px;">Football Jersey Size Advisor</h2>
       </div>
 
-      <div class="size-table-container">
-        <table class="size-guide-table">
+      <div style="overflow-x: auto; margin-bottom: 20px;">
+        <table style="width:100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
           <thead>
-            <tr>
-              <th>Size</th>
-              <th>Chest (Inches)</th>
-              <th>Chest (cm)</th>
-              <th>Length (cm)</th>
-              <th>Recommended Height</th>
+            <tr style="border-bottom: 2px solid var(--border-light); color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">
+              <th style="padding: 8px;">Size</th>
+              <th style="padding: 8px;">Chest (Inches)</th>
+              <th style="padding: 8px;">Chest (cm)</th>
+              <th style="padding: 8px;">Length (cm)</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><strong>S</strong></td>
-              <td>36 - 38"</td>
-              <td>91 - 96 cm</td>
-              <td>71 cm</td>
-              <td>165 - 173 cm</td>
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px 8px; font-weight: 700;">S</td>
+              <td style="padding: 10px 8px;">36 - 38"</td>
+              <td style="padding: 10px 8px;">91 - 96 cm</td>
+              <td style="padding: 10px 8px;">71 cm</td>
             </tr>
-            <tr>
-              <td><strong>M</strong></td>
-              <td>38 - 40"</td>
-              <td>96 - 101 cm</td>
-              <td>73 cm</td>
-              <td>172 - 180 cm</td>
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px 8px; font-weight: 700;">M</td>
+              <td style="padding: 10px 8px;">38 - 40"</td>
+              <td style="padding: 10px 8px;">96 - 101 cm</td>
+              <td style="padding: 10px 8px;">73 cm</td>
             </tr>
-            <tr>
-              <td><strong>L</strong></td>
-              <td>40 - 42"</td>
-              <td>101 - 106 cm</td>
-              <td>76 cm</td>
-              <td>178 - 185 cm</td>
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px 8px; font-weight: 700;">L</td>
+              <td style="padding: 10px 8px;">40 - 42"</td>
+              <td style="padding: 10px 8px;">101 - 106 cm</td>
+              <td style="padding: 10px 8px;">76 cm</td>
             </tr>
-            <tr>
-              <td><strong>XL</strong></td>
-              <td>42 - 44"</td>
-              <td>106 - 111 cm</td>
-              <td>78 cm</td>
-              <td>182 - 190 cm</td>
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px 8px; font-weight: 700;">XL</td>
+              <td style="padding: 10px 8px;">42 - 44"</td>
+              <td style="padding: 10px 8px;">106 - 111 cm</td>
+              <td style="padding: 10px 8px;">78 cm</td>
             </tr>
-            <tr>
-              <td><strong>2XL</strong></td>
-              <td>44 - 46"</td>
-              <td>111 - 116 cm</td>
-              <td>81 cm</td>
-              <td>188 - 196 cm</td>
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px 8px; font-weight: 700;">2XL</td>
+              <td style="padding: 10px 8px;">44 - 46"</td>
+              <td style="padding: 10px 8px;">111 - 116 cm</td>
+              <td style="padding: 10px 8px;">81 cm</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="size-tips-box">
-        <h4>💡 Fitting Advice:</h4>
-        <p>• <strong>Stadium Fan Edition:</strong> Features a regular, relaxed fit. Order your standard t-shirt size.</p>
-        <p>• <strong>Player Issue:</strong> Athletic slim fit with tailored waist and laser ventilation. For a standard relaxed fit, consider sizing up one size.</p>
-      </div>
-    </div>
-  </dialog>
-
-  <!-- 5. CHECKOUT CONFIRMATION DIALOG -->
-  <dialog id="checkoutSuccessDialog" closedby="any" aria-labelledby="successTitle" class="store-dialog modal-md">
-    <div class="dialog-card success-card">
-      <div class="success-icon-wrap">
-        <svg viewBox="0 0 24 24" width="48" height="48" stroke="#00F5A0" stroke-width="2.5" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-      </div>
-      <span class="section-pill">ORDER CONFIRMED</span>
-      <h2 id="successTitle" class="dialog-heading">YOUR KIT IS ON THE WAY!</h2>
-      <p class="dialog-sub">
-        Thank you for ordering with Second Half Store. Your official football jersey is being prepared for dispatch.
-      </p>
-
-      <div class="order-receipt-box">
-        <div class="receipt-row">
-          <span>Order Number:</span>
-          <strong id="receiptOrderNum">#SHS-948217</strong>
-        </div>
-        <div class="receipt-row">
-          <span>Confirmation Sent To:</span>
-          <strong id="receiptEmail">supporter@example.com</strong>
-        </div>
-        <div class="receipt-row">
-          <span>Estimated Delivery:</span>
-          <strong>3-5 Business Days (Tracked Air)</strong>
-        </div>
-      </div>
-
-      <div class="success-actions">
-        <button class="btn btn-primary" id="continueShoppingBtn">Continue Exploring Kits</button>
+      <div style="background:var(--bg-subtle); padding:16px; border-radius:8px; font-size:0.82rem; color:var(--text-secondary); line-height:1.5;">
+        <strong>💡 Sizing Recommendation:</strong><br>
+        Jerseys feature an athletic relaxed fit. If you prefer a loose casual style, consider ordering one size up.
       </div>
     </div>
   </dialog>

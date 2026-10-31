@@ -824,7 +824,91 @@ async function handleRemoveCartLine(lineId) {
 }
 
 // ==========================================
-// 4. CUSTOMER FAVORITE PREFERENCES STATE
+// 4. CUSTOMER PROFILE & ACCOUNT MANAGEMENT
+// ==========================================
+let customerState = {
+  name: "",
+  email: "",
+  phone: ""
+};
+
+function loadCustomerState() {
+  try {
+    const saved = localStorage.getItem("half_time_customer");
+    if (saved) {
+      customerState = JSON.parse(saved);
+    }
+  } catch (_) {}
+  updateCustomerUI();
+}
+
+function saveCustomerState(name, email, phone) {
+  customerState = {
+    name: name ? name.trim() : "",
+    email: email ? email.trim() : "",
+    phone: phone ? phone.trim() : ""
+  };
+  try {
+    localStorage.setItem("half_time_customer", JSON.stringify(customerState));
+  } catch (_) {}
+  updateCustomerUI();
+}
+
+function updateCustomerUI() {
+  const headerName = document.getElementById("headerCustomerName");
+  if (headerName) {
+    headerName.textContent = customerState.name ? customerState.name.split(" ")[0] : "Account";
+  }
+
+  const cartName = document.getElementById("cartCustomerName");
+  const cartEmail = document.getElementById("cartCustomerEmail");
+  const cartPhone = document.getElementById("cartCustomerPhone");
+  if (cartName && !cartName.value) cartName.value = customerState.name || "";
+  if (cartEmail && !cartEmail.value) cartEmail.value = customerState.email || "";
+  if (cartPhone && !cartPhone.value) cartPhone.value = customerState.phone || "";
+
+  const modalName = document.getElementById("modalCustomerName");
+  const modalEmail = document.getElementById("modalCustomerEmail");
+  const modalPhone = document.getElementById("modalCustomerPhone");
+  if (modalName) modalName.value = customerState.name || "";
+  if (modalEmail) modalEmail.value = customerState.email || "";
+  if (modalPhone) modalPhone.value = customerState.phone || "";
+}
+
+function initCustomerProfileModal() {
+  const openBtn = document.getElementById("openCustomerBtn");
+  const footerBtn = document.getElementById("footerCustomerLink");
+  const closeBtn = document.getElementById("closeCustomerModalBtn");
+  const dialog = document.getElementById("customerProfileDialog");
+  const form = document.getElementById("customerProfileForm");
+
+  const openModal = (e) => {
+    if (e) e.preventDefault();
+    updateCustomerUI();
+    if (dialog) dialog.showModal();
+  };
+
+  if (openBtn) openBtn.addEventListener("click", openModal);
+  if (footerBtn) footerBtn.addEventListener("click", openModal);
+  if (closeBtn && dialog) closeBtn.addEventListener("click", () => dialog.close());
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("modalCustomerName")?.value || "";
+      const email = document.getElementById("modalCustomerEmail")?.value || "";
+      const phone = document.getElementById("modalCustomerPhone")?.value || "";
+      saveCustomerState(name, email, phone);
+      showToast("✓ Customer details saved!");
+      if (dialog) dialog.close();
+    });
+  }
+
+  loadCustomerState();
+}
+
+// ==========================================
+// 4B. CUSTOMER FAVORITE PREFERENCES STATE
 // ==========================================
 let customerPreferences = JSON.parse(localStorage.getItem("vortex_customer_preferences") || JSON.stringify({
   favoriteTeam: "Real Madrid",
@@ -1774,7 +1858,7 @@ function renderProducts() {
     grid.innerHTML = `
       <div class="catalog-loading" style="grid-column: 1 / -1; padding: 60px 20px;">
         <div class="loading-spinner"></div>
-        <span style="font-size: 1.05rem; font-weight: 500;">Connecting to Second Half Store live catalogue...</span>
+        <span style="font-size: 1.05rem; font-weight: 500;">Connecting to Half Time Store live catalogue...</span>
       </div>
     `;
     if (counterText) counterText.textContent = "Connecting to Shopify...";
@@ -1832,7 +1916,7 @@ function renderProducts() {
   }
 
   if (counterText) {
-    counterText.textContent = `Showing ${filtered.length} of ${activeProductList.length} products from Second Half Store`;
+    counterText.textContent = `Showing ${filtered.length} of ${activeProductList.length} jerseys from Half Time Store`;
   }
 
   updateFilterCounts();
@@ -2368,7 +2452,7 @@ function openQuickView(kitId) {
   const editionEl = document.getElementById("qvEditionTag");
   if (editionEl) editionEl.textContent = kit.availableForSale ? "In Stock" : "Sold Out";
   const descEl = document.getElementById("qvDescription");
-  if (descEl) descEl.textContent = kit.description || "Authentic official football jersey from Second Half Store.";
+  if (descEl) descEl.textContent = kit.description || "Authentic official football jersey from Half Time Store.";
 
   const customToggle = document.getElementById("qvCustomToggle");
   const customInputs = document.getElementById("qvCustomInputs");
@@ -2573,9 +2657,9 @@ function initCartDrawer() {
   }
 
   // Proceed to Checkout
-  const checkoutBtn = document.getElementById("proceedToCheckoutBtn");
+  const checkoutBtn = document.getElementById("proceedCheckoutBtn") || document.getElementById("proceedToCheckoutBtn");
   if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", () => {
+    checkoutBtn.addEventListener("click", async () => {
       // 1. Live Shopify Cart checkout
       if (activeCart && activeCart.lines && activeCart.lines.length > 0) {
         if (!activeCart.checkoutUrl) {
@@ -2583,29 +2667,34 @@ function initCartDrawer() {
           return;
         }
 
-        checkoutBtn.disabled = true;
-        checkoutBtn.innerHTML = `
-          <div class="loading-spinner" style="width:20px;height:20px;border-width:2.5px;display:inline-block;vertical-align:middle;margin-right:8px;"></div>
-          <span>Redirecting to Shopify Checkout...</span>
-        `;
+        // Capture customer details if entered in cart drawer
+        const nameVal = document.getElementById("cartCustomerName")?.value || "";
+        const emailVal = document.getElementById("cartCustomerEmail")?.value || "";
+        const phoneVal = document.getElementById("cartCustomerPhone")?.value || "";
 
-        // Direct redirection to the secure Shopify checkout page
+        if (nameVal || emailVal || phoneVal) {
+          saveCustomerState(nameVal, emailVal, phoneVal);
+        }
+
+        checkoutBtn.disabled = true;
+        checkoutBtn.innerHTML = `<span>Connecting to Shopify Checkout...</span>`;
+
+        // If email or phone provided, update Shopify cart buyer identity
+        if (window.shopifyApi && window.shopifyApi.updateCartBuyerIdentity && (emailVal || phoneVal)) {
+          try {
+            await window.shopifyApi.updateCartBuyerIdentity(shopifyCartId, {
+              email: emailVal,
+              phone: phoneVal
+            });
+          } catch (_) {}
+        }
+
+        showToast("Redirecting to secure Shopify Checkout...");
         window.location.href = activeCart.checkoutUrl;
         return;
       }
 
-      // 2. Demo cart fallback
-      if (cart.length > 0) {
-        if (window.SHOPIFY_CONFIG && !window.SHOPIFY_CONFIG.isConfigured) {
-          showToast("Live checkout requires a Shopify token in shopify-config.js. Launching demo checkout modal.");
-          const cartDrawer = document.getElementById("cartDrawerDialog");
-          if (cartDrawer) cartDrawer.close();
-          openCheckoutModal();
-          return;
-        }
-      }
-
-      showToast("Your cart is empty! Add a football kit first.", true);
+      showToast("Your cart is empty! Add a football jersey first.", true);
     });
   }
 
@@ -2618,6 +2707,7 @@ function updateCartUI() {
   const list = document.getElementById("cartItemsList");
   const emptyView = document.getElementById("cartEmptyState");
   const footerView = document.getElementById("cartFooter");
+  const customerCard = document.getElementById("cartCustomerCard");
 
   // Determine if we are rendering Shopify Cart or Demo Cart
   const isShopifyMode = Boolean(activeCart && activeCart.lines);
@@ -2632,55 +2722,49 @@ function updateCartUI() {
     if (list) list.innerHTML = "";
     if (emptyView) emptyView.hidden = false;
     if (footerView) footerView.hidden = true;
+    if (customerCard) customerCard.hidden = true;
     updateFreeShippingTracker(0);
     return;
   }
 
   if (emptyView) emptyView.hidden = true;
   if (footerView) footerView.hidden = false;
+  if (customerCard) customerCard.hidden = false;
 
   if (list) {
     if (isShopifyMode) {
       // Render live Shopify Cart lines
       list.innerHTML = activeCart.lines.map(item => {
-        const customAttrs = item.attributes || [];
-        const hasCustom = customAttrs.length > 0;
         const currency = item.currencyCode || activeCart.currencyCode;
-
         const thumbHtml = item.imageUrl
-          ? `<img src="${item.imageUrl}" alt="${item.productTitle}" class="cart-item-shopify-img">`
-          : `<div class="empty-ball-icon" style="font-size:28px;">⚽</div>`;
+          ? `<img src="${item.imageUrl}" alt="${item.productTitle}">`
+          : `<div style="font-size:24px;">⚽</div>`;
 
         return `
-          <div class="cart-item-card" data-line-id="${item.id}">
-            <div class="cart-item-thumb">
+          <div class="cart-line-item" data-line-id="${item.id}">
+            <div class="cart-item-img-box">
               ${thumbHtml}
             </div>
-            <div class="cart-item-details">
+            <div class="cart-item-info">
               <h4 class="cart-item-title">${item.productTitle}</h4>
-              <div class="cart-item-meta">
-                <span>Option: <strong>${item.variantTitle}</strong></span>
-              </div>
-              ${hasCustom ? `
-                <span class="cart-item-customization-pill">
-                  ⭐ ${customAttrs.map(a => `${a.key}: ${a.value}`).join(" • ")}
-                </span>
-              ` : ''}
+              <div class="cart-item-variant">Option: <strong>${item.variantTitle}</strong></div>
+              <div class="cart-item-price">${formatPrice(item.totalPrice, currency)}</div>
             </div>
-            <div class="cart-item-price-side">
-              <button class="cart-remove-item" data-line-id="${item.id}" title="Remove kit">&times;</button>
-              <span class="cart-item-price">${formatPrice(item.totalPrice, currency)}</span>
-              <div class="cart-qty-controls">
+            <div class="cart-item-actions">
+              <div class="qty-control">
                 <button class="qty-btn" data-action="dec" data-line-id="${item.id}">-</button>
-                <span class="qty-val">${item.quantity}</span>
+                <span class="qty-display">${item.quantity}</span>
                 <button class="qty-btn" data-action="inc" data-line-id="${item.id}">+</button>
               </div>
+              <button class="remove-item-btn" data-line-id="${item.id}" title="Remove item">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
             </div>
           </div>
         `;
       }).join("");
 
-      list.querySelectorAll(".cart-remove-item").forEach(btn => {
+      list.querySelectorAll(".remove-item-btn").forEach(btn => {
         btn.addEventListener("click", async () => {
           btn.disabled = true;
           await handleRemoveCartLine(btn.dataset.lineId);
@@ -2708,14 +2792,12 @@ function updateCartUI() {
 
       const subtotal = activeCart.subtotal;
       const currency = activeCart.currencyCode;
-      const freeShippingThreshold = 85.0;
-      const isFreeShipping = subtotal >= freeShippingThreshold;
-      const shippingFee = isFreeShipping ? 0 : 9.99;
-      const grandTotal = activeCart.total > 0 ? activeCart.total : (subtotal + shippingFee);
+      const grandTotal = activeCart.total > 0 ? activeCart.total : subtotal;
 
-      document.getElementById("cartSubtotal").textContent = formatPrice(subtotal, currency);
-      document.getElementById("cartShippingFee").textContent = isFreeShipping ? "FREE" : formatPrice(shippingFee, currency);
-      document.getElementById("cartGrandTotal").textContent = formatPrice(grandTotal, currency);
+      const subtotalEl = document.getElementById("cartSubtotal");
+      if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal, currency);
+      const grandTotalEl = document.getElementById("cartFinalTotal") || document.getElementById("cartGrandTotal");
+      if (grandTotalEl) grandTotalEl.textContent = formatPrice(grandTotal, currency);
 
       updateFreeShippingTracker(subtotal, currency);
       return;
@@ -2811,7 +2893,7 @@ function updateCartUI() {
 }
 
 function updateFreeShippingTracker(subtotal, explicitCurrency = null) {
-  const goal = 85.0;
+  const goal = 1999;
   const progress = Math.min(100, (subtotal / goal) * 100);
   const bar = document.getElementById("shippingProgressBar");
   const label = document.getElementById("shippingGoalText");
@@ -2819,10 +2901,10 @@ function updateFreeShippingTracker(subtotal, explicitCurrency = null) {
   if (bar) bar.style.width = `${progress}%`;
   if (label) {
     if (subtotal >= goal) {
-      label.textContent = "🎉 You've unlocked FREE Worldwide Priority Shipping!";
+      label.textContent = "✓ You've unlocked FREE Express Shipping!";
     } else {
-      const diff = formatPrice(goal - subtotal, explicitCurrency);
-      label.textContent = `Add ${diff} more for Free Worldwide Shipping`;
+      const diff = formatPrice(goal - subtotal, explicitCurrency || "INR");
+      label.textContent = `Add ${diff} more for Free Tracked Shipping`;
     }
   }
 }
@@ -3110,7 +3192,7 @@ async function loadShopifyData() {
     grid.innerHTML = `
       <div class="catalog-loading">
         <div class="loading-spinner"></div>
-        <span>Loading authentic jerseys from Second Half Store...</span>
+        <span>Loading authentic jerseys from Half Time Store...</span>
       </div>
     `;
   }
@@ -3120,7 +3202,7 @@ async function loadShopifyData() {
     if (products && products.length > 0) {
       shopifyProducts = products;
       console.log(`✓ Successfully retrieved ${products.length} live products from Shopify!`);
-      showToast(`✓ Retrieved ${products.length} live products from Second Half Store!`);
+      showToast(`✓ Retrieved ${products.length} live products from Half Time Store!`);
       const statusBadge = document.getElementById("headerShopifyBadge");
       if (statusBadge) {
         statusBadge.innerHTML = `<span class="status-indicator"></span><span class="status-label">Shopify Live (${products.length})</span>`;
@@ -3165,6 +3247,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMatchCenter();
   initQuickViewDialog();
   initCartDrawer();
+  initCustomerProfileModal();
   initWishlist();
   initSizeGuide();
   initCheckoutFlow();
