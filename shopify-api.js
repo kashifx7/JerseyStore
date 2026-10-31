@@ -467,7 +467,7 @@ function normalizeShopifyCart(cart) {
  */
 async function shopifyCreateCart(initialLines = []) {
   const formattedLines = initialLines.map(l => ({
-    merchandiseId: l.variantId,
+    merchandiseId: l.merchandiseId || l.variantId,
     quantity: l.quantity || 1,
     attributes: l.attributes || []
   }));

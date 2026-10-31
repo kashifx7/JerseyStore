@@ -736,14 +736,19 @@ function formatPrice(amount, explicitCurrency = null) {
 let shopifyProducts = [];
 let activeCart = null;
 let shopifyCartId = (function() {
-  try { return localStorage.getItem("shopify_cart_id") || null; } catch (_) { return null; }
+  try {
+    const stored = localStorage.getItem("shopify_cart_id");
+    return (stored && stored.startsWith("gid://shopify/Cart/")) ? stored : null;
+  } catch (_) { return null; }
 })();
 let isShopifyLoading = false;
 let shopifyLoadError = null;
 
 function openCartDrawer() {
   const dialog = document.getElementById("cartDrawerDialog");
-  if (dialog) dialog.showModal();
+  if (dialog && !dialog.open) {
+    dialog.showModal();
+  }
 }
 
 /**
@@ -2591,12 +2596,14 @@ function updateQvPrice() {
   const isCustom = customToggle && customToggle.checked;
   const customFee = isCustom ? 15 : 0;
 
-  let basePrice = currentQvKit.priceUSD || 89.99;
-  let currencyCode = null;
+  let basePrice = 89.99;
+  let currencyCode = "USD";
+  let isAvailable = currentQvKit.availableForSale;
 
   if (currentQvKit.isShopifyProduct && qvSelectedVariant) {
     basePrice = qvSelectedVariant.price;
-    currencyCode = qvSelectedVariant.currencyCode;
+    currencyCode = qvSelectedVariant.currencyCode || currentQvKit.currencyCode;
+    isAvailable = Boolean(qvSelectedVariant.availableForSale);
   } else if (currentQvKit.price !== undefined) {
     basePrice = currentQvKit.price;
     currencyCode = currentQvKit.currencyCode;
@@ -2606,9 +2613,33 @@ function updateQvPrice() {
 
   const priceTag = document.getElementById("qvPrice");
   const finalPriceTag = document.getElementById("qvFinalPrice");
+  const qvAddToCartBtn = document.getElementById("qvAddToCartBtn");
+  const qvEditionTag = document.getElementById("qvEditionTag");
 
   if (priceTag) priceTag.textContent = formatPrice(basePrice, currencyCode);
   if (finalPriceTag) finalPriceTag.textContent = formatPrice(finalTotal, currencyCode);
+
+  if (qvEditionTag) {
+    qvEditionTag.textContent = isAvailable ? "In Stock" : "Sold Out";
+    qvEditionTag.className = `qv-tag-edition ${isAvailable ? 'pill-in-stock' : 'pill-sold-out'}`;
+  }
+
+  if (qvAddToCartBtn) {
+    if (!isAvailable) {
+      qvAddToCartBtn.disabled = true;
+      qvAddToCartBtn.style.opacity = "0.5";
+      qvAddToCartBtn.style.cursor = "not-allowed";
+      qvAddToCartBtn.innerHTML = `<span>Out of Stock in Shopify</span>`;
+    } else {
+      qvAddToCartBtn.disabled = false;
+      qvAddToCartBtn.style.opacity = "1";
+      qvAddToCartBtn.style.cursor = "pointer";
+      qvAddToCartBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span>Add to Bag • <span id="qvFinalPrice">${formatPrice(finalTotal, currencyCode)}</span></span>
+      `;
+    }
+  }
 }
 
 // ==========================================
