@@ -15,6 +15,15 @@
 // ==========================================
 // 1. FOOTBALL PRODUCT CATALOG (100% FOOTBALL)
 // ==========================================
+
+const products = [
+  {
+    id: 1,
+    name: "Argentina Jersey",
+    price: 799
+  }
+];
+
 const JERSEYS_DATA = [
   {
     id: "rm-home-24",
