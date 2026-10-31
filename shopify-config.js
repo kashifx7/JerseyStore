@@ -39,7 +39,8 @@ const DEFAULT_SHOPIFY_CONFIG = {
       Boolean(this.apiVersion) &&
       this.apiVersion !== "REPLACE_WITH_SUPPORTED_API_VERSION" &&
       Boolean(token) &&
-      token !== "REPLACE_WITH_PUBLIC_STOREFRONT_TOKEN"
+      token !== "REPLACE_WITH_PUBLIC_STOREFRONT_TOKEN" &&
+      token !== "PASTE_YOUR_PUBLIC_STOREFRONT_TOKEN_HERE"
     );
   }
 };
@@ -75,7 +76,8 @@ Object.defineProperty(SHOPIFY_CONFIG, "isConfigured", {
       Boolean(this.apiVersion) &&
       this.apiVersion !== "REPLACE_WITH_SUPPORTED_API_VERSION" &&
       Boolean(token) &&
-      token !== "REPLACE_WITH_PUBLIC_STOREFRONT_TOKEN"
+      token !== "REPLACE_WITH_PUBLIC_STOREFRONT_TOKEN" &&
+      token !== "PASTE_YOUR_PUBLIC_STOREFRONT_TOKEN_HERE"
     );
   }
 });
