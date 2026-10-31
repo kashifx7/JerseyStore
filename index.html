@@ -166,6 +166,77 @@
     </div>
   </section>
 
+  <!-- Football Products Catalog & Filters Section -->
+  <section class="catalog-section" id="productGridSection">
+    <div class="section-container">
+      <div class="catalog-header-wrap">
+        <div>
+          <span class="section-pill">LIVE SHOPIFY STOREFRONT</span>
+          <h2 class="section-title">AUTHENTIC <span class="gradient-text">FOOTBALL KITS</span></h2>
+          <p class="section-subtitle">Real official club editions from Second Half Store, powered by Shopify Headless.</p>
+        </div>
+        <!-- Active Filter Counter & Shopify Live Sync -->
+        <div class="catalog-meta">
+          <div class="catalog-status-group">
+            <span id="productCounterText">Connecting to Shopify...</span>
+            <button type="button" class="sync-shopify-btn" id="refreshShopifyBtn" title="Sync live products from Shopify">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <span>Sync Shopify</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick League Filter Pills -->
+      <div class="filter-pills-scroll" id="leagueFilterPills">
+        <button class="pill-btn active" data-league="all">All Football Kits</button>
+        <button class="pill-btn fav-pill-btn" id="filterByFavClubPill" hidden>⭐ My Favorite Team</button>
+        <button class="pill-btn" data-league="Serie A">🇮🇹 Serie A</button>
+        <button class="pill-btn" data-league="La Liga">🇪🇸 La Liga</button>
+        <button class="pill-btn" data-league="Premier League">🇬🇧 Premier League</button>
+      </div>
+
+      <!-- Filter Controls Toolbar -->
+      <div class="filter-toolbar">
+        <div class="toolbar-left">
+          <!-- Price Range Filter -->
+          <div class="dropdown-filter">
+            <label for="priceSortSelect">Sort By:</label>
+            <select id="priceSortSelect">
+              <option value="featured">Featured / Trending</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toolbar-right">
+          <button class="reset-filter-btn" id="resetFiltersBtn" title="Reset all filters">
+            <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            Reset Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="product-grid" id="productGrid">
+        <div class="catalog-loading">
+          <div class="loading-spinner"></div>
+          <span>Loading official jerseys from Second Half Store...</span>
+        </div>
+      </div>
+
+      <!-- Empty state when no match -->
+      <div class="empty-state" id="emptySearchState" hidden>
+        <div class="empty-icon">⚽</div>
+        <h3>No Football Kits Found Matching Your Filters</h3>
+        <p>Try adjusting your search keywords or clear all filters to explore the full collection.</p>
+        <button class="btn btn-secondary" id="clearAllFiltersBtn">Clear All Filters</button>
+      </div>
+    </div>
+  </section>
+
   <!-- Interactive Custom Football Kit Studio -->
   <section class="customizer-section" id="customizerSection">
     <div class="section-container">
@@ -410,102 +481,6 @@
           </div>
           <button class="link-btn customize-options-link" id="hubOpenOptionsBtn">⚙️ Customize All Favorite Kit Options</button>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Football Products Catalog & Filters Section -->
-  <section class="catalog-section" id="productGridSection">
-    <div class="section-container">
-      <div class="catalog-header-wrap">
-        <div>
-          <span class="section-pill">OFFICIAL FOOTBALL CATALOG</span>
-          <h2 class="section-title">THE 2024/25 <span class="gradient-text">FOOTBALL KITS</span></h2>
-          <p class="section-subtitle">Authentic European club, national team, and retro legends collection.</p>
-        </div>
-        <!-- Active Filter Counter & Shopify Live Sync -->
-        <div class="catalog-meta">
-          <div class="catalog-status-group">
-            <span id="productCounterText">Showing all football kits</span>
-            <button type="button" class="sync-shopify-btn" id="refreshShopifyBtn" title="Sync live products from Shopify">
-              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-              <span>Sync Shopify</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick League Filter Pills -->
-      <div class="filter-pills-scroll" id="leagueFilterPills">
-        <button class="pill-btn active" data-league="all">All Football Kits</button>
-        <button class="pill-btn fav-pill-btn" id="filterByFavClubPill" hidden>⭐ My Favorite Team</button>
-        <button class="pill-btn" data-league="Premier League">🇬🇧 Premier League</button>
-        <button class="pill-btn" data-league="La Liga">🇪🇸 La Liga</button>
-        <button class="pill-btn" data-league="Serie A">🇮🇹 Serie A</button>
-        <button class="pill-btn" data-league="Bundesliga">🇩🇪 Bundesliga</button>
-        <button class="pill-btn" data-league="Ligue 1">🇫🇷 Ligue 1</button>
-        <button class="pill-btn" data-league="International">🌍 National Teams</button>
-        <button class="pill-btn" data-league="Retro">⏳ Retro & Legends</button>
-      </div>
-
-      <!-- Filter Controls Toolbar -->
-      <div class="filter-toolbar">
-        <div class="toolbar-left">
-          <!-- Edition Filter -->
-          <div class="dropdown-filter">
-            <label for="editionFilterSelect">Edition:</label>
-            <select id="editionFilterSelect">
-              <option value="all">All Editions</option>
-              <option value="Player Issue">Match Player Issue</option>
-              <option value="Stadium Fan">Stadium Fan</option>
-              <option value="Retro">Retro Classic</option>
-            </select>
-          </div>
-
-          <!-- Type Filter (Home, Away, Third) -->
-          <div class="dropdown-filter">
-            <label for="typeFilterSelect">Kit Type:</label>
-            <select id="typeFilterSelect">
-              <option value="all">Home, Away & Special</option>
-              <option value="Home">Home Kit</option>
-              <option value="Away">Away Kit</option>
-              <option value="Special">Special Edition</option>
-            </select>
-          </div>
-
-          <!-- Price Range Filter -->
-          <div class="dropdown-filter">
-            <label for="priceSortSelect">Sort By:</label>
-            <select id="priceSortSelect">
-              <option value="featured">Featured / Trending</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="rating">Top Rated</option>
-              <option value="newest">Newest Drops</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="toolbar-right">
-          <!-- Reset button -->
-          <button class="reset-filter-btn" id="resetFiltersBtn" title="Reset all filters">
-            <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
-            Reset Filters
-          </button>
-        </div>
-      </div>
-
-      <!-- Product Cards Grid -->
-      <div class="product-grid" id="productGrid">
-        <!-- Rendered dynamically by app.js -->
-      </div>
-
-      <!-- Empty state when no match -->
-      <div class="empty-state" id="emptySearchState" hidden>
-        <div class="empty-icon">⚽</div>
-        <h3>No Football Kits Found Matching Your Filters</h3>
-        <p>Try adjusting your search keywords, league filters, or clear all filters to explore the full football collection.</p>
-        <button class="btn btn-secondary" id="clearAllFiltersBtn">Clear All Filters</button>
       </div>
     </div>
   </section>

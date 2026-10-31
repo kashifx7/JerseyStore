@@ -3613,3 +3613,16 @@ dialog.cart-drawer {
 .sync-shopify-btn.loading svg {
   animation: shopifySpin 0.75s linear infinite;
 }
+
+.hero-featured-img {
+  max-width: 90%;
+  max-height: 290px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.7));
+  animation: heroFloat 4s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}

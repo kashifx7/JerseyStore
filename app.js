@@ -1166,12 +1166,26 @@ function setupDialog(dialogId, closeBtnId) {
 // ==========================================
 function initHeroShowcase() {
   const container = document.getElementById("heroJerseySvgContainer");
+  const titleEl = document.getElementById("heroJerseyTitle");
+  const subEl = document.getElementById("heroJerseySubtitle");
+  const quickBuyBtn = document.getElementById("heroQuickBuyBtn");
   if (!container) return;
 
-  const featuredKit = JERSEYS_DATA[0]; // Real Madrid
+  if (shopifyProducts.length > 0) {
+    const featured = shopifyProducts[0];
+    container.innerHTML = `<img src="${featured.featuredImage}" alt="${featured.title}" class="hero-featured-img">`;
+    if (titleEl) titleEl.textContent = featured.title;
+    if (subEl) subEl.textContent = `Official Match Edition • ${formatPrice(featured.price, featured.currencyCode)} • ${featured.availableForSale ? 'In Stock' : 'Sold Out'}`;
+    if (quickBuyBtn) {
+      quickBuyBtn.textContent = `Quick View • ${formatPrice(featured.price, featured.currencyCode)}`;
+      quickBuyBtn.onclick = () => openQuickView(featured.id);
+    }
+    return;
+  }
+
+  const featuredKit = JERSEYS_DATA[0]; // Fallback if no Shopify products loaded yet
   container.innerHTML = generateJerseySVG(featuredKit, { isBack: false });
 
-  const quickBuyBtn = document.getElementById("heroQuickBuyBtn");
   if (quickBuyBtn) {
     quickBuyBtn.addEventListener("click", () => {
       selectCustomizerKit(featuredKit.id);
@@ -1622,7 +1636,19 @@ let filterState = {
 
 function initProductGrid() {
   bindCatalogControls();
-  renderProducts();
+  if (window.SHOPIFY_CONFIG && window.SHOPIFY_CONFIG.isConfigured) {
+    const grid = document.getElementById("productGrid");
+    if (grid) {
+      grid.innerHTML = `
+        <div class="catalog-loading" style="grid-column: 1 / -1; padding: 60px 20px;">
+          <div class="loading-spinner"></div>
+          <span style="font-size: 1.05rem; font-weight: 500;">Loading official jerseys from Second Half Store...</span>
+        </div>
+      `;
+    }
+  } else {
+    renderProducts();
+  }
 }
 
 function bindCatalogControls() {
@@ -1754,8 +1780,22 @@ function renderProducts() {
   if (!grid) return;
 
   const isConfigured = window.SHOPIFY_CONFIG && window.SHOPIFY_CONFIG.isConfigured;
-  const activeProductList = shopifyProducts.length > 0 ? shopifyProducts : JERSEYS_DATA;
+
+  // Prioritize live Shopify products. NEVER show dummy data when Shopify is configured.
+  const activeProductList = shopifyProducts.length > 0 ? shopifyProducts : (isConfigured ? [] : JERSEYS_DATA);
   const favTeam = customerPreferences.favoriteTeam;
+
+  if (isShopifyLoading && activeProductList.length === 0) {
+    grid.innerHTML = `
+      <div class="catalog-loading" style="grid-column: 1 / -1; padding: 60px 20px;">
+        <div class="loading-spinner"></div>
+        <span style="font-size: 1.05rem; font-weight: 500;">Connecting to Second Half Store live catalogue...</span>
+      </div>
+    `;
+    if (counterText) counterText.textContent = "Connecting to Shopify...";
+    if (emptyState) emptyState.hidden = true;
+    return;
+  }
 
   let filtered = activeProductList.filter(kit => {
     // Only favorite filter
@@ -1778,17 +1818,32 @@ function renderProducts() {
     if (filterState.league !== "all") {
       const kitLeague = (kit.league || "").toLowerCase();
       const targetLeague = filterState.league.toLowerCase();
-      if (!kitLeague.includes(targetLeague) && !targetLeague.includes(kitLeague)) {
+      const title = (kit.title || "").toLowerCase();
+      const isLeagueMatch = kitLeague.includes(targetLeague) || targetLeague.includes(kitLeague);
+      const isTeamMatch = (targetLeague.includes("serie a") && title.includes("milan")) ||
+                          (targetLeague.includes("la liga") && title.includes("barc")) ||
+                          (targetLeague.includes("premier") && (title.includes("arsenal") || title.includes("chelsea") || title.includes("liverpool") || title.includes("city")));
+      if (!isLeagueMatch && !isTeamMatch) {
         return false;
       }
     }
 
-    if (filterState.edition !== "all" && kit.edition && kit.edition !== filterState.edition) {
-      return false;
+    if (filterState.edition !== "all") {
+      const ed = (kit.edition || "").toLowerCase();
+      const title = (kit.title || "").toLowerCase();
+      const targetEd = filterState.edition.toLowerCase();
+      if (!ed.includes(targetEd) && !title.includes(targetEd)) {
+        return false;
+      }
     }
 
-    if (filterState.type !== "all" && kit.type && kit.type !== filterState.type) {
-      return false;
+    if (filterState.type !== "all") {
+      const type = (kit.type || "").toLowerCase();
+      const title = (kit.title || "").toLowerCase();
+      const targetType = filterState.type.toLowerCase();
+      if (!type.includes(targetType) && !title.includes(targetType)) {
+        return false;
+      }
     }
 
     return true;
@@ -1818,7 +1873,7 @@ function renderProducts() {
     counterText.textContent = `Showing ${filtered.length} of ${activeProductList.length} ${sourceLabel}`;
   }
 
-  // Optional setup notice banner if token is still placeholder
+  // Setup notice banner if token is missing
   let configBannerHtml = "";
   if (!isConfigured) {
     configBannerHtml = `
@@ -1826,7 +1881,7 @@ function renderProducts() {
         <span class="banner-icon">⚡</span>
         <div>
           <strong>Shopify Headless Storefront Connected:</strong>
-          Insert your Public Storefront API token into <code>shopify-config.js</code> to display your live Shopify products. Showing preview collection in the meantime.
+          Please configure your Public Storefront API token in <code>shopify-config.js</code> to display your live Shopify products.
         </div>
       </div>
     `;
@@ -1842,23 +1897,23 @@ function renderProducts() {
 
   const cardsHtml = filtered.map(kit => {
     const isWished = wishlist.includes(kit.id);
-    const editionClass = (kit.edition || "standard").toLowerCase().replace(/\s+/g, '-');
     const isFavTeam = favTeam && (kit.team || "").toLowerCase().includes(favTeam.toLowerCase());
     const isSoldOut = kit.isShopifyProduct ? !kit.availableForSale : false;
     const priceDisplay = formatPrice(kit.price !== undefined ? kit.price : kit.priceUSD, kit.currencyCode);
 
     // Image rendering: Real image if available, else SVG generator fallback
     const imageHtml = kit.featuredImage
-      ? `<img src="${kit.featuredImage}" alt="${kit.title}" class="product-card-img" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML='${generateJerseySVG(kit, { isBack: false }).replace(/'/g, "\\'")}';">`
+      ? `<img src="${kit.featuredImage}" alt="${kit.title}" class="product-card-img" loading="lazy">`
       : generateJerseySVG(kit, { isBack: false });
 
     return `
       <div class="product-card ${isFavTeam ? 'is-fav-team' : ''} ${isSoldOut ? 'is-sold-out' : ''}" data-id="${kit.id}">
         ${isFavTeam ? `<span class="card-fav-badge">⭐ YOUR FAVORITE TEAM</span>` : ''}
-        ${isSoldOut ? `<span class="card-sold-out-badge">Sold Out</span>` : ''}
 
         <div class="card-top-badges">
-          <span class="card-edition-pill ${editionClass}">${kit.edition || 'Official Edition'}</span>
+          <span class="card-edition-pill" style="${isSoldOut ? 'background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); font-weight: 700;' : 'background: rgba(0, 245, 160, 0.15); color: #00F5A0; border: 1px solid rgba(0, 245, 160, 0.3); font-weight: 700;'}">
+            ${isSoldOut ? 'Sold Out' : 'In Stock'}
+          </span>
           <button class="wishlist-heart-btn ${isWished ? 'active' : ''}" data-id="${kit.id}" title="${isWished ? 'Remove from Saved' : 'Save Kit'}" aria-label="Toggle Saved Kit">
             <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="${isWished ? 'currentColor' : 'none'}">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -1874,11 +1929,11 @@ function renderProducts() {
         <div class="card-body">
           <div class="card-league-row">
             <span class="card-league">${kit.league || kit.productType || 'Official Kit'}</span>
-            <span class="card-rating">★ ${kit.rating || '4.9'} (${kit.reviewsCount || '150+'})</span>
+            <span class="card-rating">★ ${kit.rating || '4.9'}</span>
           </div>
 
           <h3 class="card-title">${kit.title}</h3>
-          <p class="card-season-type">${kit.season || '2024/25'} Season • ${kit.type || 'Kit'}</p>
+          <p class="card-season-type">${kit.variants && kit.variants.length > 0 ? `${kit.variants.length} Size Variant${kit.variants.length > 1 ? 's' : ''}` : 'Official Kit'}</p>
 
           <div class="card-footer">
             <div class="card-price-box">
@@ -3133,6 +3188,7 @@ async function loadShopifyData() {
   } finally {
     isShopifyLoading = false;
     renderProducts();
+    initHeroShowcase();
   }
 
   // Restore cart if stored
