@@ -2120,22 +2120,6 @@ async function fetchLiveFootballScores() {
       }
     }
 
-    // Update top announcement bar
-    const tickerEl = document.querySelector(".announcement-content");
-    if (tickerEl) {
-      const isLive = MATCHES_DATA.live.length > 0;
-      const topMatch = isLive ? MATCHES_DATA.live[0] : (MATCHES_DATA.upcoming[0] || MATCHES_DATA.results[0]);
-      if (topMatch) {
-        const headline = isLive
-          ? `⚽ <strong>LIVE ${topMatch.minute}:</strong> ${topMatch.homeTeam} ${topMatch.homeScore} - ${topMatch.awayScore} ${topMatch.awayTeam}`
-          : `⚽ <strong>NEXT FIXTURE:</strong> ${topMatch.homeTeam} vs ${topMatch.awayTeam} (${topMatch.kickoff})`;
-        const firstSpan = tickerEl.querySelector("span:first-child");
-        if (firstSpan) {
-          firstSpan.innerHTML = `${headline} <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Fixtures &rarr;</a>`;
-        }
-      }
-    }
-
     renderMatchCards();
   } catch (err) {
     console.warn("Could not fetch real-time football scores:", err);
