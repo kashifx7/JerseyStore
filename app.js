@@ -3257,8 +3257,27 @@ function initMobileNav() {
   const toggle = document.getElementById("mobileMenuBtn");
   const nav = document.getElementById("mainNav");
   if (toggle && nav) {
-    toggle.addEventListener("click", () => {
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
       nav.classList.toggle("open");
+      const isOpen = nav.classList.contains("open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    // Close mobile nav when clicking any nav link
+    nav.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Close when clicking outside
+    document.addEventListener("click", (e) => {
+      if (nav.classList.contains("open") && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
     });
   }
 }
