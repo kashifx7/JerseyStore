@@ -3416,3 +3416,191 @@ button {
   padding: 3px 10px;
   border-radius: 4px;
 }
+
+
+/* ===================================================================
+   MINIMALIST 2ND BAR (HEADER & BRAND WORDMARK)
+   =================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(11, 12, 14, 0.94);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand-logo-minimal {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: opacity var(--transition);
+}
+
+.brand-logo-minimal:hover .brand-wordmark {
+  opacity: 0.85;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px 0;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #FFFFFF;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.minimal-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.minimal-search .search-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  padding: 6px 14px 6px 32px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  width: 125px;
+  transition: width 0.25s ease, border-color var(--transition), background var(--transition);
+}
+
+.minimal-search .search-input:focus {
+  outline: none;
+  width: 175px;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.minimal-search .search-icon {
+  position: absolute;
+  left: 11px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.header-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.header-action-btn:hover {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.minimal-cart-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  color: #0C0E12;
+  border: none;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.minimal-cart-btn:hover {
+  background: #E5E7EB;
+  transform: translateY(-1px);
+}
+
+.minimal-cart-btn .badge {
+  background: #10B981;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 900px) {
+  .main-nav {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+  .minimal-search .search-input {
+    width: 100px;
+  }
+  .minimal-search .search-input:focus {
+    width: 140px;
+  }
+  .header-btn-label {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .header-container {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+  .brand-wordmark {
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+  }
+  .minimal-search {
+    display: none;
+  }
+}
