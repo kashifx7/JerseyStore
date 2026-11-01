@@ -14,7 +14,7 @@
   <!-- Top Announcement Ticker -->
   <aside class="announcement-bar" aria-label="Store Announcements">
     <div class="announcement-content">
-      <span>⚽ <strong>MATCHDAY LIVE:</strong> Real Madrid 2-1 Bayern (87') • Arsenal 3-0 Chelsea <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Live Scores &rarr;</a></span>
+      <span>⚽ <strong>MATCHDAY FIXTURES:</strong> Real-time match scores & upcoming fixtures <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Fixtures &rarr;</a></span>
       <span class="bullet">•</span>
       <span>🔥 <strong>HALF TIME STORE:</strong> 100% Authentic Football Jerseys & Match Editions</span>
       <span class="bullet">•</span>
@@ -47,7 +47,7 @@
       <nav class="main-nav" id="mainNav" aria-label="Primary Navigation">
         <a href="#productGridSection" class="nav-link active">All Jerseys</a>
         <a href="#matchCenterSection" class="nav-link match-center-link" id="navLiveScoresBtn">
-          <span class="live-blink-dot"></span> Live Scores
+          <span>⚽</span> Match Fixtures
         </a>
         <a href="#productGridSection" class="nav-link" id="navInStockBtn">In Stock Only</a>
         <a href="#trustSection" class="nav-link">Authenticity Guarantee</a>
@@ -162,50 +162,45 @@
   </section>
 
   
-  <!-- ==================== MATCHDAY LIVE SCORES CENTER ==================== -->
+  <!-- ==================== MATCHDAY FIXTURES & LIVE STRIP ==================== -->
   <section class="match-center-section" id="matchCenterSection">
     <div class="section-container">
       <div class="match-center-header">
-        <div>
-          <div class="match-live-pulse-badge">
-            <span class="live-dot-pulse"></span>
-            <span id="liveMatchesCountText">3 MATCHES IN PLAY RIGHT NOW</span>
+        <div class="match-center-title-col">
+          <div class="match-live-pulse-badge" id="liveMatchesBadge">
+            <span class="live-dot-pulse" id="liveMatchesDot" style="display:none;"></span>
+            <span id="liveMatchesCountText">📅 FIXTURES & SCORES</span>
           </div>
-          <h2 class="section-title">FOOTBALL MATCHDAY CENTER</h2>
-          <p class="section-subtitle">Follow real-time scores for live matches and upcoming fixtures. Shop each playing team's official jersey instantly.</p>
+          <h2 class="match-strip-title">MATCHDAY FIXTURES</h2>
+          <span class="match-strip-desc">Top European leagues • Shop official match kits</span>
         </div>
 
         <div class="match-center-controls">
-          <button class="btn btn-secondary btn-sm" id="refreshScoresBtn">
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-            <span>Refresh Scores</span>
+          <!-- Match Center Tabs -->
+          <div class="match-tabs-bar" role="tablist" aria-label="Football Match Categories">
+            <button class="match-tab active" role="tab" aria-selected="true" id="tabUpcomingBtn" data-tab="upcoming">
+              <span>Upcoming (<span id="tabUpcomingCount">...</span>)</span>
+            </button>
+            <button class="match-tab" role="tab" aria-selected="false" id="tabLiveBtn" data-tab="live">
+              <span class="tab-live-dot" id="tabLiveDot" style="display:none;"></span>
+              <span>Live (<span id="tabLiveCount">0</span>)</span>
+            </button>
+            <button class="match-tab" role="tab" aria-selected="false" id="tabResultsBtn" data-tab="results">
+              <span>Results</span>
+            </button>
+          </div>
+
+          <button class="btn btn-secondary btn-sm refresh-btn-compact" id="refreshScoresBtn" title="Refresh Live Scores">
+            <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
           </button>
-          <label class="live-ticker-toggle">
-            <input type="checkbox" id="liveTickerToggle" checked>
-            <span class="toggle-text">Auto-Update Scores</span>
-          </label>
         </div>
       </div>
 
-      <!-- Match Center Tabs -->
-      <div class="match-tabs-bar" role="tablist" aria-label="Football Match Categories">
-        <button class="match-tab active" role="tab" aria-selected="true" id="tabLiveBtn" data-tab="live">
-          <span class="tab-live-dot"></span>
-          <span>Live Now (<span id="tabLiveCount">3</span>)</span>
-        </button>
-        <button class="match-tab" role="tab" aria-selected="false" id="tabUpcomingBtn" data-tab="upcoming">
-          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          <span>Upcoming Fixtures (<span id="tabUpcomingCount">6</span>)</span>
-        </button>
-        <button class="match-tab" role="tab" aria-selected="false" id="tabResultsBtn" data-tab="results">
-          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-          <span>Recent Results</span>
-        </button>
-      </div>
-
-      <!-- Match Cards Grid -->
+      <!-- Match Cards Grid (Compact - Max 3 entries) -->
       <div class="match-cards-grid" id="matchCardsContainer" role="tabpanel">
-        <!-- Injected dynamically by app.js -->
+        <div class="match-loading-placeholder" style="grid-column: 1 / -1; padding: 18px; text-align: center; color: var(--text-muted); font-size: 0.82rem;">
+          <span>⚽ Fetching official matchday fixtures...</span>
+        </div>
       </div>
     </div>
   </section>

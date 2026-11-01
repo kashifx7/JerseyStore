@@ -1739,9 +1739,11 @@ button {
   font-weight: 700;
 }
 
-/* Matchday Live Center Section */
+/* ============================================================
+   Matchday Fixtures & Live Scores Strip (Compact - Max 3 Rows)
+   ============================================================ */
 .match-center-section {
-  padding: 60px 0;
+  padding: 20px 0 24px;
   background: var(--bg-body);
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
@@ -1750,91 +1752,101 @@ button {
 .match-center-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 24px;
+  align-items: center;
+  margin-bottom: 14px;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
+}
+
+.match-center-title-col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .match-live-pulse-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #EF4444;
-  font-size: 0.72rem;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--accent-green);
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
-  padding: 4px 12px;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
   border-radius: var(--radius-pill);
-  margin-bottom: 8px;
+}
+
+.match-live-pulse-badge.is-live {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #EF4444;
 }
 
 .live-dot-pulse {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background: #EF4444;
   border-radius: 50%;
-  box-shadow: 0 0 8px #EF4444;
+  box-shadow: 0 0 6px #EF4444;
   animation: liveBlink 1.2s infinite;
+}
+
+.match-strip-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1;
+}
+
+.match-strip-desc {
+  font-size: 0.74rem;
+  color: var(--text-muted);
 }
 
 .match-center-controls {
   display: flex;
   align-items: center;
-  gap: 14px;
-}
-
-.live-ticker-toggle {
-  display: flex;
-  align-items: center;
   gap: 8px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  cursor: pointer;
-}
-
-.live-ticker-toggle input {
-  accent-color: #10B981;
-  width: 15px;
-  height: 15px;
 }
 
 .match-tabs-bar {
   display: flex;
-  gap: 10px;
-  border-bottom: 1px solid var(--border-light);
-  padding-bottom: 14px;
-  margin-bottom: 24px;
-  overflow-x: auto;
+  gap: 4px;
+  background: var(--bg-card);
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
 }
 
 .match-tab {
   background: transparent;
-  border: 1px solid var(--border-light);
+  border: none;
   border-radius: var(--radius-pill);
-  padding: 7px 18px;
+  padding: 5px 12px;
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   white-space: nowrap;
   transition: all var(--transition);
 }
 
 .match-tab:hover {
   color: #FFFFFF;
-  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .match-tab.active {
   background: #FFFFFF;
   color: #0C0E12;
-  border-color: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .tab-live-dot {
@@ -1843,58 +1855,81 @@ button {
   background: #EF4444;
   border-radius: 50%;
   display: inline-block;
+  animation: liveBlink 1.2s infinite;
 }
 
+.refresh-btn-compact {
+  padding: 6px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.refresh-btn-compact:hover {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Compact Match Cards Grid (Max 3 rows/cards) */
 .match-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
 }
 
 .match-card {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: 22px;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   transition: all var(--transition);
 }
 
 .match-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: var(--shadow-md);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
 }
 
 .match-card.is-live {
   border-color: rgba(239, 68, 68, 0.35);
-  background: linear-gradient(180deg, rgba(239, 68, 68, 0.04) 0%, var(--bg-card) 100%);
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.05) 0%, var(--bg-card) 100%);
 }
 
 .match-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border-light);
-  padding-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .match-league-name {
-  font-size: 0.72rem;
-  font-weight: 800;
+  font-size: 0.68rem;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--text-muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .match-status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.7rem;
-  font-weight: 800;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
   padding: 2px 8px;
   border-radius: var(--radius-pill);
 }
@@ -1921,7 +1956,7 @@ button {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .match-team {
@@ -1929,30 +1964,38 @@ button {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 6px;
+  gap: 3px;
 }
 
 .match-team-crest {
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--bg-subtle);
   border: 1px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.match-team-crest img,
+.team-crest-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
 .match-team-crest svg {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
 }
 
 .match-team-name {
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.76rem;
+  font-weight: 600;
   color: var(--text-main);
-  max-width: 100px;
+  max-width: 85px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1962,13 +2005,13 @@ button {
   background: var(--bg-subtle);
   border: 1px solid var(--border-light);
   color: var(--text-secondary);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 4px 10px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  padding: 2px 7px;
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all var(--transition);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .shop-kit-match-btn:hover {
@@ -1981,61 +2024,21 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .live-score-display {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.2rem;
-  letter-spacing: 2px;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
   color: #FFFFFF;
   line-height: 1;
 }
 
 .match-minute-label {
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #EF4444;
-}
-
-.match-events-list {
-  background: var(--bg-subtle);
-  border-radius: var(--radius-sm);
-  padding: 8px 12px;
-  font-size: 0.74rem;
-  color: var(--text-secondary);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.match-stats-bar-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.match-stats-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 700;
   color: var(--text-muted);
-}
-
-.match-stats-bar {
-  height: 4px;
-  background: var(--bg-subtle);
-  border-radius: 2px;
-  display: flex;
-  overflow: hidden;
-}
-
-.stats-fill-home {
-  background: #FFFFFF;
-}
-
-.stats-fill-away {
-  background: rgba(255, 255, 255, 0.25);
 }
 
 

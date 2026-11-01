@@ -514,183 +514,12 @@ const JERSEYS_DATA = [
 ];
 
 // ==========================================
-// 2. REAL-TIME FOOTBALL MATCHES DATA
+// 2. REAL-TIME FOOTBALL MATCHES DATA (ESPN FEED)
 // ==========================================
 let MATCHES_DATA = {
-  live: [
-    {
-      id: "match-ucl-1",
-      tournament: "UEFA Champions League • Semi-Final",
-      status: "live",
-      minute: "76'",
-      homeTeam: "Real Madrid",
-      homeKitId: "rm-home-24",
-      homeScore: 2,
-      awayTeam: "Bayern Munich",
-      awayKitId: "bayern-home-24",
-      awayScore: 1,
-      venue: "Santiago Bernabéu, Madrid",
-      events: [
-        "⚽ 32' Bellingham (Real Madrid)",
-        "⚽ 53' Kane (Penalty, Bayern Munich)",
-        "⚽ 74' Vinicius Jr (Real Madrid)"
-      ],
-      possession: { home: 56, away: 44 }
-    },
-    {
-      id: "match-pl-1",
-      tournament: "Premier League • Matchday 9",
-      status: "live",
-      minute: "63'",
-      homeTeam: "Arsenal FC",
-      homeKitId: "ars-away-24",
-      homeScore: 2,
-      awayTeam: "Chelsea FC",
-      awayKitId: "che-home-24",
-      awayScore: 0,
-      venue: "Emirates Stadium, London",
-      events: [
-        "⚽ 19' Saka (Arsenal)",
-        "⚽ 61' Havertz (Arsenal)"
-      ],
-      possession: { home: 52, away: 48 }
-    },
-    {
-      id: "match-ucl-2",
-      tournament: "UEFA Champions League • Group Stage",
-      status: "live",
-      minute: "81'",
-      homeTeam: "FC Barcelona",
-      homeKitId: "fcb-home-24",
-      homeScore: 3,
-      awayTeam: "Paris Saint-Germain",
-      awayKitId: "psg-home-24",
-      awayScore: 2,
-      venue: "Estadi Olímpic, Barcelona",
-      events: [
-        "⚽ 14' Lewandowski (Barcelona)",
-        "⚽ 29' Dembélé (PSG)",
-        "⚽ 48' Raphinha (Barcelona)",
-        "⚽ 63' Barcola (PSG)",
-        "⚽ 79' Lamine Yamal (Barcelona)"
-      ],
-      possession: { home: 58, away: 42 }
-    }
-  ],
-  upcoming: [
-    {
-      id: "match-up-1",
-      tournament: "Premier League • Super Sunday",
-      kickoff: "Tonight 20:00 GMT",
-      countdown: "Starts in 2h 45m",
-      homeTeam: "Liverpool FC",
-      homeKitId: "liv-home-24",
-      awayTeam: "Manchester City",
-      awayKitId: "mancity-home-24",
-      venue: "Anfield, Liverpool",
-      note: "Top of the table clash"
-    },
-    {
-      id: "match-up-2",
-      tournament: "Serie A • Derby della Madonnina",
-      kickoff: "Tomorrow 19:45 GMT",
-      countdown: "Starts in 24h",
-      homeTeam: "Inter Milan",
-      homeKitId: "inter-home-24",
-      awayTeam: "AC Milan",
-      awayKitId: "milan-home-24",
-      venue: "San Siro, Milan",
-      note: "Historic Milan Derby"
-    },
-    {
-      id: "match-up-3",
-      tournament: "Bundesliga • Der Klassiker",
-      kickoff: "Saturday 17:30 GMT",
-      countdown: "3 days to kickoff",
-      homeTeam: "Borussia Dortmund",
-      homeKitId: "bvb-home-24",
-      awayTeam: "Bayern Munich",
-      awayKitId: "bayern-home-24",
-      venue: "Signal Iduna Park, Dortmund",
-      note: "Germany's biggest rivalry"
-    },
-    {
-      id: "match-up-4",
-      tournament: "FIFA World Cup Qualifiers",
-      kickoff: "Sunday 21:00 GMT",
-      countdown: "4 days to kickoff",
-      homeTeam: "Argentina",
-      homeKitId: "arg-copa-24",
-      awayTeam: "Brazil",
-      awayKitId: "brazil-home-24",
-      venue: "Estadio Monumental, Buenos Aires",
-      note: "South American Superclásico"
-    },
-    {
-      id: "match-up-5",
-      tournament: "UEFA Nations League • League A",
-      kickoff: "Tuesday 19:45 GMT",
-      countdown: "6 days to kickoff",
-      homeTeam: "Spain",
-      homeKitId: "esp-euro-24",
-      awayTeam: "Portugal",
-      awayKitId: "por-euro-24",
-      venue: "Santiago Bernabéu, Madrid",
-      note: "Iberian Derby"
-    },
-    {
-      id: "match-up-6",
-      tournament: "International Friendly",
-      kickoff: "Wednesday 18:30 GMT",
-      countdown: "7 days to kickoff",
-      homeTeam: "France",
-      homeKitId: "fra-retro-98",
-      awayTeam: "Japan",
-      awayKitId: "japan-y3-24",
-      venue: "Stade de France, Paris",
-      note: "Intercontinental showcase"
-    }
-  ],
-  results: [
-    {
-      id: "match-res-1",
-      tournament: "UEFA Champions League Final",
-      homeTeam: "Real Madrid",
-      homeKitId: "rm-home-24",
-      homeScore: 2,
-      awayTeam: "Borussia Dortmund",
-      awayKitId: "bvb-home-24",
-      awayScore: 0,
-      venue: "Wembley Stadium, London",
-      events: ["⚽ 74' Carvajal", "⚽ 83' Vinicius Jr"],
-      status: "finished"
-    },
-    {
-      id: "match-res-2",
-      tournament: "UEFA Euro 2024 Final",
-      homeTeam: "Spain",
-      homeKitId: "esp-euro-24",
-      homeScore: 2,
-      awayTeam: "Arsenal FC", // represented by English players
-      awayScore: 1,
-      venue: "Olympiastadion, Berlin",
-      events: ["⚽ 47' Williams", "⚽ 86' Oyarzabal | ⚽ 73' Palmer"],
-      status: "finished"
-    },
-    {
-      id: "match-res-3",
-      tournament: "Copa América 2024 Final",
-      homeTeam: "Argentina",
-      homeKitId: "arg-copa-24",
-      homeScore: 1,
-      awayTeam: "Brazil",
-      awayKitId: "brazil-home-24",
-      awayScore: 0,
-      venue: "Hard Rock Stadium, Miami",
-      events: ["⚽ 112' Lautaro Martínez (AET)"],
-      status: "finished"
-    }
-  ]
+  live: [],
+  upcoming: [],
+  results: []
 };
 
 // ==========================================
@@ -2100,16 +1929,17 @@ function bindProductCardEvents() {
 }
 
 // ==========================================
-// 13. REAL-TIME FOOTBALL MATCHDAY API (ESPN LIVE SCORE FEED)
+// 13. REAL-TIME FOOTBALL MATCHDAY (ESPN FEED - COMPACT MAX 3)
 // ==========================================
-let currentMatchTab = "live";
+let currentMatchTab = "upcoming";
 let liveScoresTimer = null;
 let isFetchingScores = false;
+let hasFetchedScoresOnce = false;
 
 const SOCCER_LEAGUES = [
   { code: "eng.1", name: "Premier League" },
   { code: "esp.1", name: "La Liga" },
-  { code: "uefa.champions", name: "UEFA Champions League" },
+  { code: "uefa.champions", name: "Champions League" },
   { code: "ita.1", name: "Serie A" }
 ];
 
@@ -2142,7 +1972,11 @@ async function fetchLiveFootballScores() {
     const allEvents = [];
     results.forEach(evList => allEvents.push(...evList));
 
-    if (allEvents.length === 0) return;
+    if (allEvents.length === 0) {
+      hasFetchedScoresOnce = true;
+      renderMatchCards();
+      return;
+    }
 
     const live = [];
     const upcoming = [];
@@ -2164,20 +1998,7 @@ async function fetchLiveFootballScores() {
       const homeScore = parseInt(homeComp.score || "0", 10);
       const awayScore = parseInt(awayComp.score || "0", 10);
       const tournament = ev._leagueName || "Football Match";
-      const venue = comp.venue?.fullName || "Official Stadium";
-
-      const matchEvents = [];
-      if (comp.details && comp.details.length) {
-        comp.details.slice(0, 4).forEach(d => {
-          const clock = d.clock?.displayValue || "";
-          const athlete = d.athletesInvolved?.[0]?.shortName || d.athletesInvolved?.[0]?.displayName || "";
-          if (d.type?.text?.includes("Goal")) {
-            matchEvents.push(`⚽ ${clock} ${athlete}`);
-          } else if (d.redCard) {
-            matchEvents.push(`🟥 ${clock} ${athlete}`);
-          }
-        });
-      }
+      const venue = comp.venue?.fullName || "Stadium";
 
       const kickoffDate = new Date(ev.date);
       const timeStr = kickoffDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -2185,6 +2006,7 @@ async function fetchLiveFootballScores() {
 
       const matchObj = {
         id: "espn-" + ev.id,
+        rawDate: ev.date,
         tournament: tournament,
         homeTeam: homeTeam,
         awayTeam: awayTeam,
@@ -2198,9 +2020,7 @@ async function fetchLiveFootballScores() {
         kickoff: `${dateStr} • ${timeStr}`,
         countdown: `${dateStr} ${timeStr}`,
         venue: venue,
-        note: ev.status?.type?.detail || "",
-        events: matchEvents,
-        possession: { home: 50, away: 50 }
+        note: ev.status?.type?.detail || ""
       };
 
       if (state === 'in') {
@@ -2212,45 +2032,86 @@ async function fetchLiveFootballScores() {
       }
     });
 
-    if (live.length > 0) MATCHES_DATA.live = live;
-    if (upcoming.length > 0) MATCHES_DATA.upcoming = upcoming;
-    if (completed.length > 0) MATCHES_DATA.results = completed;
+    // Sort upcoming by earliest kickoff
+    upcoming.sort((a, b) => new Date(a.rawDate) - new Date(b.rawDate));
+    // Sort completed by most recent
+    completed.sort((a, b) => new Date(b.rawDate) - new Date(a.rawDate));
 
-    // Update counts
+    MATCHES_DATA.live = live;
+    MATCHES_DATA.upcoming = upcoming;
+    MATCHES_DATA.results = completed;
+    hasFetchedScoresOnce = true;
+
+    // Default to Live if any matches are currently on; otherwise default to Upcoming fixtures!
+    if (MATCHES_DATA.live.length > 0) {
+      currentMatchTab = "live";
+    } else {
+      currentMatchTab = "upcoming";
+    }
+
+    // Update tab styles
+    const tabLiveBtn = document.getElementById("tabLiveBtn");
+    const tabUpcomingBtn = document.getElementById("tabUpcomingBtn");
+    const tabResultsBtn = document.getElementById("tabResultsBtn");
+
+    if (tabLiveBtn && tabUpcomingBtn && tabResultsBtn) {
+      tabLiveBtn.classList.toggle("active", currentMatchTab === "live");
+      tabUpcomingBtn.classList.toggle("active", currentMatchTab === "upcoming");
+      tabResultsBtn.classList.toggle("active", currentMatchTab === "results");
+    }
+
+    // Update counts & live dots
     const liveCountBadge = document.getElementById("tabLiveCount");
     const upcomingCountBadge = document.getElementById("tabUpcomingCount");
+    const tabLiveDot = document.getElementById("tabLiveDot");
+    const liveMatchesBadge = document.getElementById("liveMatchesBadge");
     const liveText = document.getElementById("liveMatchesCountText");
 
     if (liveCountBadge) liveCountBadge.textContent = MATCHES_DATA.live.length;
     if (upcomingCountBadge) upcomingCountBadge.textContent = MATCHES_DATA.upcoming.length;
-    if (liveText) {
-      liveText.textContent = MATCHES_DATA.live.length > 0
-        ? `${MATCHES_DATA.live.length} MATCHES IN PLAY RIGHT NOW`
-        : `MATCHDAY FIXTURES & SCORES`;
+    if (tabLiveDot) tabLiveDot.style.display = MATCHES_DATA.live.length > 0 ? "inline-block" : "none";
+
+    if (liveText && liveMatchesBadge) {
+      if (MATCHES_DATA.live.length > 0) {
+        liveMatchesBadge.classList.add("is-live");
+        liveText.innerHTML = `<span class="live-dot-pulse"></span> ${MATCHES_DATA.live.length} MATCHES LIVE`;
+      } else {
+        liveMatchesBadge.classList.remove("is-live");
+        liveText.innerHTML = `<span>📅</span> FIXTURES (${MATCHES_DATA.upcoming.length})`;
+      }
     }
 
-    // Auto-switch to Upcoming if no live matches currently kicking off
-    if (MATCHES_DATA.live.length === 0 && currentMatchTab === "live" && MATCHES_DATA.upcoming.length > 0) {
-      // Keep tab available, render cards
+    // Update header nav link
+    const navLiveScoresBtn = document.getElementById("navLiveScoresBtn");
+    if (navLiveScoresBtn) {
+      if (MATCHES_DATA.live.length > 0) {
+        navLiveScoresBtn.innerHTML = `<span class="live-blink-dot"></span> Live (${MATCHES_DATA.live.length})`;
+      } else {
+        navLiveScoresBtn.innerHTML = `<span>⚽</span> Match Fixtures`;
+      }
     }
 
-    // Update announcement ticker with real latest score
+    // Update top announcement bar
     const tickerEl = document.querySelector(".announcement-content");
     if (tickerEl) {
-      const topMatch = MATCHES_DATA.live[0] || MATCHES_DATA.results[0];
+      const isLive = MATCHES_DATA.live.length > 0;
+      const topMatch = isLive ? MATCHES_DATA.live[0] : (MATCHES_DATA.upcoming[0] || MATCHES_DATA.results[0]);
       if (topMatch) {
-        const isLiveGame = MATCHES_DATA.live.length > 0;
-        const statusBadge = isLiveGame ? `LIVE ${topMatch.minute}` : 'FT';
+        const headline = isLive
+          ? `⚽ <strong>LIVE ${topMatch.minute}:</strong> ${topMatch.homeTeam} ${topMatch.homeScore} - ${topMatch.awayScore} ${topMatch.awayTeam}`
+          : `⚽ <strong>NEXT FIXTURE:</strong> ${topMatch.homeTeam} vs ${topMatch.awayTeam} (${topMatch.kickoff})`;
         const firstSpan = tickerEl.querySelector("span:first-child");
         if (firstSpan) {
-          firstSpan.innerHTML = `⚽ <strong>${statusBadge}:</strong> ${topMatch.homeTeam} ${topMatch.homeScore} - ${topMatch.awayScore} ${topMatch.awayTeam} <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Live Scores &rarr;</a>`;
+          firstSpan.innerHTML = `${headline} <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Fixtures &rarr;</a>`;
         }
       }
     }
 
     renderMatchCards();
   } catch (err) {
-    console.warn("Could not fetch real-time football scores, keeping cached data:", err);
+    console.warn("Could not fetch real-time football scores:", err);
+    hasFetchedScoresOnce = true;
+    renderMatchCards();
   } finally {
     isFetchingScores = false;
   }
@@ -2261,19 +2122,22 @@ function initMatchCenter() {
   if (!container) return;
   bindMatchCenterTabs();
   renderMatchCards();
-  initMatchSimulator();
 
-  // Fetch real scores immediately
+  // Fetch real matches immediately
   fetchLiveFootballScores();
+
+  // Auto-refresh every 60s
+  if (liveScoresTimer) clearInterval(liveScoresTimer);
+  liveScoresTimer = setInterval(fetchLiveFootballScores, 60000);
 
   const refreshBtn = document.getElementById("refreshScoresBtn");
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
       refreshBtn.disabled = true;
       const originalHtml = refreshBtn.innerHTML;
-      refreshBtn.innerHTML = `<span>Updating...</span>`;
+      refreshBtn.innerHTML = `<span style="font-size:0.7rem">...</span>`;
       await fetchLiveFootballScores();
-      showToast("⚡ Football scores refreshed to live minute!");
+      showToast("⚡ Matchday feed refreshed!");
       refreshBtn.disabled = false;
       refreshBtn.innerHTML = originalHtml;
     });
@@ -2300,254 +2164,102 @@ function renderMatchCards() {
   const container = document.getElementById("matchCardsContainer");
   if (!container) return;
 
-  const matches = MATCHES_DATA[currentMatchTab] || [];
+  if (!hasFetchedScoresOnce && (MATCHES_DATA[currentMatchTab] || []).length === 0) {
+    container.innerHTML = `
+      <div class="match-loading-placeholder" style="grid-column: 1 / -1; padding: 18px; text-align: center; color: var(--text-muted); font-size: 0.82rem;">
+        <span>⚽ Connecting to official matchday scoreboard...</span>
+      </div>
+    `;
+    return;
+  }
+
+  // Maximum 3 rows/cards for a subtle, compact feel
+  const matches = (MATCHES_DATA[currentMatchTab] || []).slice(0, 3);
 
   if (matches.length === 0) {
     if (currentMatchTab === "live") {
       container.innerHTML = `
-        <div class="empty-state" style="grid-column: 1 / -1; padding: 48px 20px; text-align: center;">
-          <div style="font-size: 2.2rem; margin-bottom: 10px;">⚽</div>
-          <strong style="color: #FFFFFF; font-size: 1.15rem; display: block; margin-bottom: 6px;">No Matches In Play Right Now</strong>
-          <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 480px; margin: 0 auto 18px;">
-            No live matches are kicking off this minute. Check out today's <strong>Upcoming Fixtures</strong> or review <strong>Recent Results</strong> below.
-          </p>
-          <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-            <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('tabUpcomingBtn').click()">
-              📅 View Upcoming Fixtures (${MATCHES_DATA.upcoming.length})
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('tabResultsBtn').click()">
-              ⏱️ View Recent Results (${MATCHES_DATA.results.length})
-            </button>
-          </div>
+        <div class="empty-state" style="grid-column: 1 / -1; padding: 18px; text-align: center;">
+          <span style="color: var(--text-muted); font-size: 0.82rem;">No matches currently in play.</span>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('tabUpcomingBtn').click()" style="margin-left: 10px; padding: 2px 10px; font-size: 0.74rem;">
+            View Upcoming Fixtures
+          </button>
         </div>
       `;
     } else {
-      container.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1; padding: 40px; text-align: center;">No ${currentMatchTab} matches available at this moment.</div>`;
+      container.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1; padding: 18px; text-align: center; color: var(--text-muted); font-size: 0.82rem;">No ${currentMatchTab} fixtures scheduled right now.</div>`;
     }
     return;
   }
 
-  if (currentMatchTab === "live") {
-    container.innerHTML = matches.map(match => `
-      <div class="match-card is-live" data-match-id="${match.id}">
-        <div class="match-card-header">
-          <span class="match-league-name">${match.tournament}</span>
-          <span class="match-status-badge live">
-            <span class="live-dot-pulse"></span>
-            <span>LIVE ${match.minute}</span>
+  const isLive = currentMatchTab === "live";
+  const isUpcoming = currentMatchTab === "upcoming";
+
+  container.innerHTML = matches.map(m => `
+    <div class="match-card ${isLive ? 'is-live' : ''}" data-match-id="${m.id}">
+      <div class="match-card-header">
+        <span class="match-league-name" title="${m.tournament}">${m.tournament}</span>
+        <span class="match-status-badge ${isLive ? 'live' : (isUpcoming ? 'upcoming' : 'finished')}">
+          ${isLive ? `LIVE ${m.minute}` : (isUpcoming ? m.kickoff : 'FT')}
+        </span>
+      </div>
+
+      <div class="match-card-body">
+        <div class="match-team home">
+          <div class="match-team-crest">
+            ${renderTeamCrest(m.homeLogo, m.homeTeam)}
+          </div>
+          <span class="match-team-name" title="${m.homeTeam}">${m.homeTeam}</span>
+          <button class="shop-kit-match-btn" onclick="shopKitForTeam('${m.homeTeam.replace(/'/g, "\\'")}')" title="Shop ${m.homeTeam} jerseys">
+            👕 Kit
+          </button>
+        </div>
+
+        <div class="match-scoreboard">
+          <div class="live-score-display">${isUpcoming ? 'VS' : `${m.homeScore} - ${m.awayScore}`}</div>
+          <span class="match-minute-label" style="color: ${isUpcoming ? 'var(--text-muted)' : (isLive ? '#EF4444' : 'var(--text-secondary)')}; font-size: 0.68rem;">
+            ${isLive ? m.minute : (isUpcoming ? (m.note || 'Scheduled') : 'Full Time')}
           </span>
         </div>
 
-        <div class="match-card-body">
-          <!-- Home Team -->
-          <div class="match-team">
-            <div class="match-team-crest">
-              ${renderTeamCrest(match.homeLogo, match.homeTeam)}
-            </div>
-            <span class="match-team-name">${match.homeTeam}</span>
-            <button class="shop-kit-match-btn" onclick="shopKitForTeam('${match.homeKitId}')">
-              👕 Shop Kit
-            </button>
+        <div class="match-team away">
+          <div class="match-team-crest">
+            ${renderTeamCrest(m.awayLogo, m.awayTeam)}
           </div>
-
-          <!-- Scoreboard -->
-          <div class="match-scoreboard">
-            <div class="live-score-display">${match.homeScore} - ${match.awayScore}</div>
-            <span class="match-minute-label">${match.minute}</span>
-          </div>
-
-          <!-- Away Team -->
-          <div class="match-team">
-            <div class="match-team-crest">
-              ${renderTeamCrest(match.awayLogo, match.awayTeam)}
-            </div>
-            <span class="match-team-name">${match.awayTeam}</span>
-            <button class="shop-kit-match-btn" onclick="shopKitForTeam('${match.awayKitId}')">
-              👕 Shop Kit
-            </button>
-          </div>
-        </div>
-
-        <!-- Live Events -->
-        ${match.events && match.events.length ? `
-          <div class="match-events-list">
-            ${match.events.map(ev => `<div class="match-event-item">${ev}</div>`).join("")}
-          </div>
-        ` : ''}
-
-        <!-- Live Stats Bar -->
-        <div class="match-stats-bar-wrap">
-          <div class="match-stats-labels">
-            <span>Possession: ${match.possession.home}%</span>
-            <span>${match.possession.away}%</span>
-          </div>
-          <div class="match-stats-bar">
-            <div class="stats-fill-home" style="width: ${match.possession.home}%;"></div>
-            <div class="stats-fill-away" style="width: ${match.possession.away}%;"></div>
-          </div>
+          <span class="match-team-name" title="${m.awayTeam}">${m.awayTeam}</span>
+          <button class="shop-kit-match-btn" onclick="shopKitForTeam('${m.awayTeam.replace(/'/g, "\\'")}')" title="Shop ${m.awayTeam} jerseys">
+            👕 Kit
+          </button>
         </div>
       </div>
-    `).join("");
-  } else if (currentMatchTab === "upcoming") {
-    container.innerHTML = matches.map(fixture => `
-      <div class="match-card" data-match-id="${fixture.id}">
-        <div class="match-card-header">
-          <span class="match-league-name">${fixture.tournament}</span>
-          <span class="match-status-badge upcoming">
-            <span>📅 ${fixture.kickoff}</span>
-          </span>
-        </div>
-
-        <div class="match-card-body">
-          <div class="match-team">
-            <div class="match-team-crest">
-              ${renderTeamCrest(fixture.homeLogo, fixture.homeTeam)}
-            </div>
-            <span class="match-team-name">${fixture.homeTeam}</span>
-            <button class="shop-kit-match-btn" onclick="shopKitForTeam('${fixture.homeKitId}')">
-              👕 Match Kit
-            </button>
-          </div>
-
-          <div class="match-scoreboard">
-            <div class="live-score-display" style="font-size: 1.8rem; color: #FFFFFF;">VS</div>
-            <span class="match-minute-label" style="color: var(--accent-green); font-size: 0.72rem;">${fixture.countdown}</span>
-          </div>
-
-          <div class="match-team">
-            <div class="match-team-crest">
-              ${renderTeamCrest(fixture.awayLogo, fixture.awayTeam)}
-            </div>
-            <span class="match-team-name">${fixture.awayTeam}</span>
-            <button class="shop-kit-match-btn" onclick="shopKitForTeam('${fixture.awayKitId}')">
-              👕 Match Kit
-            </button>
-          </div>
-        </div>
-
-        <div class="upcoming-fixture-info" style="font-size: 0.76rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 10px;">
-          <span>🏟️ <strong>${fixture.venue}</strong></span>
-          <span style="color: var(--accent-green); font-weight: 600;">${fixture.note || ''}</span>
-        </div>
-      </div>
-    `).join("");
-  } else if (currentMatchTab === "results") {
-    container.innerHTML = matches.map(res => `
-      <div class="match-card" data-match-id="${res.id}">
-        <div class="match-card-header">
-          <span class="match-league-name">${res.tournament}</span>
-          <span class="match-status-badge finished">FULL TIME</span>
-        </div>
-
-        <div class="match-card-body">
-          <div class="match-team">
-            <div class="match-team-crest">
-              ${renderTeamCrest(res.homeLogo, res.homeTeam)}
-            </div>
-            <span class="match-team-name">${res.homeTeam}</span>
-            <button class="shop-kit-match-btn" onclick="shopKitForTeam('${res.homeKitId}')">
-              👕 Shop Kit
-            </button>
-          </div>
-
-          <div class="match-scoreboard">
-            <div class="live-score-display">${res.homeScore} - ${res.awayScore}</div>
-            <span class="match-minute-label" style="color: var(--text-muted);">FT</span>
-          </div>
-
-          <div class="match-team">
-            <div class="match-team-crest">
-              ${renderTeamCrest(res.awayLogo, res.awayTeam)}
-            </div>
-            <span class="match-team-name">${res.awayTeam}</span>
-            <button class="shop-kit-match-btn" onclick="shopKitForTeam('${res.awayKitId}')">
-              👕 Shop Kit
-            </button>
-          </div>
-        </div>
-
-        ${res.events && res.events.length ? `
-          <div class="match-events-list">
-            ${res.events.map(ev => `<div class="match-event-item">${ev}</div>`).join("")}
-          </div>
-        ` : ''}
-      </div>
-    `).join("");
-  }
+    </div>
+  `).join("");
 }
 
 // Global hook for direct Shop Kit buttons from Match cards
-window.shopKitForTeam = function(kitId) {
-  const kit = JERSEYS_DATA.find(k => k.id === kitId);
-  const teamName = kit ? kit.team : kitId;
+window.shopKitForTeam = function(teamNameOrId) {
+  let matchedKit = null;
+  if (typeof JERSEYS_DATA !== 'undefined' && Array.isArray(JERSEYS_DATA)) {
+    const q = teamNameOrId.toLowerCase();
+    matchedKit = JERSEYS_DATA.find(k => k.team.toLowerCase().includes(q) || q.includes(k.team.toLowerCase()));
+  }
+  const query = matchedKit ? matchedKit.team : teamNameOrId;
 
   const searchInput = document.getElementById("headerSearchInput");
   const clearBtn = document.getElementById("clearSearchBtn");
   if (searchInput) {
-    searchInput.value = teamName;
+    searchInput.value = query;
     if (clearBtn) clearBtn.hidden = false;
   }
-  filterState.searchQuery = teamName.toLowerCase().trim();
+  filterState.searchQuery = query.toLowerCase().trim();
   renderProducts();
 
   const section = document.getElementById("productGridSection");
   if (section) section.scrollIntoView({ behavior: "smooth" });
-  showToast(`Showing official jerseys for ${teamName}!`);
+  showToast(`Showing jerseys for ${query}!`);
 };
 
-// Periodic background sync of live football matches
-function initMatchSimulator() {
-  const toggle = document.getElementById("liveTickerToggle");
-  if (!toggle) return;
 
-  const startLoop = () => {
-    if (liveScoresTimer) clearInterval(liveScoresTimer);
-    liveScoresTimer = setInterval(() => {
-      if (toggle.checked) {
-        fetchLiveFootballScores();
-      }
-    }, 60000); // Poll live API every 60 seconds
-  };
-
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      fetchLiveFootballScores();
-      startLoop();
-      showToast("Real-time live score updates active.");
-    } else {
-      if (liveScoresTimer) clearInterval(liveScoresTimer);
-      showToast("Live score auto-update paused.");
-    }
-  });
-
-  startLoop();
-}
-
-function simulateScoreUpdate(isManual = false) {
-  const liveMatches = MATCHES_DATA.live;
-  if (!liveMatches.length) return;
-
-  // Increment minute
-  liveMatches.forEach(m => {
-    let currMin = parseInt(m.minute, 10);
-    if (!isNaN(currMin) && currMin < 90) {
-      currMin += 1;
-      m.minute = `${currMin}'`;
-    }
-  });
-
-  // Small probability of a goal for excitement
-  if (!isManual && Math.random() > 0.4) {
-    const match = liveMatches[0]; // Real Madrid vs Bayern
-    match.homeScore += 1;
-    match.events.push(`⚽ ${match.minute} Bellingham (Real Madrid)`);
-    showToast(`⚽ GOAL! Bellingham scores for Real Madrid in the ${match.minute}! (Real Madrid ${match.homeScore} - ${match.awayScore} Bayern)`);
-  }
-
-  if (currentMatchTab === "live") {
-    renderMatchCards();
-  }
-}
 
 // ==========================================
 // 14. PRODUCT QUICK VIEW MODAL
