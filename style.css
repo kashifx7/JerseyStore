@@ -2559,3 +2559,10 @@ button {
     font-size: 1.6rem;
   }
 }
+
+.team-crest-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}

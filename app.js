@@ -2100,10 +2100,161 @@ function bindProductCardEvents() {
 }
 
 // ==========================================
-// 13. MATCHDAY LIVE CENTER ENGINE
+// 13. REAL-TIME FOOTBALL MATCHDAY API (ESPN LIVE SCORE FEED)
 // ==========================================
 let currentMatchTab = "live";
-let liveSimulationTimer = null;
+let liveScoresTimer = null;
+let isFetchingScores = false;
+
+const SOCCER_LEAGUES = [
+  { code: "eng.1", name: "Premier League" },
+  { code: "esp.1", name: "La Liga" },
+  { code: "uefa.champions", name: "UEFA Champions League" },
+  { code: "ita.1", name: "Serie A" }
+];
+
+function renderTeamCrest(logoUrl, teamName) {
+  if (logoUrl) {
+    return `<img src="${logoUrl}" alt="${teamName}" class="team-crest-img" loading="lazy" onerror="this.outerHTML=getClubCrestSVG('${teamName.replace(/'/g, "\\'")}')">`;
+  }
+  return getClubCrestSVG(teamName);
+}
+
+async function fetchLiveFootballScores() {
+  if (isFetchingScores) return;
+  isFetchingScores = true;
+
+  try {
+    const promises = SOCCER_LEAGUES.map(async (league) => {
+      try {
+        const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${league.code}/scoreboard`;
+        const res = await fetch(url);
+        if (!res.ok) return [];
+        const data = await res.json();
+        const events = data.events || [];
+        return events.map(ev => ({ ...ev, _leagueName: data.leagues?.[0]?.name || league.name }));
+      } catch (_) {
+        return [];
+      }
+    });
+
+    const results = await Promise.all(promises);
+    const allEvents = [];
+    results.forEach(evList => allEvents.push(...evList));
+
+    if (allEvents.length === 0) return;
+
+    const live = [];
+    const upcoming = [];
+    const completed = [];
+
+    allEvents.forEach(ev => {
+      const state = ev.status?.type?.state;
+      const comp = ev.competitions?.[0];
+      if (!comp) return;
+
+      const homeComp = comp.competitors?.find(c => c.homeAway === 'home') || comp.competitors?.[0];
+      const awayComp = comp.competitors?.find(c => c.homeAway === 'away') || comp.competitors?.[1];
+      if (!homeComp || !awayComp) return;
+
+      const homeTeam = homeComp.team?.displayName || "Home Team";
+      const awayTeam = awayComp.team?.displayName || "Away Team";
+      const homeLogo = homeComp.team?.logo || null;
+      const awayLogo = awayComp.team?.logo || null;
+      const homeScore = parseInt(homeComp.score || "0", 10);
+      const awayScore = parseInt(awayComp.score || "0", 10);
+      const tournament = ev._leagueName || "Football Match";
+      const venue = comp.venue?.fullName || "Official Stadium";
+
+      const matchEvents = [];
+      if (comp.details && comp.details.length) {
+        comp.details.slice(0, 4).forEach(d => {
+          const clock = d.clock?.displayValue || "";
+          const athlete = d.athletesInvolved?.[0]?.shortName || d.athletesInvolved?.[0]?.displayName || "";
+          if (d.type?.text?.includes("Goal")) {
+            matchEvents.push(`⚽ ${clock} ${athlete}`);
+          } else if (d.redCard) {
+            matchEvents.push(`🟥 ${clock} ${athlete}`);
+          }
+        });
+      }
+
+      const kickoffDate = new Date(ev.date);
+      const timeStr = kickoffDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const dateStr = kickoffDate.toLocaleDateString([], { month: 'short', day: 'numeric' });
+
+      const matchObj = {
+        id: "espn-" + ev.id,
+        tournament: tournament,
+        homeTeam: homeTeam,
+        awayTeam: awayTeam,
+        homeScore: homeScore,
+        awayScore: awayScore,
+        minute: ev.status?.displayClock || ev.status?.type?.detail || "LIVE",
+        homeLogo: homeLogo,
+        awayLogo: awayLogo,
+        homeKitId: homeTeam,
+        awayKitId: awayTeam,
+        kickoff: `${dateStr} • ${timeStr}`,
+        countdown: `${dateStr} ${timeStr}`,
+        venue: venue,
+        note: ev.status?.type?.detail || "",
+        events: matchEvents,
+        possession: { home: 50, away: 50 }
+      };
+
+      if (state === 'in') {
+        live.push(matchObj);
+      } else if (state === 'pre') {
+        upcoming.push(matchObj);
+      } else if (state === 'post') {
+        completed.push(matchObj);
+      }
+    });
+
+    if (live.length > 0) MATCHES_DATA.live = live;
+    if (upcoming.length > 0) MATCHES_DATA.upcoming = upcoming;
+    if (completed.length > 0) MATCHES_DATA.results = completed;
+
+    // Update counts
+    const liveCountBadge = document.getElementById("tabLiveCount");
+    const upcomingCountBadge = document.getElementById("tabUpcomingCount");
+    const liveText = document.getElementById("liveMatchesCountText");
+
+    if (liveCountBadge) liveCountBadge.textContent = MATCHES_DATA.live.length;
+    if (upcomingCountBadge) upcomingCountBadge.textContent = MATCHES_DATA.upcoming.length;
+    if (liveText) {
+      liveText.textContent = MATCHES_DATA.live.length > 0
+        ? `${MATCHES_DATA.live.length} MATCHES IN PLAY RIGHT NOW`
+        : `MATCHDAY FIXTURES & SCORES`;
+    }
+
+    // Auto-switch to Upcoming if no live matches currently kicking off
+    if (MATCHES_DATA.live.length === 0 && currentMatchTab === "live" && MATCHES_DATA.upcoming.length > 0) {
+      // Keep tab available, render cards
+    }
+
+    // Update announcement ticker with real latest score
+    const tickerEl = document.querySelector(".announcement-content");
+    if (tickerEl) {
+      const topMatch = MATCHES_DATA.live[0] || MATCHES_DATA.results[0];
+      if (topMatch) {
+        const isLiveGame = MATCHES_DATA.live.length > 0;
+        const statusBadge = isLiveGame ? `LIVE ${topMatch.minute}` : 'FT';
+        const firstSpan = tickerEl.querySelector("span:first-child");
+        if (firstSpan) {
+          firstSpan.innerHTML = `⚽ <strong>${statusBadge}:</strong> ${topMatch.homeTeam} ${topMatch.homeScore} - ${topMatch.awayScore} ${topMatch.awayTeam} <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Live Scores &rarr;</a>`;
+        }
+      }
+    }
+
+    renderMatchCards();
+  } catch (err) {
+    console.warn("Could not fetch real-time football scores, keeping cached data:", err);
+  } finally {
+    isFetchingScores = false;
+  }
+}
 
 function initMatchCenter() {
   const container = document.getElementById("matchCardsContainer");
@@ -2112,11 +2263,19 @@ function initMatchCenter() {
   renderMatchCards();
   initMatchSimulator();
 
+  // Fetch real scores immediately
+  fetchLiveFootballScores();
+
   const refreshBtn = document.getElementById("refreshScoresBtn");
   if (refreshBtn) {
-    refreshBtn.addEventListener("click", () => {
-      simulateScoreUpdate(true);
+    refreshBtn.addEventListener("click", async () => {
+      refreshBtn.disabled = true;
+      const originalHtml = refreshBtn.innerHTML;
+      refreshBtn.innerHTML = `<span>Updating...</span>`;
+      await fetchLiveFootballScores();
       showToast("⚡ Football scores refreshed to live minute!");
+      refreshBtn.disabled = false;
+      refreshBtn.innerHTML = originalHtml;
     });
   }
 }
@@ -2144,7 +2303,27 @@ function renderMatchCards() {
   const matches = MATCHES_DATA[currentMatchTab] || [];
 
   if (matches.length === 0) {
-    container.innerHTML = `<div class="empty-state">No ${currentMatchTab} matches at this moment.</div>`;
+    if (currentMatchTab === "live") {
+      container.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1; padding: 48px 20px; text-align: center;">
+          <div style="font-size: 2.2rem; margin-bottom: 10px;">⚽</div>
+          <strong style="color: #FFFFFF; font-size: 1.15rem; display: block; margin-bottom: 6px;">No Matches In Play Right Now</strong>
+          <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 480px; margin: 0 auto 18px;">
+            No live matches are kicking off this minute. Check out today's <strong>Upcoming Fixtures</strong> or review <strong>Recent Results</strong> below.
+          </p>
+          <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('tabUpcomingBtn').click()">
+              📅 View Upcoming Fixtures (${MATCHES_DATA.upcoming.length})
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('tabResultsBtn').click()">
+              ⏱️ View Recent Results (${MATCHES_DATA.results.length})
+            </button>
+          </div>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1; padding: 40px; text-align: center;">No ${currentMatchTab} matches available at this moment.</div>`;
+    }
     return;
   }
 
@@ -2163,7 +2342,7 @@ function renderMatchCards() {
           <!-- Home Team -->
           <div class="match-team">
             <div class="match-team-crest">
-              ${getClubCrestSVG(match.homeTeam)}
+              ${renderTeamCrest(match.homeLogo, match.homeTeam)}
             </div>
             <span class="match-team-name">${match.homeTeam}</span>
             <button class="shop-kit-match-btn" onclick="shopKitForTeam('${match.homeKitId}')">
@@ -2180,7 +2359,7 @@ function renderMatchCards() {
           <!-- Away Team -->
           <div class="match-team">
             <div class="match-team-crest">
-              ${getClubCrestSVG(match.awayTeam)}
+              ${renderTeamCrest(match.awayLogo, match.awayTeam)}
             </div>
             <span class="match-team-name">${match.awayTeam}</span>
             <button class="shop-kit-match-btn" onclick="shopKitForTeam('${match.awayKitId}')">
@@ -2222,7 +2401,7 @@ function renderMatchCards() {
         <div class="match-card-body">
           <div class="match-team">
             <div class="match-team-crest">
-              ${getClubCrestSVG(fixture.homeTeam)}
+              ${renderTeamCrest(fixture.homeLogo, fixture.homeTeam)}
             </div>
             <span class="match-team-name">${fixture.homeTeam}</span>
             <button class="shop-kit-match-btn" onclick="shopKitForTeam('${fixture.homeKitId}')">
@@ -2231,13 +2410,13 @@ function renderMatchCards() {
           </div>
 
           <div class="match-scoreboard">
-            <div class="live-score-display" style="font-size: 1.8rem; color: var(--secondary);">VS</div>
-            <span class="match-minute-label" style="color: var(--secondary);">${fixture.countdown}</span>
+            <div class="live-score-display" style="font-size: 1.8rem; color: #FFFFFF;">VS</div>
+            <span class="match-minute-label" style="color: var(--accent-green); font-size: 0.72rem;">${fixture.countdown}</span>
           </div>
 
           <div class="match-team">
             <div class="match-team-crest">
-              ${getClubCrestSVG(fixture.awayTeam)}
+              ${renderTeamCrest(fixture.awayLogo, fixture.awayTeam)}
             </div>
             <span class="match-team-name">${fixture.awayTeam}</span>
             <button class="shop-kit-match-btn" onclick="shopKitForTeam('${fixture.awayKitId}')">
@@ -2246,9 +2425,9 @@ function renderMatchCards() {
           </div>
         </div>
 
-        <div class="upcoming-fixture-info">
+        <div class="upcoming-fixture-info" style="font-size: 0.76rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 10px;">
           <span>🏟️ <strong>${fixture.venue}</strong></span>
-          <span style="color: var(--text-dim); font-size: 0.74rem;">${fixture.note || ''}</span>
+          <span style="color: var(--accent-green); font-weight: 600;">${fixture.note || ''}</span>
         </div>
       </div>
     `).join("");
@@ -2263,7 +2442,7 @@ function renderMatchCards() {
         <div class="match-card-body">
           <div class="match-team">
             <div class="match-team-crest">
-              ${getClubCrestSVG(res.homeTeam)}
+              ${renderTeamCrest(res.homeLogo, res.homeTeam)}
             </div>
             <span class="match-team-name">${res.homeTeam}</span>
             <button class="shop-kit-match-btn" onclick="shopKitForTeam('${res.homeKitId}')">
@@ -2278,7 +2457,7 @@ function renderMatchCards() {
 
           <div class="match-team">
             <div class="match-team-crest">
-              ${getClubCrestSVG(res.awayTeam)}
+              ${renderTeamCrest(res.awayLogo, res.awayTeam)}
             </div>
             <span class="match-team-name">${res.awayTeam}</span>
             <button class="shop-kit-match-btn" onclick="shopKitForTeam('${res.awayKitId}')">
@@ -2287,9 +2466,11 @@ function renderMatchCards() {
           </div>
         </div>
 
-        <div class="match-events-list">
-          ${res.events.map(ev => `<div class="match-event-item">${ev}</div>`).join("")}
-        </div>
+        ${res.events && res.events.length ? `
+          <div class="match-events-list">
+            ${res.events.map(ev => `<div class="match-event-item">${ev}</div>`).join("")}
+          </div>
+        ` : ''}
       </div>
     `).join("");
   }
@@ -2314,27 +2495,28 @@ window.shopKitForTeam = function(kitId) {
   showToast(`Showing official jerseys for ${teamName}!`);
 };
 
-// Simulation of live football action
+// Periodic background sync of live football matches
 function initMatchSimulator() {
   const toggle = document.getElementById("liveTickerToggle");
   if (!toggle) return;
 
   const startLoop = () => {
-    if (liveSimulationTimer) clearInterval(liveSimulationTimer);
-    liveSimulationTimer = setInterval(() => {
+    if (liveScoresTimer) clearInterval(liveScoresTimer);
+    liveScoresTimer = setInterval(() => {
       if (toggle.checked) {
-        simulateScoreUpdate(false);
+        fetchLiveFootballScores();
       }
-    }, 28000); // Check every 28 seconds
+    }, 60000); // Poll live API every 60 seconds
   };
 
   toggle.addEventListener("change", () => {
     if (toggle.checked) {
+      fetchLiveFootballScores();
       startLoop();
-      showToast("Live score auto-updates enabled!");
+      showToast("Real-time live score updates active.");
     } else {
-      if (liveSimulationTimer) clearInterval(liveSimulationTimer);
-      showToast("Live score auto-updates paused.");
+      if (liveScoresTimer) clearInterval(liveScoresTimer);
+      showToast("Live score auto-update paused.");
     }
   });
 
