@@ -1740,7 +1740,7 @@ function renderProducts() {
     grid.innerHTML = `
       <div class="catalog-loading" style="grid-column: 1 / -1; padding: 60px 20px;">
         <div class="loading-spinner"></div>
-        <span style="font-size: 1.05rem; font-weight: 500;">Connecting to Half Time Store live catalogue...</span>
+        <span style="font-size: 1.05rem; font-weight: 500;">Connecting to Second Half Store live catalogue...</span>
       </div>
     `;
     if (counterText) counterText.textContent = "Connecting to Shopify...";
@@ -1778,6 +1778,35 @@ function renderProducts() {
       return false;
     }
 
+    // Category collection filter
+    if (filterState.category && filterState.category !== "all") {
+      const cat = filterState.category.toLowerCase();
+      const title = (kit.title || "").toLowerCase();
+      const desc = (kit.description || "").toLowerCase();
+      const tags = (kit.tags || []).map(t => t.toLowerCase());
+      const edition = (kit.edition || "").toLowerCase();
+      const season = (kit.season || "").toLowerCase();
+      const team = (kit.team || "").toLowerCase();
+
+      if (cat === "retro") {
+        const isRetro = title.includes("retro") || desc.includes("retro") || tags.includes("retro") || season.includes("19") || season.includes("200") || season.includes("201");
+        if (!isRetro) return false;
+      } else if (cat === "player") {
+        const isPlayer = title.includes("player") || edition.includes("player") || desc.includes("player") || tags.includes("player");
+        if (!isPlayer) return false;
+      } else if (cat === "nations") {
+        const isNation = kit.isNationalTeam || tags.includes("national") || 
+          ["argentina", "portugal", "brazil", "france", "germany", "spain", "england", "italy", "netherlands", "japan"].some(n => title.includes(n) || team.includes(n));
+        if (!isNation) return false;
+      } else if (cat === "sale") {
+        const isSale = kit.price <= 999 || title.includes("sale");
+        if (!isSale) return false;
+      } else if (cat === "new-season") {
+        const isNewSeason = title.includes("2025") || title.includes("25/26") || title.includes("24/25") || season.includes("2024") || season.includes("2025");
+        if (!isNewSeason) return false;
+      }
+    }
+
     if (filterState.searchQuery) {
       const q = filterState.searchQuery.toLowerCase();
       const matchTitle = (kit.title || "").toLowerCase().includes(q);
@@ -1798,7 +1827,7 @@ function renderProducts() {
   }
 
   if (counterText) {
-    counterText.textContent = `Showing ${filtered.length} of ${activeProductList.length} jerseys from Half Time Store`;
+    counterText.textContent = `Showing ${filtered.length} of ${activeProductList.length} jerseys from Second Half Store`;
   }
 
   updateFilterCounts();
@@ -2406,7 +2435,7 @@ function openQuickView(kitId) {
   const editionEl = document.getElementById("qvEditionTag");
   if (editionEl) editionEl.textContent = kit.availableForSale ? "In Stock" : "Sold Out";
   const descEl = document.getElementById("qvDescription");
-  if (descEl) descEl.textContent = kit.description || "Authentic official football jersey from Half Time Store.";
+  if (descEl) descEl.textContent = kit.description || "Authentic official football jersey from Second Half Store.";
 
   const customToggle = document.getElementById("qvCustomToggle");
   const customInputs = document.getElementById("qvCustomInputs");
@@ -3191,7 +3220,7 @@ async function loadShopifyData() {
     grid.innerHTML = `
       <div class="catalog-loading">
         <div class="loading-spinner"></div>
-        <span>Loading authentic jerseys from Half Time Store...</span>
+        <span>Loading authentic jerseys from Second Half Store...</span>
       </div>
     `;
   }
@@ -3201,7 +3230,7 @@ async function loadShopifyData() {
     if (products && products.length > 0) {
       shopifyProducts = products;
       console.log(`✓ Successfully retrieved ${products.length} live products from Shopify!`);
-      showToast(`✓ Retrieved ${products.length} live products from Half Time Store!`);
+      showToast(`✓ Retrieved ${products.length} live products from Second Half Store!`);
       const statusBadge = document.getElementById("headerShopifyBadge");
       if (statusBadge) {
         statusBadge.innerHTML = `<span class="status-indicator"></span><span class="status-label">Shopify Live (${products.length})</span>`;
@@ -3235,10 +3264,162 @@ async function loadShopifyData() {
   }
 }
 
+
+// ==========================================
+// SECOND HALF STORE - LOOKBOOK & FILTER ENGINE
+// ==========================================
+let lookbookCurrentIndex = 0;
+let lookbookTimer = null;
+
+function initLookbookSlider() {
+  const slides = document.querySelectorAll(".lookbook-slide");
+  const tabs = document.querySelectorAll(".lookbook-tab");
+  const prevBtn = document.getElementById("heroPrevBtn");
+  const nextBtn = document.getElementById("heroNextBtn");
+  const slider = document.getElementById("lookbookSlider");
+
+  if (!slides || slides.length === 0) return;
+
+  function goToSlide(idx) {
+    if (idx < 0) idx = slides.length - 1;
+    if (idx >= slides.length) idx = 0;
+    lookbookCurrentIndex = idx;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === idx);
+    });
+
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle("active", i === idx);
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      goToSlide(lookbookCurrentIndex - 1);
+      resetLookbookTimer();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      goToSlide(lookbookCurrentIndex + 1);
+      resetLookbookTimer();
+    });
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => {
+      goToSlide(i);
+      resetLookbookTimer();
+    });
+  });
+
+  function resetLookbookTimer() {
+    if (lookbookTimer) clearInterval(lookbookTimer);
+    lookbookTimer = setInterval(() => {
+      goToSlide(lookbookCurrentIndex + 1);
+    }, 5000);
+  }
+
+  if (slider) {
+    slider.addEventListener("mouseenter", () => {
+      if (lookbookTimer) clearInterval(lookbookTimer);
+    });
+    slider.addEventListener("mouseleave", () => {
+      resetLookbookTimer();
+    });
+  }
+
+  resetLookbookTimer();
+}
+
+window.switchFavTab = function(type) {
+  const tabClubs = document.getElementById("favTabClubs");
+  const tabNations = document.getElementById("favTabNations");
+  const panelClubs = document.getElementById("favPanelClubs");
+  const panelNations = document.getElementById("favPanelNations");
+
+  if (type === "clubs") {
+    if (tabClubs) {
+      tabClubs.classList.add("active");
+      tabClubs.setAttribute("aria-selected", "true");
+    }
+    if (tabNations) {
+      tabNations.classList.remove("active");
+      tabNations.setAttribute("aria-selected", "false");
+    }
+    if (panelClubs) panelClubs.hidden = false;
+    if (panelNations) panelNations.hidden = true;
+  } else {
+    if (tabClubs) {
+      tabClubs.classList.remove("active");
+      tabClubs.setAttribute("aria-selected", "false");
+    }
+    if (tabNations) {
+      tabNations.classList.add("active");
+      tabNations.setAttribute("aria-selected", "true");
+    }
+    if (panelClubs) panelClubs.hidden = true;
+    if (panelNations) panelNations.hidden = false;
+  }
+};
+
+window.filterByFavTeam = function(teamName) {
+  const searchInput = document.getElementById("headerSearchInput");
+  const clearBtn = document.getElementById("clearSearchBtn");
+  if (searchInput) {
+    searchInput.value = teamName;
+    if (clearBtn) clearBtn.hidden = false;
+  }
+
+  filterState.searchQuery = teamName.toLowerCase().trim();
+  filterState.category = "all";
+  renderProducts();
+
+  const section = document.getElementById("productGridSection");
+  if (section) section.scrollIntoView({ behavior: "smooth" });
+  showToast(`Showing official jerseys for ${teamName}!`);
+};
+
+window.filterByCollection = function(collectionName) {
+  const searchInput = document.getElementById("headerSearchInput");
+  const clearBtn = document.getElementById("clearSearchBtn");
+  if (searchInput) {
+    searchInput.value = "";
+    if (clearBtn) clearBtn.hidden = true;
+  }
+  filterState.searchQuery = "";
+
+  if (collectionName === "All") {
+    filterState.category = "all";
+  } else if (collectionName === "Retro") {
+    filterState.category = "retro";
+  } else if (collectionName === "Player") {
+    filterState.category = "player";
+  } else if (collectionName === "Nations") {
+    filterState.category = "nations";
+  } else if (collectionName === "Sale") {
+    filterState.category = "sale";
+  } else if (collectionName === "New Season") {
+    filterState.category = "new-season";
+  } else if (collectionName === "Jackets") {
+    filterState.searchQuery = "jacket";
+    if (searchInput) searchInput.value = "Jacket";
+  }
+
+  renderProducts();
+
+  const section = document.getElementById("productGridSection");
+  if (section) section.scrollIntoView({ behavior: "smooth" });
+  showToast(`Browsing ${collectionName} collection`);
+};
+
 // ==========================================
 // 22. APPLICATION BOOTSTRAP
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
+  initLookbookSlider();
   initHeroShowcase();
   initFavoriteOptions();
   initCustomizerStudio();

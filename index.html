@@ -3,26 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Half Time Store | Authentic Football Apparel & Match Jerseys</title>
-  <!-- Modern Clean Google Fonts -->
+  <title>Second Half Store | Authentic Football Apparel & Match Edition Jerseys</title>
+  <!-- Second Half Store Typography & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Top Announcement Ticker -->
   <aside class="announcement-bar" aria-label="Store Announcements">
     <div class="announcement-content">
-      <span>⚽ <strong>MATCHDAY FIXTURES:</strong> Real-time match scores & upcoming fixtures <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Fixtures &rarr;</a></span>
-      <span class="bullet">•</span>
-      <span>🔥 <strong>HALF TIME STORE:</strong> 100% Authentic Football Jerseys & Match Editions</span>
-      <span class="bullet">•</span>
-      <span>⚡ Use Code <span class="badge-code">KICKOFF15</span> for 15% OFF your order</span>
+      <span>🔥 <strong>THE SECOND HALF SALE:</strong> Up to 50% OFF official match kits & retro archive</span>
       <span class="bullet">•</span>
       <span>📦 Free Tracked Shipping on orders over ₹1,999</span>
       <span class="bullet">•</span>
-      <span>⚽ Powered by Shopify Headless</span>
+      <span>⚽ <strong>MATCHDAY FIXTURES:</strong> Real-time match scores & fixtures <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Fixtures &rarr;</a></span>
+      <span class="bullet">•</span>
+      <span>⚡ 100% Authentic Match Kits • Powered by Shopify Headless</span>
     </div>
   </aside>
 
@@ -34,24 +32,50 @@
         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
 
-      <!-- Brand Logo -->
-      <a href="#" class="brand-logo" aria-label="Half Time Store Home">
-        <div class="logo-badge">HTS</div>
-        <div class="brand-text-col">
-          <span class="brand-title">HALF TIME STORE</span>
-          <span class="brand-subtitle">AUTHENTIC FOOTBALL APPAREL</span>
+      <!-- Brand Logo (Second Half Store 3D Animated Logo) -->
+      <a href="#" class="brand-logo-shs" aria-label="Second Half Store Home">
+        <div class="shs-logo3d" aria-label="Second Half Store">
+          <div class="shs-logo3d__word">
+            <span class="shs-logo3d__char" style="--i:0">S</span>
+            <span class="shs-logo3d__char" style="--i:1">e</span>
+            <span class="shs-logo3d__char" style="--i:2">c</span>
+            <span class="shs-logo3d__char" style="--i:3">o</span>
+            <span class="shs-logo3d__char" style="--i:4">n</span>
+            <span class="shs-logo3d__char" style="--i:5">d</span>
+            <span class="shs-logo3d__space">&nbsp;</span>
+            <span class="shs-logo3d__char shs-logo3d__char--b" style="--i:6">H</span>
+            <span class="shs-logo3d__char shs-logo3d__char--b" style="--i:7">a</span>
+            <span class="shs-logo3d__char shs-logo3d__char--b" style="--i:8">l</span>
+            <span class="shs-logo3d__char shs-logo3d__char--b" style="--i:9">f</span>
+            <span class="shs-logo3d__space">&nbsp;</span>
+            <span class="shs-logo3d__char" style="--i:10">S</span>
+            <span class="shs-logo3d__char" style="--i:11">t</span>
+            <span class="shs-logo3d__char" style="--i:12">o</span>
+            <span class="shs-logo3d__char" style="--i:13">r</span>
+            <span class="shs-logo3d__char" style="--i:14">e</span>
+          </div>
+          <div class="shs-logo3d__track">
+            <span class="shs-logo3d__bounce">
+              <svg class="shs-logo3d__ball" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="12 7 15 10 14 14 10 14 9 10" fill="currentColor"/>
+              </svg>
+            </span>
+          </div>
         </div>
       </a>
 
       <!-- Desktop Navigation Links -->
       <nav class="main-nav" id="mainNav" aria-label="Primary Navigation">
-        <a href="#productGridSection" class="nav-link active">All Jerseys</a>
+        <a href="#productGridSection" class="nav-link active" onclick="filterByCollection('All')">All Jerseys</a>
+        <a href="#productGridSection" class="nav-link" onclick="filterByCollection('Retro')">Retro Range</a>
+        <a href="#productGridSection" class="nav-link" onclick="filterByCollection('Player')">Player Version</a>
+        <a href="#productGridSection" class="nav-link" onclick="filterByCollection('Nations')">Nations United</a>
+        <a href="#productGridSection" class="nav-link" onclick="filterByCollection('Sale')">Sale</a>
+        <a href="#shopByFavoriteSection" class="nav-link">Favorites</a>
         <a href="#matchCenterSection" class="nav-link match-center-link" id="navLiveScoresBtn">
           <span>⚽</span> Match Fixtures
         </a>
-        <a href="#productGridSection" class="nav-link" id="navInStockBtn">In Stock Only</a>
-        <a href="#trustSection" class="nav-link">Authenticity Guarantee</a>
-        <button type="button" class="nav-link" id="navSizeAdvisorBtn">Size Advisor</button>
       </nav>
 
       <!-- Header Actions (Live Status, Search, Currency, Customer Account, Bag) -->
@@ -101,67 +125,327 @@
     </div>
   </header>
 
-  <!-- Hero Showcase Section (Minimalist Editorial) -->
-  <section class="hero-section">
-    <div class="section-container">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <div class="hero-tag">
-            <span class="tag-badge">NEW DROP</span>
-            <span>2025/2026 OFFICIAL KITS</span>
+  <!-- ==================== LOOKBOOK HERO SLIDER (SECOND HALF STORE) ==================== -->
+  <section class="lookbook-hero-section" aria-label="Lookbook Hero">
+    <div class="lookbook-slider" id="lookbookSlider">
+      <div class="lookbook-track" id="lookbookTrack">
+        <!-- Slide 1: Retro Range -->
+        <div class="lookbook-slide active" data-index="0">
+          <div class="slide-media">
+            <img src="https://secondhalfstore.in/cdn/shop/files/shs-hero-striped-duo.webp?v=1793455630&width=1500" alt="Retro range 26/27" class="slide-img" loading="eager" fetchpriority="high">
+            <div class="slide-overlay"></div>
           </div>
-          <h1 class="hero-title">
-            HALF TIME STORE
-            <span class="brand-accent">THE MATCHDAY ARCHIVE</span>
-          </h1>
-          <p class="hero-subtitle">
-            Curated authentic football jerseys from the world's greatest clubs and national teams. Engineered with match-grade breathable fabrics, authentic detailing, and genuine club crests.
-          </p>
-          <div class="hero-buttons">
-            <a href="#productGridSection" class="btn btn-primary">
-              <span>Shop All Jerseys</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-            <button type="button" class="btn btn-secondary" id="heroInStockCtaBtn">
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#059669" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>View In Stock</span>
-            </button>
-          </div>
-          <div class="hero-perks">
-            <div class="perk-item">
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#059669" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <span>100% Authentic Quality</span>
-            </div>
-            <div class="perk-item">
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#111827" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span>Fast Tracked Dispatch</span>
-            </div>
-            <div class="perk-item">
-              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#111827" stroke-width="2" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              <span>Shopify Checkout</span>
+          <div class="slide-content">
+            <span class="slide-badge">ARCHIVE DROP</span>
+            <h1 class="slide-title">RETRO RANGE 26/27</h1>
+            <p class="slide-desc">Immortal archive classics & vintage football heritage, reimagined for the modern terrace.</p>
+            <div class="slide-actions">
+              <button type="button" class="btn btn-primary" onclick="filterByCollection('Retro')">
+                <span>View Collection &rarr;</span>
+              </button>
             </div>
           </div>
         </div>
 
-        <!-- Hero Visual Jersey Banner -->
-        <div class="hero-visual">
-          <div class="hero-pedestal-card" id="heroShowcase">
-            <div class="hero-jersey-display" id="heroJerseySvgContainer">
-              <img src="https://cdn.shopify.com/s/files/1/0667/6450/5173/files/6ceeb5df.jpg?v=1792591979" alt="Barcelona Third player 2025-26" class="hero-featured-img">
+        <!-- Slide 2: Player Version 25/26 -->
+        <div class="lookbook-slide" data-index="1">
+          <div class="slide-media">
+            <img src="https://secondhalfstore.in/cdn/shop/files/football-jersey-shorts-studio-hero-banner.png?v=1792606473&width=1500" alt="Player version 25/26" class="slide-img" loading="lazy">
+            <div class="slide-overlay"></div>
+          </div>
+          <div class="slide-content">
+            <span class="slide-badge">ON-PITCH SPECIFICATION</span>
+            <h2 class="slide-title">PLAYER VERSION 25/26</h2>
+            <p class="slide-desc">Heat-pressed silicone badges, ultra-breathable moisture-wicking weave, and athletic cut.</p>
+            <div class="slide-actions">
+              <button type="button" class="btn btn-primary" onclick="filterByCollection('Player')">
+                <span>Shop Player Edition &rarr;</span>
+              </button>
             </div>
-            <div class="hero-jersey-info">
-              <span class="hero-jersey-badge">SPOTLIGHT MATCH KIT</span>
-              <h3 class="hero-jersey-title" id="heroJerseyTitle">Barcelona Third player 2025-26</h3>
-              <p class="hero-jersey-subtitle" id="heroJerseySubtitle">Official Match Edition • ₹699 • In Stock</p>
-              <button class="btn btn-secondary btn-sm" id="heroQuickBuyBtn">⚡ Quick View</button>
+          </div>
+        </div>
+
+        <!-- Slide 3: Nations United -->
+        <div class="lookbook-slide" data-index="2">
+          <div class="slide-media">
+            <img src="https://secondhalfstore.in/cdn/shop/files/shs-hero-pink-chair.webp?v=1793455629&width=1500" alt="Nations united" class="slide-img" loading="lazy">
+            <div class="slide-overlay"></div>
+          </div>
+          <div class="slide-content">
+            <span class="slide-badge">INTERNATIONAL KITS</span>
+            <h2 class="slide-title">NATIONS UNITED</h2>
+            <p class="slide-desc">World cup contenders & continental champions. Official national team matchwear.</p>
+            <div class="slide-actions">
+              <button type="button" class="btn btn-primary" onclick="filterByCollection('Nations')">
+                <span>Shop National Teams &rarr;</span>
+              </button>
             </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: The Second Half Sale -->
+        <div class="lookbook-slide" data-index="3">
+          <div class="slide-media">
+            <img src="https://secondhalfstore.in/cdn/shop/collections/Second_Half_Football_Kit_Sale.png?v=1792785477&width=1500" alt="The second half sale" class="slide-img" loading="lazy">
+            <div class="slide-overlay"></div>
+          </div>
+          <div class="slide-content">
+            <span class="slide-badge sale-badge">UP TO 50% OFF</span>
+            <h2 class="slide-title">THE SECOND HALF SALE</h2>
+            <p class="slide-desc">Premium authentic football jerseys and retro editions at exclusive season prices.</p>
+            <div class="slide-actions">
+              <button type="button" class="btn btn-primary" onclick="filterByCollection('Sale')">
+                <span>Shop The Sale &rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: Anthem Jackets -->
+        <div class="lookbook-slide" data-index="4">
+          <div class="slide-media">
+            <img src="https://secondhalfstore.in/cdn/shop/files/anthem-jacket-2.jpg?v=1793034788&width=1500" alt="Anthem jackets" class="slide-img" loading="lazy">
+            <div class="slide-overlay"></div>
+          </div>
+          <div class="slide-content">
+            <span class="slide-badge">SIDELINE & TRAINING</span>
+            <h2 class="slide-title">ANTHEM JACKETS</h2>
+            <p class="slide-desc">Pre-match track tops, anthem jackets & training wear built for terrace and stadium style.</p>
+            <div class="slide-actions">
+              <button type="button" class="btn btn-primary" onclick="filterByCollection('Jackets')">
+                <span>Explore Track Tops &rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow Controls -->
+      <button class="slide-arrow prev" id="heroPrevBtn" aria-label="Previous Slide">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="slide-arrow next" id="heroNextBtn" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <!-- Bottom Collection Navigation Tabs -->
+      <div class="lookbook-tabs-wrap">
+        <div class="lookbook-tabs" role="tablist">
+          <button class="lookbook-tab active" data-slide-target="0">
+            <span class="tab-index">01</span>
+            <span class="tab-name">Retro 26/27</span>
+          </button>
+          <button class="lookbook-tab" data-slide-target="1">
+            <span class="tab-index">02</span>
+            <span class="tab-name">Player Ver.</span>
+          </button>
+          <button class="lookbook-tab" data-slide-target="2">
+            <span class="tab-index">03</span>
+            <span class="tab-name">Nations</span>
+          </button>
+          <button class="lookbook-tab" data-slide-target="3">
+            <span class="tab-index">04</span>
+            <span class="tab-name">Sale</span>
+          </button>
+          <button class="lookbook-tab" data-slide-target="4">
+            <span class="tab-index">05</span>
+            <span class="tab-name">Anthem</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SHOP THE RANGE (EDITORIAL CATEGORIES) ==================== -->
+  <section class="shop-the-range-section">
+    <div class="section-container">
+      <div class="range-header">
+        <div>
+          <h2 class="range-title">SHOP THE RANGE</h2>
+          <p class="range-subtitle">From stadium matchdays to street culture</p>
+        </div>
+      </div>
+
+      <div class="range-grid">
+        <!-- 01 New Season Kits -->
+        <div class="range-card" onclick="filterByCollection('New Season')">
+          <div class="range-card-img-wrap">
+            <img src="https://secondhalfstore.in/cdn/shop/collections/WhatsApp_Image_2026-10-24_at_7.25.26_PM.webp?v=1792850204&width=750" alt="New season kits" loading="lazy">
+            <div class="range-card-overlay"></div>
+          </div>
+          <div class="range-card-content">
+            <span class="range-card-num">01</span>
+            <h3 class="range-card-title">NEW SEASON KITS</h3>
+            <span class="range-card-cta">Shop the drop &rarr;</span>
+          </div>
+        </div>
+
+        <!-- 02 Clearance Sale -->
+        <div class="range-card" onclick="filterByCollection('Sale')">
+          <div class="range-card-img-wrap">
+            <img src="https://secondhalfstore.in/cdn/shop/collections/Second_Half_Football_Kit_Sale.png?v=1792785477&width=750" alt="Clearance sale" loading="lazy">
+            <div class="range-card-overlay"></div>
+          </div>
+          <div class="range-card-content">
+            <span class="range-card-num">02</span>
+            <h3 class="range-card-title">CLEARANCE SALE</h3>
+            <span class="range-card-cta">Shop the drop &rarr;</span>
+          </div>
+        </div>
+
+        <!-- 03 Anthem Jackets -->
+        <div class="range-card" onclick="filterByCollection('Jackets')">
+          <div class="range-card-img-wrap">
+            <img src="https://secondhalfstore.in/cdn/shop/files/anthem-jacket-2.jpg?v=1793034788&width=750" alt="Anthem jackets" loading="lazy">
+            <div class="range-card-overlay"></div>
+          </div>
+          <div class="range-card-content">
+            <span class="range-card-num">03</span>
+            <h3 class="range-card-title">ANTHEM JACKETS</h3>
+            <span class="range-card-cta">Shop the drop &rarr;</span>
+          </div>
+        </div>
+
+        <!-- 04 Retro Range -->
+        <div class="range-card" onclick="filterByCollection('Retro')">
+          <div class="range-card-img-wrap">
+            <img src="https://secondhalfstore.in/cdn/shop/collections/Specially_for_vtgshmot_99aa1750-7458-4d86-b8b7-be270cc1ca72.jpg?v=1792526624&width=750" alt="Retro range" loading="lazy">
+            <div class="range-card-overlay"></div>
+          </div>
+          <div class="range-card-content">
+            <span class="range-card-num">04</span>
+            <h3 class="range-card-title">RETRO RANGE</h3>
+            <span class="range-card-cta">Shop the drop &rarr;</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  
+  <!-- ==================== SHOP BY FAVORITE (CLUBS & NATIONS) ==================== -->
+  <section class="shs-fav-section" id="shopByFavoriteSection">
+    <div class="section-container">
+      <div class="shs-fav-box">
+        <div class="shs-fav-header">
+          <div>
+            <h2 class="shs-fav-title">SHOP BY FAVORITE</h2>
+            <p class="shs-fav-sub">Every badge has a story. Find yours.</p>
+          </div>
+          <div class="shs-fav-tab-controls">
+            <div class="shs-fav-tab-group" role="tablist">
+              <button class="shs-fav-tab active" id="favTabClubs" role="tab" aria-selected="true" onclick="switchFavTab('clubs')">
+                Clubs
+              </button>
+              <button class="shs-fav-tab" id="favTabNations" role="tab" aria-selected="false" onclick="switchFavTab('nations')">
+                Nations
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clubs Panel -->
+        <div class="shs-fav-panel active" id="favPanelClubs">
+          <div class="shs-fav-grid">
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Real Madrid')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#FFFFFF; color:#1E2A5E;">RM</span></span>
+              <span class="shs-badge-name">Real Madrid</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('FC Barcelona')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#A50044; color:#EDBB00;">FCB</span></span>
+              <span class="shs-badge-name">FC Barcelona</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Manchester United')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#DA291C; color:#FFE500;">MUFC</span></span>
+              <span class="shs-badge-name">Man United</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Manchester City')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#6CABDD; color:#00285E;">MCFC</span></span>
+              <span class="shs-badge-name">Man City</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Liverpool')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#C8102E; color:#F6EB61;">LFC</span></span>
+              <span class="shs-badge-name">Liverpool</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Arsenal')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#EF0107; color:#FFFFFF;">AFC</span></span>
+              <span class="shs-badge-name">Arsenal</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Chelsea')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#034694; color:#FFFFFF;">CFC</span></span>
+              <span class="shs-badge-name">Chelsea</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Bayern Munich')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#DC052D; color:#FFFFFF;">BAY</span></span>
+              <span class="shs-badge-name">Bayern Munich</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('AC Milan')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#FB090B; color:#000000;">ACM</span></span>
+              <span class="shs-badge-name">AC Milan</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Juventus')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#000000; color:#FFFFFF;">JUVE</span></span>
+              <span class="shs-badge-name">Juventus</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('PSG')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#004170; color:#FFFFFF;">PSG</span></span>
+              <span class="shs-badge-name">PSG</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Inter Miami')">
+              <span class="shs-badge-disc"><span class="badge-monogram" style="background:#F7B5CD; color:#231F20;">IMCF</span></span>
+              <span class="shs-badge-name">Inter Miami</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Nations Panel -->
+        <div class="shs-fav-panel" id="favPanelNations" hidden>
+          <div class="shs-fav-grid">
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Argentina')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-argentina.png?v=1793047632&width=400" alt="Argentina" class="shs-flag-img"></span>
+              <span class="shs-badge-name">Argentina</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Portugal')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-portugal.png?v=1793047633&width=400" alt="Portugal" class="shs-flag-img"></span>
+              <span class="shs-badge-name">Portugal</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Brazil')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-brazil.png?v=1793047632&width=400" alt="Brazil" class="shs-flag-img"></span>
+              <span class="shs-badge-name">Brazil</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('France')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-france.png?v=1793047632&width=400" alt="France" class="shs-flag-img"></span>
+              <span class="shs-badge-name">France</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Germany')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-germany.png?v=1793047632&width=400" alt="Germany" class="shs-flag-img"></span>
+              <span class="shs-badge-name">Germany</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Spain')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-spain.png?v=1793047633&width=400" alt="Spain" class="shs-flag-img"></span>
+              <span class="shs-badge-name">Spain</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('England')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-england.png?v=1793047632&width=400" alt="England" class="shs-flag-img"></span>
+              <span class="shs-badge-name">England</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Italy')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-italy.png?v=1793047633&width=400" alt="Italy" class="shs-flag-img"></span>
+              <span class="shs-badge-name">Italy</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Netherlands')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-netherlands.png?v=1793047633&width=400" alt="Netherlands" class="shs-flag-img"></span>
+              <span class="shs-badge-name">Netherlands</span>
+            </button>
+            <button type="button" class="shs-badge" onclick="filterByFavTeam('Japan')">
+              <span class="shs-badge-disc"><img src="https://secondhalfstore.in/cdn/shop/files/shs-flag-japan.png?v=1793047633&width=400" alt="Japan" class="shs-flag-img"></span>
+              <span class="shs-badge-name">Japan</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== MATCHDAY FIXTURES & LIVE STRIP ==================== -->
   <section class="match-center-section" id="matchCenterSection">
     <div class="section-container">
@@ -210,9 +494,9 @@
     <div class="section-container">
       <div class="catalog-header-wrap">
         <div>
-          <span class="section-pill">LIVE SHOPIFY CATALOGUE</span>
-          <h2 class="section-title">OFFICIAL JERSEYS</h2>
-          <p class="section-subtitle">Directly synced with Half Time Store on Shopify.</p>
+          <span class="section-pill">OFFICIAL MATCHDAY ARCHIVE</span>
+          <h2 class="section-title">THE SECOND HALF COLLECTION</h2>
+          <p class="section-subtitle">Official player editions, retro range & authentic match kits.</p>
         </div>
         <!-- Active Filter Counter & Shopify Live Sync -->
         <div class="catalog-meta">
@@ -248,7 +532,7 @@
       <!-- Product Cards Grid -->
       <div class="product-grid" id="productGrid">
         <div class="catalog-loading" style="grid-column: 1 / -1; padding: 60px 20px; text-align: center;">
-          <span>Loading official jerseys from Half Time Store...</span>
+          <span>Loading official jerseys from Second Half Store...</span>
         </div>
       </div>
 
@@ -319,54 +603,83 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="section-container">
-      <div class="footer-grid">
-        <div class="footer-col brand-col">
-          <div class="brand-logo" style="margin-bottom: 12px;">
-            <div class="logo-badge">HTS</div>
-            <span class="brand-title">HALF TIME STORE</span>
+    <div class="footer-container">
+      <div class="footer-top-row">
+        <!-- Logo Mark Spin -->
+        <div class="footer-mark-col">
+          <div class="footer-mark-wrapper">
+            <img src="https://secondhalfstore.in/cdn/shop/files/shs-logo-mark.jpg?v=1793251057&width=750" alt="Second Half Store Mark" class="footer-mark-img">
           </div>
-          <p class="footer-desc">
-            Your premier destination for authentic football club, national team, and player edition kits. Powered by Shopify Headless.
-          </p>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Collections</h4>
-          <ul class="footer-links">
-            <li><a href="#productGridSection">All Football Jerseys</a></li>
-            <li><a href="#productGridSection" id="footerInStockLink">In Stock Only</a></li>
-            <li><a href="#trustSection">Authenticity Guarantee</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Customer Care</h4>
-          <ul class="footer-links">
-            <li><a href="#" id="footerCustomerLink">Customer Details</a></li>
-            <li><a href="#" id="footerSizeGuideLink">Size & Fit Guide</a></li>
-            <li><a href="#" id="footerReturnsLink">Returns & Exchanges</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Shopify Checkout</h4>
-          <p class="footer-subtext">Official storefront for secondhalfstore.in powered by Shopify Storefront API.</p>
-          <div class="payment-badges-row">
-            <span class="pay-badge">UPI</span>
-            <span class="pay-badge">VISA</span>
-            <span class="pay-badge">Mastercard</span>
-            <span class="pay-badge">Net Banking</span>
+          <div class="footer-brand-bio">
+            <span class="footer-brand-name">SECOND HALF STORE</span>
+            <p>Archive classics, match-edition player versions & terrace apparel. Curated for football purists.</p>
           </div>
+        </div>
+
+        <!-- Join the family Newsletter -->
+        <div class="footer-newsletter-col">
+          <span class="newsletter-kicker">COMMUNITY</span>
+          <h3 class="newsletter-heading">JOIN THE FAMILY</h3>
+          <p class="newsletter-desc">Be the first to know about secret kit restocks, archive retro drops & exclusive matchday offers.</p>
+          <form class="newsletter-form-shs" onsubmit="event.preventDefault(); showToast('🎉 Welcome to the Second Half family!');">
+            <input type="email" placeholder="Enter your email address" required class="newsletter-input-shs">
+            <button type="submit" class="newsletter-btn-shs">Join &rarr;</button>
+          </form>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>&copy; 2026 Half Time Store (<a href="https://secondhalfstore.in" target="_blank" rel="noopener" style="font-weight:600;">secondhalfstore.in</a>). All rights reserved.</p>
-        <div class="bottom-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Shipping Policy</a>
+      <div class="footer-nav-grid">
+        <div class="footer-col">
+          <h4 class="footer-col-title">STORE</h4>
+          <ul class="footer-links-list">
+            <li><a href="#productGridSection" onclick="filterByCollection('All')">All Jerseys</a></li>
+            <li><a href="#productGridSection" onclick="filterByCollection('New Season')">New Season 25/26</a></li>
+            <li><a href="#productGridSection" onclick="filterByCollection('Retro')">Retro Range 26/27</a></li>
+            <li><a href="#productGridSection" onclick="filterByCollection('Player')">Player Version</a></li>
+            <li><a href="#productGridSection" onclick="filterByCollection('Nations')">Nations United</a></li>
+            <li><a href="#productGridSection" onclick="filterByCollection('Sale')">The Second Half Sale</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">INFORMATION</h4>
+          <ul class="footer-links-list">
+            <li><a href="#" onclick="document.getElementById('navSizeAdvisorBtn').click()">Size Advisor & Fit Guide</a></li>
+            <li><a href="#trustSection">Authenticity Guarantee</a></li>
+            <li><a href="#" onclick="showToast('Orders dispatch within 24-48 hours with live tracking.')">Track Order</a></li>
+            <li><a href="#matchCenterSection">Matchday Fixtures</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">LEGAL</h4>
+          <ul class="footer-links-list">
+            <li><a href="#" onclick="showToast('Free shipping on all prepaid orders over ₹1,999 across India.')">Shipping Policy</a></li>
+            <li><a href="#" onclick="showToast('7-day hassle-free size exchange guarantee on uncustomised jerseys.')">Refund & Exchange Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">CONNECT</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram (@secondhalfstore)</a></li>
+            <li><a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp Support</a></li>
+            <li><a href="mailto:support@secondhalfstore.in">support@secondhalfstore.in</a></li>
+            <li><a href="https://secondhalfstore.in" target="_blank" rel="noopener">secondhalfstore.in</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <p>&copy; 2026 Second Half Store. Powered by Shopify Headless Storefront.</p>
+        <div class="payment-methods-strip">
+          <span class="pay-chip">UPI</span>
+          <span class="pay-chip">VISA</span>
+          <span class="pay-chip">Mastercard</span>
+          <span class="pay-chip">Net Banking</span>
+          <span class="pay-chip">Cash on Delivery</span>
         </div>
       </div>
     </div>
@@ -398,7 +711,7 @@
           </div>
 
           <p class="qv-desc" id="qvDescription">
-            Authentic official football jersey from Half Time Store. Engineered for performance and luxury everyday wear.
+            Authentic official football jersey from Second Half Store. Engineered for performance and luxury everyday wear.
           </p>
 
           <!-- Size selector -->
