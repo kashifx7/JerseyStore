@@ -878,6 +878,10 @@ function updateCustomerUI() {
   if (modalName) modalName.value = customerState.name || "";
   if (modalEmail) modalEmail.value = customerState.email || "";
   if (modalPhone) modalPhone.value = customerState.phone || "";
+  const modalFavClub = document.getElementById("modalCustomerFavClub");
+  if (modalFavClub && customerPreferences && customerPreferences.favoriteTeam) {
+    modalFavClub.value = customerPreferences.favoriteTeam;
+  }
 }
 
 function initCustomerProfileModal() {
@@ -944,6 +948,8 @@ function applyCustomerPreferencesUI() {
 
   if (favSelect && favTeam) favSelect.value = favTeam;
   if (modalSelect && favTeam) modalSelect.value = favTeam;
+  const modalFavClub = document.getElementById("modalCustomerFavClub");
+  if (modalFavClub && favTeam) modalFavClub.value = favTeam;
 
   if (greetingHeading) {
     greetingHeading.textContent = favTeam ? `⭐ Your Favorite Football Club: ${favTeam}` : "Select Your Favorite Football Club";
@@ -1719,6 +1725,48 @@ function initFavoriteOptions() {
   }
 
   applyCustomerPreferencesUI();
+
+  // Favorite club filter pill toggle
+  const favPill = document.getElementById("filterByFavClubPill");
+  if (favPill) {
+    favPill.addEventListener("click", () => {
+      const favTeam = customerPreferences.favoriteTeam;
+      if (!favTeam) return;
+
+      const searchInput = document.getElementById("headerSearchInput");
+      const clearBtn = document.getElementById("clearSearchBtn");
+
+      if (filterState.searchQuery === favTeam.toLowerCase().trim()) {
+        filterState.searchQuery = "";
+        if (searchInput) searchInput.value = "";
+        if (clearBtn) clearBtn.hidden = true;
+        favPill.classList.remove("active");
+        renderProducts();
+        showToast("Cleared favorite club filter.");
+      } else {
+        filterState.searchQuery = favTeam.toLowerCase().trim();
+        if (searchInput) searchInput.value = favTeam;
+        if (clearBtn) clearBtn.hidden = false;
+        favPill.classList.add("active");
+        renderProducts();
+        const section = document.getElementById("productGridSection");
+        if (section) section.scrollIntoView({ behavior: "smooth" });
+        showToast(`Filtered jerseys for your favorite club: ${favTeam}!`);
+      }
+    });
+  }
+
+  // Top header Live Scores navigation click
+  const liveScoresBtn = document.getElementById("navLiveScoresBtn");
+  if (liveScoresBtn) {
+    liveScoresBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const section = document.getElementById("matchCenterSection");
+      if (section) section.scrollIntoView({ behavior: "smooth" });
+      const liveTab = document.getElementById("tabLiveBtn");
+      if (liveTab) liveTab.click();
+    });
+  }
 }
 
 // ==========================================
@@ -2250,13 +2298,20 @@ function renderMatchCards() {
 // Global hook for direct Shop Kit buttons from Match cards
 window.shopKitForTeam = function(kitId) {
   const kit = JERSEYS_DATA.find(k => k.id === kitId);
-  if (!kit) return;
+  const teamName = kit ? kit.team : kitId;
 
-  // Open the customizer for this team and scroll smoothly
-  selectCustomizerKit(kit.id);
-  const section = document.getElementById("customizerSection");
+  const searchInput = document.getElementById("headerSearchInput");
+  const clearBtn = document.getElementById("clearSearchBtn");
+  if (searchInput) {
+    searchInput.value = teamName;
+    if (clearBtn) clearBtn.hidden = false;
+  }
+  filterState.searchQuery = teamName.toLowerCase().trim();
+  renderProducts();
+
+  const section = document.getElementById("productGridSection");
   if (section) section.scrollIntoView({ behavior: "smooth" });
-  showToast(`Loaded ${kit.team}'s official match kit in Custom Studio!`);
+  showToast(`Showing official jerseys for ${teamName}!`);
 };
 
 // Simulation of live football action

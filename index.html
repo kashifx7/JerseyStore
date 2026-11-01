@@ -14,6 +14,8 @@
   <!-- Top Announcement Ticker -->
   <aside class="announcement-bar" aria-label="Store Announcements">
     <div class="announcement-content">
+      <span>⚽ <strong>MATCHDAY LIVE:</strong> Real Madrid 2-1 Bayern (87') • Arsenal 3-0 Chelsea <a href="#matchCenterSection" style="color:#10B981; font-weight:700; text-decoration:underline; margin-left:6px;">View Live Scores &rarr;</a></span>
+      <span class="bullet">•</span>
       <span>🔥 <strong>HALF TIME STORE:</strong> 100% Authentic Football Jerseys & Match Editions</span>
       <span class="bullet">•</span>
       <span>⚡ Use Code <span class="badge-code">KICKOFF15</span> for 15% OFF your order</span>
@@ -44,6 +46,9 @@
       <!-- Desktop Navigation Links -->
       <nav class="main-nav" id="mainNav" aria-label="Primary Navigation">
         <a href="#productGridSection" class="nav-link active">All Jerseys</a>
+        <a href="#matchCenterSection" class="nav-link match-center-link" id="navLiveScoresBtn">
+          <span class="live-blink-dot"></span> Live Scores
+        </a>
         <a href="#productGridSection" class="nav-link" id="navInStockBtn">In Stock Only</a>
         <a href="#trustSection" class="nav-link">Authenticity Guarantee</a>
         <button type="button" class="nav-link" id="navSizeAdvisorBtn">Size Advisor</button>
@@ -73,6 +78,12 @@
             <option value="GBP">GBP (£)</option>
           </select>
         </div>
+
+        <!-- Favorite Club Button -->
+        <button class="fav-team-btn" id="openFavOptionsBtn" title="Set Your Favorite Football Club" aria-label="Favorite Club">
+          <span class="fav-icon">⭐</span>
+          <span class="fav-btn-text" id="headerFavClubLabel">Favorite Club</span>
+        </button>
 
         <!-- Customer Account / Profile Button -->
         <button class="customer-btn" id="openCustomerBtn" title="Customer Details">
@@ -150,6 +161,55 @@
     </div>
   </section>
 
+  
+  <!-- ==================== MATCHDAY LIVE SCORES CENTER ==================== -->
+  <section class="match-center-section" id="matchCenterSection">
+    <div class="section-container">
+      <div class="match-center-header">
+        <div>
+          <div class="match-live-pulse-badge">
+            <span class="live-dot-pulse"></span>
+            <span id="liveMatchesCountText">3 MATCHES IN PLAY RIGHT NOW</span>
+          </div>
+          <h2 class="section-title">FOOTBALL MATCHDAY CENTER</h2>
+          <p class="section-subtitle">Follow real-time scores for live matches and upcoming fixtures. Shop each playing team's official jersey instantly.</p>
+        </div>
+
+        <div class="match-center-controls">
+          <button class="btn btn-secondary btn-sm" id="refreshScoresBtn">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>Refresh Scores</span>
+          </button>
+          <label class="live-ticker-toggle">
+            <input type="checkbox" id="liveTickerToggle" checked>
+            <span class="toggle-text">Auto-Update Scores</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Match Center Tabs -->
+      <div class="match-tabs-bar" role="tablist" aria-label="Football Match Categories">
+        <button class="match-tab active" role="tab" aria-selected="true" id="tabLiveBtn" data-tab="live">
+          <span class="tab-live-dot"></span>
+          <span>Live Now (<span id="tabLiveCount">3</span>)</span>
+        </button>
+        <button class="match-tab" role="tab" aria-selected="false" id="tabUpcomingBtn" data-tab="upcoming">
+          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Upcoming Fixtures (<span id="tabUpcomingCount">6</span>)</span>
+        </button>
+        <button class="match-tab" role="tab" aria-selected="false" id="tabResultsBtn" data-tab="results">
+          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          <span>Recent Results</span>
+        </button>
+      </div>
+
+      <!-- Match Cards Grid -->
+      <div class="match-cards-grid" id="matchCardsContainer" role="tabpanel">
+        <!-- Injected dynamically by app.js -->
+      </div>
+    </div>
+  </section>
+
   <!-- Football Products Catalog & Filters Section -->
   <section class="catalog-section" id="productGridSection">
     <div class="section-container">
@@ -177,6 +237,7 @@
           <button class="pill-btn active" data-filter="all">All Products (3)</button>
           <button class="pill-btn" data-filter="in-stock">In Stock (2)</button>
           <button class="pill-btn" data-filter="sold-out">Sold Out (1)</button>
+          <button type="button" class="pill-btn fav-pill" id="filterByFavClubPill" hidden>⭐ My Team</button>
         </div>
 
         <div class="dropdown-filter">
@@ -479,6 +540,25 @@
           <input type="tel" id="modalCustomerPhone" class="customer-form-input" placeholder="e.g. +91 98765 43210">
         </div>
 
+        <div class="customer-form-group">
+          <label for="modalCustomerFavClub">Favorite Football Club</label>
+          <select id="modalCustomerFavClub" class="customer-form-input">
+            <option value="">-- Choose Your Favorite Club --</option>
+            <option value="FC Barcelona">🇪🇸 FC Barcelona</option>
+            <option value="Real Madrid">🇪🇸 Real Madrid</option>
+            <option value="AC Milan">🇮🇹 AC Milan</option>
+            <option value="Arsenal FC">🇬🇧 Arsenal FC</option>
+            <option value="Manchester City">🇬🇧 Manchester City</option>
+            <option value="Liverpool FC">🇬🇧 Liverpool FC</option>
+            <option value="Chelsea FC">🇬🇧 Chelsea FC</option>
+            <option value="Bayern Munich">🇩🇪 Bayern Munich</option>
+            <option value="Paris Saint-Germain">🇫🇷 Paris Saint-Germain</option>
+            <option value="France">🇫🇷 France</option>
+            <option value="Argentina">🇦🇷 Argentina</option>
+            <option value="Brazil">🇧🇷 Brazil</option>
+          </select>
+        </div>
+
         <button type="submit" class="btn btn-primary btn-block" style="margin-top:20px;">
           Save Customer Details
         </button>
@@ -486,7 +566,55 @@
     </div>
   </dialog>
 
-  <!-- 4. SIZE GUIDE & FIT ADVISOR DIALOG -->
+  
+  <!-- 4. CUSTOMER FAVORITE CLUB MODAL -->
+  <dialog id="favoriteOptionsDialog" closedby="any" aria-labelledby="favOptionsTitle" class="store-dialog modal-md">
+    <div class="dialog-card">
+      <button class="dialog-close-btn" id="closeFavOptionsBtn" aria-label="Close dialog">&times;</button>
+      <div style="margin-bottom: 20px;">
+        <span class="section-pill">CUSTOMER PREFERENCES</span>
+        <h2 id="favOptionsTitle" style="font-size:1.4rem; font-weight:800; margin-top:4px;">Select Your Favorite Club</h2>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-top:4px;">Personalize your store experience and filter your club's jerseys in 1-click.</p>
+      </div>
+
+      <form id="favOptionsForm">
+        <div class="customer-form-group">
+          <label for="modalFavTeamSelect">Favorite Football Club / Team *</label>
+          <select id="modalFavTeamSelect" class="customer-form-input" required>
+            <option value="">-- Choose Your Favorite Club --</option>
+            <option value="FC Barcelona">🇪🇸 FC Barcelona</option>
+            <option value="Real Madrid">🇪🇸 Real Madrid</option>
+            <option value="AC Milan">🇮🇹 AC Milan</option>
+            <option value="Arsenal FC">🇬🇧 Arsenal FC</option>
+            <option value="Manchester City">🇬🇧 Manchester City</option>
+            <option value="Liverpool FC">🇬🇧 Liverpool FC</option>
+            <option value="Chelsea FC">🇬🇧 Chelsea FC</option>
+            <option value="Bayern Munich">🇩🇪 Bayern Munich</option>
+            <option value="Paris Saint-Germain">🇫🇷 Paris Saint-Germain</option>
+            <option value="France">🇫🇷 France</option>
+            <option value="Argentina">🇦🇷 Argentina</option>
+            <option value="Brazil">🇧🇷 Brazil</option>
+          </select>
+        </div>
+
+        <div class="customer-form-group" style="margin-top: 14px;">
+          <label for="prefCustomName">Favorite Player Name</label>
+          <input type="text" id="prefCustomName" class="customer-form-input" placeholder="e.g. YAMAL or BELLINGHAM">
+        </div>
+
+        <div class="customer-form-group" style="margin-top: 14px;">
+          <label for="prefCustomNum">Favorite Squad Number</label>
+          <input type="number" id="prefCustomNum" class="customer-form-input" placeholder="e.g. 10 or 7" min="1" max="99">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top:24px;">
+          Save Favorite Club
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- 5. SIZE GUIDE & FIT ADVISOR DIALOG -->
   <dialog id="sizeGuideDialog" closedby="any" aria-labelledby="sizeGuideTitle" class="store-dialog modal-md">
     <div class="dialog-card">
       <button class="dialog-close-btn" id="closeSizeGuideBtn" aria-label="Close size guide">&times;</button>
