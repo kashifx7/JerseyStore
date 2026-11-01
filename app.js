@@ -3163,30 +3163,43 @@ function initNewsletter() {
 function initMobileNav() {
   const toggle = document.getElementById("mobileMenuBtn");
   const nav = document.getElementById("mainNav");
-  if (toggle && nav) {
+  const backdrop = document.getElementById("navDrawerBackdrop");
+  const closeBtn = document.getElementById("closeNavDrawerBtn");
+
+  if (!nav) return;
+
+  function openDrawer() {
+    nav.classList.add("open");
+    nav.setAttribute("aria-hidden", "false");
+    if (toggle) toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDrawer() {
+    nav.classList.remove("open");
+    nav.setAttribute("aria-hidden", "true");
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  if (toggle) {
     toggle.addEventListener("click", (e) => {
       e.stopPropagation();
-      nav.classList.toggle("open");
-      const isOpen = nav.classList.contains("open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    // Close mobile nav when clicking any nav link
-    nav.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("click", () => {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    // Close when clicking outside
-    document.addEventListener("click", (e) => {
-      if (nav.classList.contains("open") && !nav.contains(e.target) && !toggle.contains(e.target)) {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
+      if (nav.classList.contains("open")) {
+        closeDrawer();
+      } else {
+        openDrawer();
       }
     });
   }
+
+  if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+  if (backdrop) backdrop.addEventListener("click", closeDrawer);
+
+  // Close when clicking any link inside drawer
+  nav.querySelectorAll(".drawer-link, .nav-link").forEach(link => {
+    link.addEventListener("click", closeDrawer);
+  });
 }
 
 // ==========================================
